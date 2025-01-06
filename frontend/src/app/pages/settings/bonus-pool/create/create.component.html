@@ -1,0 +1,81 @@
+<div class="container-fixed">
+    <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+        <div class="flex flex-col justify-center gap-2">
+            <h1 class="text-xl font-medium leading-none text-gray-900">
+                New Bonus Pool
+            </h1>
+        </div>
+        <div class="flex items-center gap-2.5">
+            <a class="btn btn-sm btn-light" routerLink="/settings/budget-management">
+                Back
+            </a>
+        </div>
+    </div>
+
+    <app-alert [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
+
+    <div class="grid gap-5 lg:gap-7.5 w-full mx-left">
+        <div>
+            <div class="pl-0" id="basic_settings">
+                <h3 class="card-title pl-0">
+                    Bonus Pool Information
+                </h3>
+                <hr class="my-4">
+            </div>
+            <div class="grid gap-5">
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Entity Name <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <select [(ngModel)]="form.entity_id" class="input" placeholder="Select entity name">
+                        <option value="" disabled>Select entity name</option>
+                        <option *ngFor="let entity of entities" [value]="entity.id">{{ entity.name }}</option>
+                    </select>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Name <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="form.name" class="input" placeholder="Enter name"/>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Code <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="form.code" class="input" placeholder="Enter code"/>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Currency <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <select name="currency_selectize" id="currency_selectize" class="w-full">
+                        <option value="">Select Currency</option>
+                    </select>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Total Bonus <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="number" [(ngModel)]="form.total_bonus" class="input" placeholder="Enter total bonus"/>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Minimum Management Bonus <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="number" [(ngModel)]="form.minimum_management_bonus" class="input" placeholder="Enter minimum management bonus"/>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Description
+                    </label>
+                    <textarea [(ngModel)]="form.description" class="textarea text-2sm text-gray-600 font-normal" rows="3" style="height: 80px;"></textarea>
+                </div>
+                <div class="flex justify-end">
+                    <button (click)="createBonusPool()" [disabled]="loading" class="btn btn-primary">
+                        {{ loading ? 'Saving...' : 'Save' }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

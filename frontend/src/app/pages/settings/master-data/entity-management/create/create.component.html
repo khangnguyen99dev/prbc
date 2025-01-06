@@ -1,0 +1,84 @@
+<div class="container-fixed">
+    <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+        <div class="flex flex-col justify-center gap-2">
+            <h1 class="text-xl font-medium leading-none text-gray-900">
+                New Entity
+            </h1>
+        </div>
+        <div class="flex items-center gap-2.5">
+            <a class="btn btn-sm btn-light" routerLink="/settings/master-data/entity-management">
+                Back
+            </a>
+        </div>
+    </div>
+
+    <app-alert [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
+
+    <div class="grid gap-5 lg:gap-7.5 xl:w-[38.75rem] mx-auto">
+        <div class="card pb-2.5">
+            <div class="card-header" id="basic_settings">
+                <h3 class="card-title">
+                    Entity Information
+                </h3>
+            </div>
+            <div class="card-body grid gap-5">
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Country <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <p class="pt-2 text-sm" id="fetching_country" style="display: none">Fetching Countries...</p>
+                    <select name="country_selectize" id="country_selectize" class="w-full">
+                        <option value="">Select Country</option>
+                    </select>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Name <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input [(ngModel)]="form.name" class="input" type="text" placeholder="Enter name"/>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Code <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input [(ngModel)]="form.code" class="input" type="text" placeholder="Enter code"/>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Address <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <textarea [(ngModel)]="form.address" class="textarea text-2sm text-gray-600 font-normal" rows="3" placeholder="Enter address"></textarea>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Local Currency <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <p class="pt-2 text-sm" id="fetching_local_currency" style="display: none">Fetching Currencies...</p>
+                    <select name="local_currency_selectize" id="local_currency_selectize" class="w-full">
+                        <option value="">Select Currency</option>
+                    </select>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Logo
+                    </label>
+                    <div class="image-input w-20 h-20" data-image-input="true">
+                        <input name="avatar" (change)="onImageChange($event)" id="image_input" type="file" accept=".jpeg, .png, .jpg, .gif">
+                        <div (click)="removeImage()" class="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-5 -top-0.5 -end-0.5 rounded-full"
+                            data-image-input-remove="">
+                            <i class="ki-filled ki-cross"></i>
+                        </div>
+                        <label for="image_input" class="image-input-placeholder border-2 border-success image-input-empty:border-gray-300"
+                            style="background-image:url({{form.image_url || '/assets/media/avatars/blank.png'}})">
+                        </label>
+                    </div>
+                </div>
+                <div class="flex justify-end">
+                    <button *ngIf="permissionService.hasPermission('Settings - Master Data - Can Create Entity Management')" (click)="createEntity()" [disabled]="loading" class="btn btn-primary">
+                        {{ loading ? 'Saving...' : 'Save Changes' }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

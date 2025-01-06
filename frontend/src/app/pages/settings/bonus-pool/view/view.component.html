@@ -1,0 +1,241 @@
+<div class="container-fixed">
+    <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+        <div class="flex flex-col justify-center gap-2">
+            <h1 class="text-xl font-medium leading-none text-gray-900">
+                View Bonus Pool
+            </h1>
+        </div>
+        <div class="flex items-center gap-2.5">
+            <a class="btn btn-sm btn-light" routerLink="/settings/budget-management">
+                Back
+            </a>
+        </div>
+    </div>
+
+    <app-alert [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
+
+    <div class="grid gap-5 lg:gap-7.5 w-full mx-left">
+        <div>
+            <div class="pl-0" id="basic_settings">
+                <h3 class="card-title pl-0">
+                    Bonus Pool Information
+                </h3>
+                <hr class="my-4">
+            </div>
+            <div class="grid gap-5">
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Entity Name <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <select [(ngModel)]="form.entity_id" class="input" placeholder="Select entity name" [disabled]="isDisabled">
+                        <option value="" disabled>Select entity name</option>
+                        <option *ngFor="let entity of entities" [value]="entity.id">{{ entity.name }}</option>
+                    </select>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Name <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="form.name" class="input" placeholder="Enter name" [disabled]="isDisabled"/>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Code <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="form.code" class="input" placeholder="Enter code" [disabled]="isDisabled" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Currency <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <select name="currency_selectize" id="currency_selectize" class="w-full" [disabled]="isDisabled">
+                        <option value="">Select Currency</option>
+                    </select>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Total Bonus <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="number" [(ngModel)]="form.total_bonus" class="input" placeholder="Enter total bonus" [disabled]="isDisabled"/>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Minimum Management Bonus <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="number" [(ngModel)]="form.minimum_management_bonus" class="input" placeholder="Enter minimum management bonus" [disabled]="isDisabled"/>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Remaining Bonus
+                    </label>
+                    <input type="number" [(ngModel)]="form.remaining_bonus_in_doc" class="input" placeholder="Enter remaining bonus" [disabled]="true"/>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Description
+                    </label>
+                    <textarea [(ngModel)]="form.description" class="textarea text-2sm text-gray-600 font-normal" rows="3" style="height: 80px;" [disabled]="isDisabled"></textarea>
+                </div>
+                <div class="flex justify-end">
+                    <button (click)="updateBonusBool()" [disabled]="loading" class="btn btn-primary" *ngIf="!isDisabled && permissionService.hasPermission('Settings - Bonus Pool - Can Update Bonus Pool')">
+                        {{ loading ? 'Saving...' : 'Save' }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Items section -->
+<div class="container-fixed">
+    <div class="pl-0" id="basic_settings">
+        <h3 class="card-title">
+            Employees
+        </h3>
+        <div class="flex justify-end" *ngIf="permissionService.hasPermission('Settings - Bonus Pool - Can Create Bonus Pool Items') && form.status != 'Approved'">
+            <button class="btn btn-light btn-sm" (click)="addItem()">
+                <i class="ki-filled ki-plus"></i>
+                Add Employee
+            </button>
+        </div>
+        <hr class="my-4">
+    </div>
+    <div class="grid gap-5 lg:gap-7.5">
+        <div class="card card-grid min-w-full">
+            <div class="card-body">
+                <div data-datatable="true" data-datatable-page-size="20">
+                    <div class="scrollable-x-auto">
+                        <table class="table table-auto table-border" data-datatable-table="true">
+                            <thead>
+                                <tr>
+                                    <th class="min-w-52">Employee</th>
+                                    <th class="min-w-52">Employee Name</th>
+                                    <th class="min-w-52">Employee Number</th>
+                                    <th class="min-w-52">Date of birth</th>
+                                    <th class="min-w-72">Amount</th>
+                                    <th class="min-w-52">Reason</th>
+                                    <th class="min-w-52">Status</th>
+                                    <th class="min-w-52" *ngIf="permissionService.hasPermission('Settings - Bonus Pool - Can Approval Bonus Pool Items') && isPending(items)">Comment</th>
+                                    <th class="min-w-24" *ngIf="isPending(items)">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of items; let i = index">
+                                    <td class="text-sm text-gray-800 font-normal">
+                                        <p class="pt-2 text-sm" id="fetching_user" style="display: none">Fetching Users...</p>
+                                        <select name="user_selectize" id="user_selectize_{{i}}" class="w-full" [disabled]="!permissionService.hasPermission('Settings - Bonus Pool - Can Create Bonus Pool Items') || item.status !== 'Pending'">
+                                            <option value="">Select User</option>
+                                        </select>
+                                    </td>
+                                    <td class="text-sm text-gray-800 font-normal">
+                                        <input type="text" [(ngModel)]="item.employee_name" class="input" placeholder="Enter employee name" disabled/>
+                                    </td>
+                                    <td class="text-sm text-gray-800 font-normal">
+                                        <input type="text" [(ngModel)]="item.employee_number" class="input" placeholder="Enter employee number" disabled/>
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <input type="text" [(ngModel)]="item.date_of_birth" class="input" placeholder="Enter date of birth" disabled/>
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <input type="number" [(ngModel)]="item.amount" min="0" class="input" placeholder="Enter amount" [disabled]="!permissionService.hasPermission('Settings - Bonus Pool - Can Create Bonus Pool Items') || item.status !== 'Pending'" />
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <textarea [(ngModel)]="item.description" class="textarea text-2sm text-gray-600 font-normal" rows="3" style="height: 80px;" [disabled]="!permissionService.hasPermission('Settings - Bonus Pool - Can Create Bonus Pool Items') || item.status !== 'Pending'"></textarea>
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <div class="badge badge-sm badge-{{ item.status_color }} badge-outline">
+                                            {{ item.status }}
+                                        </div>
+                                    </td>
+                                    <td class="lg:text-start" *ngIf="permissionService.hasPermission('Settings - Bonus Pool - Can Approval Bonus Pool Items')">
+                                        <textarea [(ngModel)]="item.comment" class="textarea text-2sm text-gray-600 font-normal" rows="3" style="height: 80px;" *ngIf="item.status === 'Pending'"></textarea>
+                                    </td>
+
+                                    <td class="lg:text-start" *ngIf="isPending(items)">
+                                        <div class="flex gap-2" *ngIf="item.status === 'Pending'">
+                                            <button (click)="deleteItem(i, item.id)" class="btn btn-sm btn-icon btn-danger" *ngIf="permissionService.hasPermission('Settings - Bonus Pool - Can Delete Bonus Pool Items')">
+                                                <i class="ki-filled ki-trash"></i>
+                                            </button>
+                                            <div class="flex gap-2" *ngIf="permissionService.hasPermission('Settings - Bonus Pool - Can Approval Bonus Pool Items')">
+                                                <button (click)="approvalItem('approve', item)" class="btn btn-sm btn-success">
+                                                    Approve
+                                                </button>
+                                                <button (click)="approvalItem('reject', item)" class="btn btn-sm btn-danger">
+                                                    Reject
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="4" class="p-4"></td>
+                                    <td class="text-left text-gray-800 font-bold p-4">
+                                        Total: {{ formatterService.formatMoney(getTotalAmount(), 2, '.', ',') }} {{ form.currency }}
+                                    </td>
+                                    <td class="p-4"></td>
+                                </tr>
+
+                                <tr *ngIf="items?.length == 0">
+                                    <td colspan="10" class="text-center text-gray-500 font-normal">
+                                        No items found
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-end mt-5 mb-10 gap-2.5">
+        <button *ngIf="items.length > 0 && permissionService.hasPermission('Settings - Bonus Pool - Can Create Bonus Pool Items') && isPending(items)" (click)="saveItems()" [disabled]="loading" class="btn btn-primary">
+            {{ loading ? 'Saving...' : 'Save Items' }}
+        </button>
+    </div>
+</div>
+
+<!-- History section -->
+<div class="container-fixed">
+    <div class="pl-0" id="basic_settings">
+        <h3 class="card-title">
+            Histories
+        </h3>
+        <hr class="my-4">
+
+        <div class="grid gap-5 lg:gap-7.5">
+            <div class="card card-grid min-w-full">
+                <div class="card-body">
+                    <div data-datatable="true" data-datatable-page-size="20">
+                        <div class="scrollable-x-auto">
+                            <table class="table table-auto table-border" data-datatable-table="true">
+                                <thead>
+                                    <tr>
+                                        <th class="min-w-52">Action</th>
+                                        <th class="min-w-52">Status</th>
+                                        <th class="min-w-52">Comment</th>
+                                        <th class="min-w-52">User</th>
+                                        <th class="min-w-52">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let history of histories">
+                                        <td>{{ history.action }}</td>
+                                        <td>
+                                            <div class="badge badge-sm badge-{{ history.status_color }} badge-outline">
+                                                {{ history.status }}
+                                            </div>
+                                        </td>
+                                        <td>{{ history.comment }}</td>
+                                        <td>{{ history.user?.name }}</td>
+                                        <td>{{ history.created_at_formatted }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

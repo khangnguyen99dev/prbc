@@ -1,0 +1,349 @@
+<div class="container-fixed">
+    <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5" *ngIf="!loading">
+        <div class="flex flex-col justify-center gap-2">
+            <h1 class="text-xl font-medium leading-none text-gray-900">
+                View Budget {{monthlyBudget.month}}/{{monthlyBudget.year}} ({{monthlyBudget.start_date_formatted}} to {{monthlyBudget.end_date_formatted}})
+            </h1>
+        </div>
+        <div class="flex items-center gap-2.5">
+            <a class="btn btn-sm btn-light" routerLink="/settings/budget-management/{{budget.id}}">
+                Back
+            </a>
+        </div>
+    </div>
+
+    <app-alert [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
+
+    <div class="grid gap-5 lg:gap-7.5 w-full mx-left" *ngIf="!loading">
+        <!-- Add Budget Summary Section -->
+        <div class="grid grid-cols-5 gap-4 mb-7.5 w-full">
+            <div class="card p-4 text-center w-full">
+                <div class="text-2xl font-semibold text-primary mb-2">
+                    {{monthlyBudget.budget_amount_formatted}}
+                </div>
+                <div class="text-gray-600 text-sm">
+                    Total Budget
+                </div>
+            </div>
+            <div class="card p-4 text-center w-full">
+                <div class="text-2xl font-semibold text-primary mb-2">
+                    {{monthlyBudget.planned_budget_amount_formatted}}
+                </div>
+                <div class="text-gray-600 text-sm">
+                    Planned
+                </div>
+            </div>
+            <div class="card p-4 text-center w-full">
+                <div class="text-2xl font-semibold text-primary mb-2">
+                    {{monthlyBudget.actual_budget_amount_formatted}}
+                </div>
+                <div class="text-gray-600 text-sm">
+                    Actual
+                </div>
+            </div>
+            <div class="card p-4 text-center w-full">
+                <div class="text-2xl font-semibold text-primary mb-2">
+                    {{monthlyBudget.allotted_budget_amount_formatted}}
+                </div>
+                <div class="text-gray-600 text-sm">
+                    Allotted
+                </div>
+            </div>
+            <div class="card p-4 text-center w-full">
+                <div class="text-2xl font-semibold text-primary mb-2">
+                    {{monthlyBudget.available_budget_amount_formatted}}
+                </div>
+                <div class="text-gray-600 text-sm">
+                    Available
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col gap-5">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Budget Information
+                    </h3>
+                </div>
+                <div class="card-body pt-4 pb-2">
+                    <table class="table-auto">
+                        <tbody>
+                            <tr>
+                                <td class="text-sm text-gray-600 min-w-36 pb-5 pe-6">
+                                    Entity Name
+                                </td>
+                                <td class="text-sm text-gray-800 pb-5">
+                                    {{budget.entity?.name}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-sm text-gray-600 min-w-36 pb-5 pe-6">
+                                    Year
+                                </td>
+                                <td class="text-sm text-gray-800 pb-5">
+                                    {{budget.year}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-sm text-gray-600 min-w-36 pb-5 pe-6">
+                                    Total Budget
+                                </td>
+                                <td class="text-sm text-gray-800 pb-5">
+                                    {{budget.total_budget_formatted}} {{budget.currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-sm text-gray-600 min-w-36 pb-5 pe-6">
+                                    Status
+                                </td>
+                                <td class="text-sm text-gray-800 pb-5">
+                                    <div class="badge badge-sm badge-success badge-outline">
+                                        {{budget.status}}
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Planned Purchase Requests -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Planned Purchase Requests
+                    </h3>
+                </div>
+                <div class="card-table scrollable-x-auto">
+                    <table class="table table-auto table-border" data-datatable-table="true">
+                        <thead>
+                            <tr>
+                                <th class="min-w-[100px]">
+                                    PR Number
+                                </th>
+                                <th class="min-w-[180px]">
+                                    PR Name
+                                </th>
+                                <th class="min-w-[180px]">
+                                    PR Date
+                                </th>
+                                <th class="min-w-[150px]">
+                                    Amount
+                                </th>
+                                <th class="min-w-[150px]">
+                                    Status
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let purchaseRequest of plannedPurchaseRequests">
+                                <td class="text-gray-800 font-normal">
+                                    {{purchaseRequest.pr_number}}
+                                </td>
+                                <td class="text-gray-800 font-normal">
+                                    {{purchaseRequest.pr_name}}
+                                </td>
+                                <td class="text-gray-800 font-normal">
+                                    {{purchaseRequest.pr_date_formatted}}
+                                </td>
+                                <td class="text-gray-800 font-normal">
+                                    {{purchaseRequest.amount_in_local_currency_formatted}} {{purchaseRequest.currency}}
+                                </td>
+                                <td class="text-gray-800 font-normal">
+                                    <div class="badge badge-sm badge-{{purchaseRequest.status_color}} badge-outline">
+                                        {{purchaseRequest.status_alias}}
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="menu flex-inline" data-menu="true">
+                                        <div class="menu-item" data-menu-item-offset="0, 10px"
+                                            data-menu-item-placement="bottom-end"
+                                            data-menu-item-placement-rtl="bottom-start"
+                                            data-menu-item-toggle="dropdown"
+                                            data-menu-item-trigger="click|lg:click">
+                                            <button class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
+                                                <i class="ki-filled ki-dots-vertical"></i>
+                                            </button>
+                                            <div class="menu-dropdown menu-default w-full max-w-[175px]"
+                                                data-menu-dismiss="true">
+                                                <div class="menu-item">
+                                                    <a class="menu-link" [routerLink]="['/purchase-requests/', purchaseRequest.id]">
+                                                        <span class="menu-icon">
+                                                            <i class="ki-filled ki-setting-2"></i>
+                                                        </span>
+                                                        <span class="menu-title">
+                                                            View
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="plannedPurchaseRequests?.length == 0">
+                                <td colspan="7" class="text-center text-gray-500 font-normal">
+                                    No purchase requests found
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
+                    <div class="flex items-center gap-4 order-1 md:order-2">
+                        <app-pagination *ngIf="!loading" [perPage]="perPage" [totalItems]="totalItemPlannedPurchaseRequests"
+                            [currentPage]="plannedPurchaseRequestsPage" (selectedPage)="selectedPage($event, 'plannedPurchaseRequests')">
+                        </app-pagination>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actual Purchase Requests -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Actual Purchase Requests
+                    </h3>
+                </div>
+                <div class="card-table scrollable-x-auto">
+                    <table class="table table-auto table-border" data-datatable-table="true">
+                        <thead>
+                            <tr>
+                                <th class="min-w-[100px]">
+                                    PR Number
+                                </th>
+                                <th class="min-w-[180px]">
+                                    PR Name
+                                </th>
+                                <th class="min-w-[180px]">
+                                    PR Date
+                                </th>
+                                <th class="min-w-[150px]">
+                                    Amount
+                                </th>
+                                <th class="min-w-[150px]">
+                                    Status
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let purchaseRequest of actualPurchaseRequests">
+                                <td class="text-gray-800 font-normal">
+                                    {{purchaseRequest.pr_number}}
+                                </td>
+                                <td class="text-gray-800 font-normal">
+                                    {{purchaseRequest.pr_name}}
+                                </td>
+                                <td class="text-gray-800 font-normal">
+                                    {{purchaseRequest.pr_date_formatted}}
+                                </td>
+                                <td class="text-gray-800 font-normal">
+                                    {{purchaseRequest.amount_in_local_currency_formatted}} {{purchaseRequest.currency}}
+                                </td>
+                                <td class="text-gray-800 font-normal">
+                                    <div class="badge badge-sm badge-{{purchaseRequest.status_color}} badge-outline">
+                                        {{purchaseRequest.status_alias}}
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="menu flex-inline" data-menu="true">
+                                        <div class="menu-item" data-menu-item-offset="0, 10px"
+                                            data-menu-item-placement="bottom-end"
+                                            data-menu-item-placement-rtl="bottom-start"
+                                            data-menu-item-toggle="dropdown"
+                                            data-menu-item-trigger="click|lg:click">
+                                            <button class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
+                                                <i class="ki-filled ki-dots-vertical"></i>
+                                            </button>
+                                            <div class="menu-dropdown menu-default w-full max-w-[175px]"
+                                                data-menu-dismiss="true">
+                                                <div class="menu-item">
+                                                    <a class="menu-link" [routerLink]="['/purchase-requests/', purchaseRequest.id]">
+                                                        <span class="menu-icon">
+                                                            <i class="ki-filled ki-setting-2"></i>
+                                                        </span>
+                                                        <span class="menu-title">
+                                                            View
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="actualPurchaseRequests?.length == 0">
+                                <td colspan="7" class="text-center text-gray-500 font-normal">
+                                    No purchase requests found
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
+                    <div class="flex items-center gap-4 order-1 md:order-2">
+                        <app-pagination *ngIf="!loading" [perPage]="perPage" [totalItems]="totalItemActualPurchaseRequests"
+                            [currentPage]="actualPurchaseRequestsPage" (selectedPage)="selectedPage($event, 'actualPurchaseRequests')">
+                        </app-pagination>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recurring Operational Costs -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Recurring Operational Costs
+                    </h3>
+                </div>
+                <div class="card-table scrollable-x-auto">
+                    <table class="table table-auto table-border" data-datatable-table="true">
+                        <thead>
+                            <tr>
+                                <th class="min-w-[100px]">
+                                    Name
+                                </th>
+                                <th class="min-w-[180px]">
+                                    Code
+                                </th>
+                                <th class="min-w-[180px]">
+                                    Date
+                                </th>
+                                <th class="min-w-[150px]">
+                                    Amount
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let recurringOperationalCost of recurringOperationalCosts">
+                                <td class="text-gray-800 font-normal">
+                                    {{recurringOperationalCost.recurring_operational_cost.name}}
+                                </td>
+                                <td class="text-gray-800 font-normal">
+                                    {{recurringOperationalCost.recurring_operational_cost.code}}
+                                </td>
+                                <td class="text-gray-800 font-normal">
+                                    {{recurringOperationalCost.date_formatted}}
+                                </td>
+                                <td class="text-gray-800 font-normal">
+                                    {{recurringOperationalCost.cost_amount_in_local_currency_formatted}}
+                                </td>
+                            </tr>
+                            <tr *ngIf="recurringOperationalCosts?.length == 0">
+                                <td colspan="7" class="text-center text-gray-500 font-normal">
+                                    No recurring operational costs found
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
+                    <div class="flex items-center gap-4 order-1 md:order-2">
+                        <app-pagination *ngIf="!loading" [perPage]="perPage" [totalItems]="totalItemRecurringOperationalCosts"
+                            [currentPage]="recurringOperationalCostsPage" (selectedPage)="selectedPage($event, 'recurringOperationalCosts')">
+                        </app-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

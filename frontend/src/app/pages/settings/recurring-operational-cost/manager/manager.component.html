@@ -1,0 +1,49 @@
+<div class="container-fixed">
+    <div
+        class="flex items-center flex-wrap md:flex-nowrap lg:items-end justify-between border-b border-b-gray-200 dark:border-b-coal-100 gap-3 lg:gap-6 mb-2">
+        <div class="grid">
+            <div class="scrollable-x-auto">
+                <div class="menu gap-3" data-menu="true">
+                    <div
+                        class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-primary menu-item-here:border-b-primary"
+                        [class.active]="currentTab === 'details'">
+                        <a [routerLink]="['/settings/recurring-operational-cost/' + modelId]"
+                            [queryParams]="{tab: 'details'}" class="menu-link gap-1.5 pb-2 lg:pb-4 px-2"
+                            tabindex="0">
+                            <span
+                                class="menu-title text-nowrap font-medium text-sm text-gray-700 menu-item-active:text-primary menu-item-active:font-semibold menu-item-here:text-primary menu-item-here:font-semibold menu-item-show:text-primary menu-link-hover:text-primary">
+                                Details
+                            </span>
+                        </a>
+                    </div>
+
+                    <div
+                        class="menu-item border-b-2 border-b-transparent menu-item-active:border-b-primary menu-item-here:border-b-primary"
+                        [class.active]="currentTab === 'roc_month'">
+                        <a [routerLink]="['/settings/recurring-operational-cost/' + modelId]"
+                            [queryParams]="{tab: 'roc_month'}" class="menu-link gap-1.5 pb-2 lg:pb-4 px-2"
+                            tabindex="0">
+                            <span
+                                class="menu-title text-nowrap font-medium text-sm text-gray-700 menu-item-active:text-primary menu-item-active:font-semibold menu-item-here:text-primary menu-item-here:font-semibold menu-item-show:text-primary menu-link-hover:text-primary">
+                                ROC Month
+                            </span>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="flex items-center justify-end grow lg:grow-0 lg:pb-4 gap-2.5 mb-3 lg:mb-0">
+            <button class="btn btn-sm btn-light" routerLink="/settings/recurring-operational-cost">
+                Back
+            </button>
+        </div>
+    </div>
+
+    <ng-container *ngIf="currentTab === 'details'">
+        <app-details [modelId]="modelId"></app-details>
+    </ng-container>
+    <ng-container *ngIf="currentTab === 'roc_month'">
+        <app-roc-month [modelId]="modelId"></app-roc-month> 
+    </ng-container>
+</div>

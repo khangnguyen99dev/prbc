@@ -1,0 +1,140 @@
+<div class="container-fixed">
+    <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+        <div class="flex flex-col justify-center gap-2">
+            <h1 class="text-xl font-medium leading-none text-gray-900">
+                Country Management
+            </h1>
+        </div>
+        <div class="flex items-center gap-2.5">
+            <a class="btn btn-sm btn-success" routerLink="/settings/master-data/country-management/create"
+                *ngIf="permissionService.hasPermission('Settings - Master Data - Can Create Country Management')">
+                New Country
+            </a>
+        </div>
+    </div>
+
+    <app-alert [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
+
+    <div class="mb-4">
+        <h2 class="text-lg font-medium leading-none text-gray-900">
+            Search
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div>
+                <label class="text-sm font-normal text-gray-700" for="name">Name:</label>
+                <br>
+                <input type="text" id="name" class="input input-sm" placeholder="Name" [(ngModel)]="filters.name"
+                    name="name">
+            </div>
+            <div>
+                <label class="text-sm font-normal text-gray-700" for="code">Code:</label>
+                <br>
+                <input type="text" id="code" class="input input-sm" placeholder="Code" [(ngModel)]="filters.code"
+                    name="code">
+            </div>
+            <div>
+                <label class="text-sm font-normal text-gray-700" for="owner_name">Owner Name:</label>
+                <br>
+                <input type="text" id="owner_name" class="input input-sm" placeholder="Owner Name"
+                    [(ngModel)]="filters.owner_name" name="owner_name">
+            </div>
+            <div>
+                <label class="text-sm font-normal text-gray-700" for="created_at">Created At</label>
+                <input [matDatepicker]="created_at" class="input input-sm" (click)="created_at.open()" name="created_at"
+                    [(ngModel)]="filters.created_at" placeholder="Select Created At">
+                <mat-datepicker #created_at></mat-datepicker>
+            </div>
+        </div>
+        <div class="w-full mt-2 flex justify-end gap-2">
+            <button class="btn btn-sm btn-light" [disabled]="loading" (click)="resetFilters()">
+                Reset Filters
+            </button>
+            <button class="btn btn-sm btn-primary" [disabled]="loading" (click)="searchCountries()">
+                {{ loading ? 'Loading...' : 'Search' }}
+            </button>
+        </div>
+    </div>
+    <hr class="w-full my-4 border-t border-gray-300 mb-8">
+</div>
+
+<div class="container-fixed">
+    <div class="grid gap-5 lg:gap-7.5">
+        <div class="card card-grid min-w-full">
+            <div class="card-header flex-wrap gap-2">
+                <h3 class="card-title font-medium text-sm">
+                    Showing {{ from }} to {{ to }} of {{ totalItems }} countries
+                </h3>
+            </div>
+            <div class="card-body">
+                <div data-datatable="true" data-datatable-page-size="20">
+                    <div class="scrollable-x-auto">
+                        <table class="table table-auto table-border" data-datatable-table="true">
+                            <thead>
+                                <tr>
+                                    <th class="min-w-[180px]">Name</th>
+                                    <th class="min-w-[180px]">Code</th>
+                                    <th class="min-w-[180px]">Owner Name</th>
+                                    <th class="min-w-[80px]">Flag</th>
+                                    <th class="min-w-[180px]">Created At</th>
+                                    <th class="w-[60px]"></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr *ngFor="let country of countries">
+                                    <td>{{ country.name }}</td>
+                                    <td>{{ country.code }}</td>
+                                    <td>{{ country.owner ? country.owner.name : 'N/A' }}</td>
+                                    <td>
+                                        <img [src]="country.flag_url ? country.flag_url : '/assets/media/avatars/blank.png'"
+                                            alt="Country Flag" class="w-10 h-10">
+                                    </td>
+                                    <td>{{ country.created_at_formatted }}</td>
+                                    <td>
+                                        <div class="menu flex-inline" data-menu="true">
+                                            <div class="menu-item" data-menu-item-offset="0, 10px"
+                                                data-menu-item-placement="bottom-end"
+                                                data-menu-item-placement-rtl="bottom-start"
+                                                data-menu-item-toggle="dropdown"
+                                                data-menu-item-trigger="click|lg:click">
+                                                <button class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
+                                                    <i class="ki-filled ki-dots-vertical">
+                                                    </i>
+                                                </button>
+
+                                                <div class="menu-dropdown menu-default w-full max-w-[175px]"
+                                                    data-menu-dismiss="true">
+                                                    <div *ngIf="permissionService.hasPermission('Settings - Master Data - Can Show Country Management')"
+                                                        class="menu-item">
+                                                        <a class="menu-link"
+                                                            [routerLink]="['/settings/master-data/country-management/', country.id]">
+                                                            <span class="menu-icon">
+                                                                <i class="ki-filled ki-setting-2">
+                                                                </i>
+                                                            </span>
+                                                            <span class="menu-title">
+                                                                Edit Country
+                                                            </span>
+                                                        </a>
+                                                        <a class="menu-link" (click)="deleteCountry(country.id)"> 
+                                                            <span class="menu-icon">
+                                                                <i class="ki-filled ki-trash"></i>
+                                                            </span>
+                                                            <span class="menu-title">
+                                                                Delete Country
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

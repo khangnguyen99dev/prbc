@@ -1,0 +1,80 @@
+<div class="container-fixed">
+    <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+        <div class="flex flex-col justify-center gap-2">
+            <h1 class="text-xl font-medium leading-none text-gray-900">
+                New Country Budget
+            </h1>
+        </div>
+        <div class="flex items-center gap-2.5">
+            <a class="btn btn-sm btn-light" routerLink="/settings/country-budget">
+                Back
+            </a>
+        </div>
+    </div>
+
+    <app-alert [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
+
+    <div class="grid gap-5 lg:gap-7.5 w-full mx-left">
+        <div>
+            <div class="pl-0" id="basic_settings">
+                <h3 class="card-title pl-0">
+                    Country Budget Information
+                </h3>
+                <hr class="my-4">
+            </div>
+            <div class="grid gap-5">
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Country Name <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <p class="pt-2 text-sm" id="fetching_country" style="display: none">Fetching Countries...</p>
+                    <select name="country_selectize" id="country_selectize" class="w-full">
+                        <option value="">Select Country</option>
+                    </select>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Currency <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="form.currency" class="input" placeholder="Enter currency" [disabled]="true" />
+                </div>
+
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Year <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <select [(ngModel)]="form.year" class="w-full" placeholder="Select year" id="year_selectize">
+                        <option value="" disabled>Select year</option>
+                        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                    </select>
+                </div>
+
+                    <!-- Monthly amounts section -->
+                <div *ngIf="form.year" class="mt-5">
+                    <h3 class="card-title pl-0">Monthly Amounts</h3>
+                    <hr class="my-4">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                        <div *ngFor="let item of monthlyAmounts; let i = index" 
+                            class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                            <label class="form-label max-w-56">
+                                {{ getMonthName(item.month) }}
+                            </label>
+                            <input type="number" 
+                                onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46"
+                                [(ngModel)]="item.amount"
+                                class="input" 
+                                placeholder="Enter amount"
+                                min="0"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end">
+                    <button (click)="createCountryBudget()" [disabled]="loading" class="btn btn-primary">
+                        {{ loading ? 'Saving...' : 'Save' }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

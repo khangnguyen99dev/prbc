@@ -1,0 +1,195 @@
+<div class="container-fixed">
+    <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+        <div class="flex flex-col justify-center gap-2">
+            <h1 class="text-xl font-medium leading-none text-gray-900">
+                New Purchase Request
+            </h1>
+        </div>
+        <div class="flex items-center gap-2.5">
+            <a class="btn btn-sm btn-light" routerLink="/purchase-requests">
+                Back
+            </a>
+        </div>
+    </div>
+
+    <app-alert [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
+
+    <div class="grid gap-5 lg:gap-7.5 w-full mx-left">
+        <div>
+            <div class="pl-0" id="basic_settings">
+                <h3 class="card-title pl-0">
+                    Purchase Request Information
+                </h3>
+                <hr class="my-4">
+            </div>
+            <div class="grid gap-5">
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        PR Name <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="form.pr_name" class="input" placeholder="Enter PR Name" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Entity Name <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <p class="text-sm" id="fetching_entity" style="display: none">Fetching Entities...</p>
+                    <select name="entity_selectize" id="entity_selectize" class="w-full">
+                        <option value="">Select Entity</option>
+                    </select>
+                </div>
+                <div *ngIf="form.entity_id" class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        
+                    </label>
+                    <div class="text-xs text-gray-800 font-normal">
+                        <ng-container *ngIf="!availableBudget.available_budget_label">
+                            Available Budget: {{ availableBudget.available_budget_in_local_currency }} {{ availableBudget.currency_in_local }} 
+                            <ng-container *ngIf="availableBudget.available_budget_in_doc_currency">
+                                (≈ {{ availableBudget.available_budget_in_doc_currency }} {{ availableBudget.currency_in_doc }} | Exchange Rate: {{ availableBudget.exchange_rate }}) 
+                            </ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="availableBudget.available_budget_label">
+                            {{ availableBudget.available_budget_label ? '(' + availableBudget.available_budget_label + ')' : '' }}
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Currency <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <select name="currency_selectize" id="currency_selectize" class="w-full">
+                        <option value="">Select Currency</option>
+                    </select>
+                </div>
+
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        PR Number <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="form.pr_number" [disabled]="true" class="input" placeholder="Enter PR Number" />
+                </div>
+
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5"> 
+                    <label class="form-label max-w-56">
+                        PR Date <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input [matDatepicker]="pr_date" class="input" (click)="pr_date.open()" name="pr_date" [(ngModel)]="form.pr_date"  placeholder="Select PR Date" [disabled]="true">
+                    <mat-datepicker #pr_date></mat-datepicker>
+                </div>
+
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5"> 
+                    <label class="form-label max-w-56">
+                        PR Description
+                    </label>
+                    <textarea [(ngModel)]="form.pr_description" class="textarea text-2sm text-gray-600 font-normal" rows="3" style="height: 80px;"></textarea>
+                </div>
+
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Level <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <select name="level_selectize" id="level_selectize" class="w-full">
+                        <option value="">Select Level</option>
+                        <option *ngFor="let level of levelSetup.option_levels" [value]="level.id">{{ level.label }}</option>
+                    </select>
+                </div>
+                <div *ngFor="let item of levelSetup.option_approver_user;" class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Approver Level {{ item.id }} <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <p class="text-sm" id="fetching_approver_user_{{ item.id }}" style="display: none">Fetching Approver Levels {{ item.id }}...</p>
+                    <select name="approver_user_selectize_{{ item.id }}" id="approver_user_selectize_{{ item.id }}" class="w-full" multiple>
+                        <option value="">Select Approver Level {{ item.id }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Items section -->
+<div class="container-fixed">
+    <div class="pl-0" id="basic_settings">
+        <h3 class="card-title">
+            Items
+        </h3>
+        <div class="flex justify-end">
+            <button class="btn btn-light btn-sm" (click)="addItem()">
+                <i class="ki-filled ki-plus"></i>
+                Add Item
+            </button>
+        </div>
+        <hr class="my-4">
+    </div>
+    <div class="grid gap-5 lg:gap-7.5">
+        <div class="card card-grid min-w-full">
+            <div class="card-body">
+                <div data-datatable="true" data-datatable-page-size="20">
+                    <div class="scrollable-x-auto">
+                        <table class="table table-auto table-border" data-datatable-table="true">
+                            <thead>
+                                <tr>
+                                    <th class="min-w-52">Item Code</th>
+                                    <th class="min-w-52">Item Name</th>
+                                    <th class="min-w-52">Item Description</th>
+                                    <th class="min-w-24">Quantity</th>
+                                    <th class="min-w-52">Price</th>
+                                    <th class="min-w-52">Total</th>
+                                    <th class="min-w-36">UOM</th>
+                                    <th class="min-w-52">Required By</th>
+                                    <th class="min-w-24">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of items; let i = index">
+                                    <td class="text-sm text-gray-800 font-normal">
+                                        <input type="text" [(ngModel)]="item.item_code" class="input" placeholder="Enter item code" />
+                                    </td>
+                                    <td class="text-sm text-gray-800 font-normal">
+                                        <input type="text" [(ngModel)]="item.item_name" class="input" placeholder="Enter item name" />
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <input type="text" [(ngModel)]="item.item_description" class="input" placeholder="Enter item description" />
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <input type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46" [(ngModel)]="item.quantity" min="0" class="input" placeholder="Enter quantity" (ngModelChange)="calculateTotalPrice(i)" />
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <input type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46" [(ngModel)]="item.unit_price" min="0" class="input" placeholder="Enter unit price" (ngModelChange)="calculateTotalPrice(i)" />
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <input type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46" [(ngModel)]="item.total_price" class="input" placeholder="Enter total price" [disabled]="true" />
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <input type="text" [(ngModel)]="item.uom" class="input" placeholder="Enter UOM" />
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <input type="text" (click)="required_by.open()" name="required_by" [matDatepicker]="required_by" [(ngModel)]="item.required_by" class="input" placeholder="Enter required by" />
+                                        <mat-datepicker #required_by></mat-datepicker>
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <button (click)="deleteItem(i)" class="btn btn-sm btn-icon btn-danger">
+                                            <i class="ki-filled ki-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr *ngIf="items?.length == 0">
+                                    <td colspan="6" class="text-center text-gray-500 font-normal">
+                                        No items found
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-end mt-5 mb-10">
+        <button *ngIf="items.length > 0" (click)="save()" [disabled]="loading" class="btn btn-primary">
+            {{ loading ? 'Saving...' : 'Save' }}
+        </button>
+    </div>
+</div>

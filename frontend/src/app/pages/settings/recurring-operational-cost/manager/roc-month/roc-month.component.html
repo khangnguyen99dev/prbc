@@ -1,0 +1,64 @@
+<app-alert [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
+
+<!-- <div class="flex justify-end items-center gap-2" *ngIf="roc.active">
+    <div class="text-gray-500 text-xs">
+        The ROC Month will be run manually from {{ roc.date_active_formatted }} to current month.
+    </div>
+    <button class="btn btn-primary mb-2" (click)="runManualRocMonth()" [disabled]="loadingRocMonth">
+        {{ loadingRocMonth ? 'Loading...' : 'Run Manual ROC Month' }}
+    </button>
+</div> -->
+
+<div class="grid gap-5 lg:gap-7.5">
+    <div class="card card-grid min-w-full">
+        <div class="card-header flex-wrap gap-2">
+            <h3 class="card-title font-medium text-sm">
+                Showing {{ from }} to {{ to }} of {{ totalItems }} ROC months
+            </h3>
+        </div>
+        <div class="card-body">
+            <div data-datatable="true" data-datatable-page-size="20">
+                <div class="scrollable-x-auto">
+                    <table class="table table-auto table-border" data-datatable-table="true">
+                        <thead>
+                            <tr>
+                                <th class="min-w-[180px]">
+                                    Date
+                                </th>
+                                <th class="min-w-[180px]">
+                                    Cost Amount
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let rocMonth of rocMonths">
+                                <td class="text-gray-800 font-normal">
+                                    {{ rocMonth.date_formatted }}
+                                </td>
+                                <td class="text-gray-800 font-normal">
+                                    {{ rocMonth.cost_amount_in_local_currency_formatted }}
+                                </td>
+                            </tr>
+                            <tr *ngIf="rocMonths.length == 0">
+                                <td colspan="2" class="text-center text-gray-500 font-normal">
+                                    No ROC months found
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div
+                    class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
+                    <div class="flex items-center gap-2 order-2 md:order-1">
+
+                    </div>
+                    <div class="flex items-center gap-4 order-1 md:order-2">
+                        <app-pagination *ngIf="!loading" [perPage]="perPage" [totalItems]="totalItems"
+                            [currentPage]="page" (selectedPage)="selectedPage($event)">
+                        </app-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div *ngIf="layout === 'sign-in'">
+    <router-outlet></router-outlet>
+</div>
+<div *ngIf="layout === 'app'"
+    class="antialiased flex h-full text-base text-gray-700 demo1 sidebar-fixed header-fixed">
+    <div class="flex grow">
+        <!-- Sidebar -->
+        <app-sidebar-menu></app-sidebar-menu>
+        <!-- Wrapper -->
+        <div class="wrapper flex grow flex-col">
+            <app-header></app-header>
+            <hr>
+
+            <main class="grow content pt-5" id="content" role="content">
+                <!-- Container -->
+                <div class="container-fixed" id="content_container">
+                </div>
+                <router-outlet></router-outlet>
+
+            </main>
+            <!-- <footer></footer> -->
+        </div>
+    </div>
+</div>

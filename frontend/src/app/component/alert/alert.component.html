@@ -1,0 +1,30 @@
+<ng-container *ngIf="errorMessages.length > 0">
+    <div *ngIf="errorMessages.length === 1" role="alert">
+        <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+            Error
+        </div>
+        <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+            <p *ngFor="let error of errorMessages">{{ error }}</p>
+        </div>
+        <div class="mb-4"></div>
+    </div>
+    <div *ngIf="errorMessages.length > 1" role="alert">
+        <div (click)="toggleErrors()" class="bg-red-500 text-white font-bold rounded-t px-4 py-2 cursor-pointer">
+            Sorry, system find {{ errorMessages.length }} errors. <span>(Click here to show)</span>
+        </div>
+        <div *ngIf="showErrors" class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+            <p *ngFor="let error of errorMessages">{{ error }}</p>
+        </div>
+        <div class="mb-4"></div>
+    </div>
+</ng-container>
+
+<div *ngIf="successMessage !== ''" role="alert">
+    <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
+        Success
+    </div>
+    <div class="border border-t-0 border-green-400 rounded-b bg-green-100 px-4 py-3 text-green-700">
+        <p>{{ successMessage }}</p>
+    </div>
+    <div class="mb-4"></div>
+</div>

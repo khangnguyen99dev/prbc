@@ -1,0 +1,335 @@
+
+<div class="container-fixed">
+    <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+        <div class="flex justify-center gap-2">
+            <h1 class="text-xl font-medium leading-none text-gray-900">
+                View Purchase Request
+            </h1>
+            <div class="badge badge-sm badge-{{ purchaseRequest.status_color }} badge-outline">
+                {{ purchaseRequest.status_alias }}
+            </div>
+        </div>
+        <div class="flex items-center gap-2.5">
+            <a class="btn btn-sm btn-light" routerLink="/purchase-requests">
+                Back
+            </a>
+        </div>
+    </div>
+
+    <app-alert [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
+
+    <div class="grid gap-5 lg:gap-7.5 w-full mx-left">
+        <div>
+            <div class="pl-0" id="basic_settings">
+                <h3 class="card-title pl-0">
+                    Purchase Request Information
+                </h3>
+                <hr class="my-4">
+            </div>
+            <div class="grid gap-5">
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        PR Name <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input [disabled]="isDisabledForm()" type="text" [(ngModel)]="form.pr_name" class="input" placeholder="Enter PR Name" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Entity Name <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <p class="text-sm" id="fetching_entity" style="display: none">Fetching Entities...</p>
+                    <select [disabled]="isDisabledForm()" name="entity_selectize" id="entity_selectize" class="w-full">
+                        <option value="">Select Entity</option>
+                    </select>
+                </div>
+                <div *ngIf="form.entity_id" class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        
+                    </label>
+                    <div class="text-xs text-gray-800 font-normal">
+                        <ng-container *ngIf="!availableBudget.available_budget_label">
+                            Available Budget: {{ availableBudget.available_budget_in_local_currency }} {{ availableBudget.currency_in_local }} 
+                            <ng-container *ngIf="availableBudget.available_budget_in_doc_currency">
+                                (≈ {{ availableBudget.available_budget_in_doc_currency }} {{ availableBudget.currency_in_doc }} | Exchange Rate: {{ availableBudget.exchange_rate }}) 
+                            </ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="availableBudget.available_budget_label">
+                            {{ availableBudget.available_budget_label ? '(' + availableBudget.available_budget_label + ')' : '' }}
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Currency <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <select name="currency_selectize" id="currency_selectize" class="w-full" [disabled]="isDisabledForm()">
+                        <option value="">Select Currency</option>
+                    </select>
+                </div>
+
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        PR Number <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="form.pr_number" [disabled]="true" class="input" placeholder="Enter PR Number" />
+                </div>
+
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5"> 
+                    <label class="form-label max-w-56">
+                        PR Date <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input [matDatepicker]="pr_date" class="input" (click)="pr_date.open()" name="pr_date" [(ngModel)]="form.pr_date"  placeholder="Select PR Date" [disabled]="true">
+                    <mat-datepicker #pr_date></mat-datepicker>
+                </div>
+
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5"> 
+                    <label class="form-label max-w-56">
+                        PR Description
+                    </label>
+                    <textarea [disabled]="isDisabledForm()" [(ngModel)]="form.pr_description" class="textarea text-2sm text-gray-600 font-normal" rows="3" style="height: 80px;"></textarea>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Level <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <select [disabled]="isDisabledForm()" name="level_selectize" id="level_selectize" class="w-full">
+                        <option value="">Select Level</option>
+                        <option *ngFor="let level of levelSetup.option_levels" [value]="level.id">{{ level.label }}</option>
+                    </select>
+                </div>
+                <div *ngFor="let item of levelSetup.option_approver_user;" class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Approver Level {{ item.id }} <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <p class="text-sm" id="fetching_approver_user_{{ item.id }}" style="display: none">Fetching Approver Levels {{ item.id }}...</p>
+                    <select [disabled]="isDisabledForm()" name="approver_user_selectize_{{ item.id }}" id="approver_user_selectize_{{ item.id }}" class="w-full" multiple>
+                        <option value="">Select Approver Level {{ item.id }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Items section -->
+<div class="container-fixed">
+    <div class="pl-0" id="basic_settings">
+        <h3 class="card-title">
+            Items
+        </h3>
+        <div class="flex justify-end">
+            <button [disabled]="isDisabledForm()" class="btn btn-light btn-sm" (click)="addItem()">
+                <i class="ki-filled ki-plus"></i>
+                Add Item
+            </button>
+        </div>
+        <hr class="my-4">
+    </div>
+    <div class="grid gap-5 lg:gap-7.5">
+        <div class="card card-grid min-w-full">
+            <div class="card-body">
+                <div data-datatable="true" data-datatable-page-size="20">
+                    <div class="scrollable-x-auto">
+                        <table class="table table-auto table-border" data-datatable-table="true">
+                            <thead>
+                                <tr>
+                                    <th class="min-w-52">Item Code</th>
+                                    <th class="min-w-52">Item Name</th>
+                                    <th class="min-w-52">Item Description</th>
+                                    <th class="min-w-24">Quantity</th>
+                                    <th class="min-w-52">Price</th>
+                                    <th class="min-w-52">Total</th>
+                                    <th class="min-w-36">UOM</th>
+                                    <th class="min-w-52">Required By</th>
+                                    <th class="min-w-24">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of items; let i = index">
+                                    <td class="text-sm text-gray-800 font-normal">
+                                        <input [disabled]="isDisabledForm()" type="text" [(ngModel)]="item.item_code" class="input" placeholder="Enter item code" />
+                                    </td>
+                                    <td class="text-sm text-gray-800 font-normal">
+                                        <input [disabled]="isDisabledForm()" type="text" [(ngModel)]="item.item_name" class="input" placeholder="Enter item name" />
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <input [disabled]="isDisabledForm()" type="text" [(ngModel)]="item.item_description" class="input" placeholder="Enter item description" />
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <input [disabled]="isDisabledForm()" type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46" [(ngModel)]="item.quantity" min="0" class="input" placeholder="Enter quantity" (ngModelChange)="calculateTotalPrice(i)" />
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <input [disabled]="isDisabledForm()" type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46" [(ngModel)]="item.unit_price" min="0" class="input" placeholder="Enter unit price" (ngModelChange)="calculateTotalPrice(i)" />
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <input type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46" [(ngModel)]="item.total_price" class="input" placeholder="Enter total price" [disabled]="true" />
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <input [disabled]="isDisabledForm()" type="text" [(ngModel)]="item.uom" class="input" placeholder="Enter UOM" />
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <input [disabled]="isDisabledForm()" type="text" (click)="required_by.open()" name="required_by" [matDatepicker]="required_by" [(ngModel)]="item.required_by" class="input" placeholder="Enter required by" />
+                                        <mat-datepicker #required_by></mat-datepicker>
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <button *ngIf="purchaseRequest.status !== 'Approved'" [disabled]="isDisabledForm()" (click)="deleteItem(i, item.id)" class="btn btn-sm btn-icon btn-danger">
+                                            <i class="ki-filled ki-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr *ngIf="items?.length == 0">
+                                    <td colspan="10" class="text-center text-gray-500 font-normal">
+                                        No items found
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-end mt-5 mb-10 gap-2.5">
+        <button *ngIf="items.length > 0 && purchaseRequest.status == 'Draft' && permissionService.hasPermission('WorkSpace - Can Update Purchase Request')" (click)="save()" [disabled]="loading" class="btn btn-primary">
+            {{ loading ? 'Updating...' : 'Update Purchase Request' }}
+        </button>
+    </div>
+    <div class="mt-5" *ngIf="items.length > 0 && purchaseRequest.status == 'Draft'">
+        <h3 class="card-title">
+            Purchase Request Actions
+        </h3>
+        <hr class="my-4">
+        <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5 mt-5"> 
+            <label class="form-label max-w-56">
+                Cancel Comment
+            </label>
+            <textarea [(ngModel)]="cancelComment" class="textarea text-2sm text-gray-600 font-normal" rows="3" style="height: 80px;"></textarea>
+        </div>
+        <div class="flex justify-end mt-5 mb-10 gap-2.5">
+            <button 
+                *ngIf="permissionService.hasPermission('WorkSpace - Can Submit For Approval Purchase Request')"
+                (click)="submitForApproval()" 
+                [disabled]="loading" 
+                class="btn btn-outline btn-warning">
+                {{ loading ? 'Submitting...' : 'Submit For Approval' }}
+            </button>
+            <button 
+                *ngIf="permissionService.hasPermission('WorkSpace - Can Cancel Purchase Request')"
+                (click)="cancel()" 
+                [disabled]="loading" 
+                class="btn btn-outline btn-danger">
+                {{ loading ? 'Cancelling...' : 'Cancel Purchase Request' }}
+            </button>
+        </div>
+    </div>
+
+    <ng-container *ngIf="purchaseRequest.can_approve">
+        <div class="grid gap-5 lg:gap-7.5 w-full mx-left mb-10">
+            <div>
+                <div class="pl-0" id="basic_settings">
+                    <h3 class="card-title pl-0">
+                        Approval Purchase Request Level {{ purchaseRequest.approval_level_approved + 1 }}
+                    </h3>
+                    <hr class="my-4">
+                </div>
+                <div class="grid gap-5">
+                    <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                        <label class="form-label max-w-56">
+                            Comment
+                        </label>
+                        <textarea [(ngModel)]="formApproval.comment" class="textarea text-2sm text-gray-600 font-normal" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-end mt-5 mb-10 gap-2.5">
+            <button (click)="approval('Approve')" [disabled]="loading" class="btn btn-primary">
+                {{ loading ? 'Loading...' : 'Approve' }}
+            </button>
+            <button (click)="approval('Reject')" [disabled]="loading" class="btn btn-danger">
+                {{ loading ? 'Loading...' : 'Reject' }}
+            </button>
+        </div>
+    </ng-container>
+</div>
+
+<div class="container-fixed">
+    <div class="pl-0" id="basic_settings">
+        <h3 class="card-title pl-0">
+            Purchase Request Histories
+        </h3>
+        <hr class="my-4">
+    </div>
+    <div class="grid gap-5 lg:gap-7.5">
+        <div class="card card-grid min-w-full">
+            <div class="card-header flex-wrap gap-2">
+                <h3 class="card-title font-medium text-sm">
+                    Showing {{ from }} to {{ to }} of {{ totalItems }} purchase request histories
+                </h3>
+            </div>
+            <div class="card-body">
+                <div data-datatable="true" data-datatable-page-size="20">
+                    <div class="scrollable-x-auto">
+                        <table class="table table-auto table-border" data-datatable-table="true">
+                            <thead>
+                                <tr>
+                                    <th class="min-w-[150px]">
+                                        Action
+                                    </th>
+                                    <th class="min-w-[250px]">
+                                        Comment
+                                    </th>
+                                    <th class="min-w-[150px]">
+                                        Status
+                                    </th>
+                                    <th class="min-w-[150px]">
+                                        User
+                                    </th>
+                                    <th class="min-w-[150px]">
+                                        Date
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let history of histories">
+                                    <td class="text-gray-800 font-normal">
+                                        {{ history.action }}
+                                    </td>
+                                    <td class="text-gray-800 font-normal">
+                                        {{ history.comment }}
+                                    </td>
+                                    <td class="text-gray-800 font-normal">
+                                        {{ history.status }}
+                                    </td>
+                                    <td class="text-gray-800 font-normal">
+                                        {{ history.user?.name }}
+                                    </td>
+                                    <td class="text-gray-800 font-normal">
+                                        {{ history.created_at_formatted }}
+                                    </td>
+                                </tr>
+
+                                <tr *ngIf="histories?.length == 0">
+                                    <td colspan="5" class="text-center text-gray-500 font-normal">
+                                        No histories found
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div
+                        class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
+                        <div class="flex items-center gap-2 order-2 md:order-1">
+
+                        </div>
+                        <div class="flex items-center gap-4 order-1 md:order-2">
+                            <app-pagination *ngIf="!loading" [perPage]="perPage" [totalItems]="totalItems"
+                                [currentPage]="page" (selectedPage)="selectedPage($event)">
+                            </app-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

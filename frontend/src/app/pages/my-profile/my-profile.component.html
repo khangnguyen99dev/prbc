@@ -1,0 +1,74 @@
+<div class="container-fixed">
+    <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+        <div class="flex flex-col justify-center gap-2">
+            <h1 class="text-xl font-medium leading-none text-gray-900">
+                My Profile
+            </h1>
+        </div>
+    </div>
+    <app-alert [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
+
+    <div class="grid gap-5 lg:gap-7.5 w-full mx-auto">
+        <div class="card pb-2.5">
+            <div class="card-header" id="basic_settings">
+                <h3 class="card-title">
+                    Your Profile Information
+                </h3>
+            </div>
+            <div class="card-body grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Entity <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <p class="pt-2 text-sm" id="fetching_entity" style="display: none">Fetching Entities...</p>
+                    <select name="entity_selectize" id="entity_selectize" class="w-full">
+                        <option value="">Select Entity</option>
+                    </select>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Name <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input [(ngModel)]="form.name" class="input" type="text" placeholder="Enter name" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Employee Number <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input [disabled]="form.email === 'admin@admin.com'" [(ngModel)]="form.employee_number" class="input" type="text" placeholder="Enter employee number" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Email <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input [disabled]="form.email === 'admin@admin.com'" [(ngModel)]="form.email" class="input" type="text" placeholder="Enter email" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Date of Birth
+                    </label>
+                    <input [matDatepicker]="date_of_birth" class="input" (click)="date_of_birth.open()" name="date_of_birth" [(ngModel)]="form.date_of_birth"  placeholder="Select Date of Birth">
+                    <mat-datepicker #date_of_birth hidden></mat-datepicker> 
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Password
+                    </label>
+                    <input [(ngModel)]="form.password" class="input" placeholder="Enter password" type="password" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5 mb-2.5">
+                    <label class="form-label max-w-56">
+                        Confirm Password
+                    </label>
+                    <input [(ngModel)]="form.confirm_password" class="input" placeholder="Enter confirm password"
+                        type="password" />
+                </div>
+            </div>
+            <div class="card-body flex justify-end">
+                <button (click)="updateUser()" [disabled]="loading" class="btn btn-primary">
+                    {{ loading ? 'Loading...' : 'Update Profile' }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+<div class="container-fixed">
+    <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+        <div class="flex flex-col justify-center gap-2">
+            <h1 class="text-xl font-medium leading-none text-gray-900">
+                New Currency
+            </h1>
+        </div>
+        <div class="flex items-center gap-2.5">
+            <a class="btn btn-sm btn-light" routerLink="/settings/master-data/currency-management">
+                Back
+            </a>
+        </div>
+    </div>
+
+    <app-alert [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
+
+    <div class="grid gap-5 lg:gap-7.5 w-full mx-auto">
+        <div class="card pb-2.5">
+            <div class="card-header" id="basic_settings">
+                <h3 class="card-title">
+                    Currency Information
+                </h3>
+            </div>
+            <div class="card-body grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Name <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input [(ngModel)]="currencyName" class="input" type="text" placeholder="Enter name" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Currency Code <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input [(ngModel)]="currencyCode" class="input" type="text" placeholder="Enter currency code" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Rate (Main) <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input [(ngModel)]="currencyRate" class="input" placeholder="Enter rate" type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46" />
+                </div>
+
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Symbol <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input class="input" [(ngModel)]="currencySymbol" type="text" placeholder="Enter symbol" />
+                </div>
+
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Decimal Mark <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <select name="decimal_mark" id="decimal_mark" class="w-full">
+                        <option value="">Select Decimal Mark</option>
+                        <option>,</option>
+                        <option>.</option>
+                    </select>
+                </div>
+
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Thousand Separator <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <select name="thousand_separator" id="thousand_separator" class="w-full">
+                        <option value="">Select Thousand Separator</option>
+                        <option>,</option>
+                        <option>.</option>
+                    </select>
+                </div>
+
+
+            </div>
+            <div *ngIf="permissionService.hasPermission('Settings - Master Data - Can Create Currency')" class="card-body flex justify-end">
+                <button (click)="saveAddingCurrency()" [disabled]="addingCurrency_Loading" class="btn btn-primary">
+                    {{ addingCurrency_Loading ? 'Saving...' : 'Save Changes' }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

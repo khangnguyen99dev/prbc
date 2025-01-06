@@ -1,0 +1,171 @@
+<div class="container-fixed">
+    <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+        <div class="flex flex-col justify-center gap-2">
+            <h1 class="text-xl font-medium leading-none text-gray-900">
+                Bonus Pool
+            </h1>
+        </div>
+        <div class="flex items-center gap-2.5">
+            <a class="btn btn-sm btn-success" routerLink="/settings/bonus-pool/create" *ngIf="permissionService.hasPermission('Settings - Bonus Pool - Can Create Bonus Pool')">
+                New Bonus Pool
+            </a>
+        </div>
+    </div>
+
+    <app-alert [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
+
+    <div class="mb-4">
+        <h2 class="text-lg font-medium leading-none text-gray-900">
+            Search
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div>
+                <label class="text-sm font-normal text-gray-700" for="entity_name">Entity Name:</label>
+                <br>
+                <input type="text" id="entity_name" class="input input-sm" placeholder="Entity Name" [(ngModel)]="filters.entity_name"
+                    name="entity_name">
+            </div>
+            <div>
+                <label class="text-sm font-normal text-gray-700" for="name">Name:</label>
+                <br>
+                <input type="text" id="name" class="input input-sm" placeholder="Name" [(ngModel)]="filters.name"
+                    name="name">
+            </div>
+            <div>
+                <label class="text-sm font-normal text-gray-700" for="code">Code:</label>
+                <br>
+                <input type="text" id="code" class="input input-sm" placeholder="Code" [(ngModel)]="filters.code"
+                    name="code">
+            </div>
+            <div>
+                <label class="text-sm font-normal text-gray-700" for="created_at">Created At:</label>
+                <br>
+                <input [matDatepicker]="created_at" class="input input-sm" (click)="created_at.open()" name="created_at" [(ngModel)]="filters.created_at"  placeholder="Select Created At">
+                <mat-datepicker #created_at></mat-datepicker>
+            </div>
+        </div>
+        <div class="w-full mt-2 flex justify-end gap-2">
+            <button class="btn btn-sm btn-light" [disabled]="loading" (click)="resetFilters()">
+                Clear Filters
+            </button>
+            <button class="btn btn-sm btn-primary" [disabled]="loading" (click)="searchBonusPools()">
+                {{ loading ? 'Loading...' : 'Search' }}
+            </button>
+        </div>
+    </div>
+    <hr class="w-full my-4 border-t border-gray-300 mb-8">
+</div>
+
+<div class="container-fixed">
+    <div class="grid gap-5 lg:gap-7.5">
+        <div class="card card-grid min-w-full">
+            <div class="card-header flex-wrap gap-2">
+                <h3 class="card-title font-medium text-sm">
+                    Showing {{ from }} to {{ to }} of {{ totalItems }} Bonus Pools
+                </h3>
+            </div>
+            <div class="card-body">
+                <div data-datatable="true" data-datatable-page-size="20">
+                    <div class="scrollable-x-auto">
+                        <table class="table table-auto table-border" data-datatable-table="true">
+                            <thead>
+                                <tr>
+                                    <th class="min-w-[250px]">
+                                        Entity Name
+                                    </th>
+                                    <th class="min-w-[100px]">
+                                        Name
+                                    </th>
+                                    <th class="min-w-[180px]">
+                                        Code
+                                    </th>
+                                    <th class="min-w-[180px]">
+                                        Total Bonus
+                                    </th>
+                                    <th class="min-w-[180px]">
+                                        Minimum Management Bonus
+                                    </th>
+                                    <th class="min-w-[150px]">
+                                        Status
+                                    </th>
+                                    <th class="w-[60px]">
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let bonusPool of bonusPools">
+                                    <td class="text-gray-800 font-normal">
+                                        {{ bonusPool.entity?.name }}
+                                    </td>
+                                    <td class="text-gray-800 font-normal">
+                                        {{ bonusPool.name }}
+                                    </td>
+                                    <td class="text-gray-800 font-normal">
+                                        {{ bonusPool.code }}
+                                    </td>
+                                    <td class="text-gray-800 font-normal">
+                                        {{ bonusPool.total_bonus_in_doc_formatted }} {{ bonusPool.currency }}
+                                    </td>
+                                    <td class="text-gray-800 font-normal">
+                                        {{ bonusPool.minimum_management_bonus_in_doc_formatted }} {{ bonusPool.currency }}
+                                    </td>
+                                    <td class="text-gray-800 font-normal">
+                                        <div class="badge badge-sm badge-{{ bonusPool.status_color }} badge-outline">
+                                            {{ bonusPool.status }}
+                                        </div>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <div class="menu flex-inline" data-menu="true">
+                                            <div class="menu-item" data-menu-item-offset="0, 10px"
+                                                data-menu-item-placement="bottom-end"
+                                                data-menu-item-placement-rtl="bottom-start"
+                                                data-menu-item-toggle="dropdown"
+                                                data-menu-item-trigger="click|lg:click">
+                                                <button class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
+                                                    <i class="ki-filled ki-dots-vertical">
+                                                    </i>
+                                                </button>
+                                                <div class="menu-dropdown menu-default w-full max-w-[175px]"
+                                                    data-menu-dismiss="true">
+                                                    <div *ngIf="permissionService.hasPermission('Settings - Bonus Pool - Can View Bonus Pool')" class="menu-item">
+                                                        <a class="menu-link" [routerLink]="['/settings/bonus-pool/', bonusPool.id]">
+                                                            <span class="menu-icon">
+                                                                <i class="ki-filled ki-eye">
+                                                                </i>
+                                                            </span>
+                                                            <span class="menu-title">
+                                                                View
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr *ngIf="bonusPools?.length == 0">
+                                    <td colspan="7" class="text-center text-gray-500 font-normal">
+                                        No Bonus Pools found
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div
+                        class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
+                        <div class="flex items-center gap-2 order-2 md:order-1">
+
+                        </div>
+                        <div class="flex items-center gap-4 order-1 md:order-2">
+                            <app-pagination *ngIf="!loading" [perPage]="perPage" [totalItems]="totalItems"
+                                [currentPage]="page" (selectedPage)="selectedPage($event)">
+                            </app-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

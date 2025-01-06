@@ -1,0 +1,45 @@
+<div class="grid grow">
+    <div class="flex justify-center items-center">
+        <app-alert class="sm:w-1/2 w-full" [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
+    </div>
+    <div class="flex justify-center items-center p-8 lg:p-10 order-2 lg:order-1">
+        <div class="card max-w-[370px] w-full">
+            <div class="card-body flex flex-col gap-5 p-10">
+                <div class="text-center mb-2.5">
+                    <h3 class="text-lg font-medium text-gray-900 leading-none">
+                        Sign in
+                    </h3>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="form-label font-normal text-gray-900">
+                        Employee Number
+                    </label>
+                    <input [(ngModel)]="employeeNumber" class="input" placeholder="Enter employee number" type="text" value="" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <div class="flex items-center justify-between gap-1">
+                        <label class="form-label font-normal text-gray-900">
+                            Password
+                        </label>
+                    </div>
+                    <div class="input" data-toggle-password="true">
+                        <input [(ngModel)]="password" name="user_password" placeholder="Enter Password" type="{{ hidePassword ? 'password' : 'text' }}" value="" />
+                        <button (click)="togglePassword()" class="btn btn-icon" data-toggle-password-trigger="true" type="button">
+                            <ng-container *ngIf="hidePassword">
+                                <i class="ki-filled ki-eye text-gray-500 toggle-password-active:hidden">
+                                </i>
+                            </ng-container>
+                            <ng-container *ngIf="!hidePassword">
+                                <i class="ki-filled ki-eye-slash text-gray-500 toggle-password-active:block">
+                                </i>
+                            </ng-container>
+                        </button>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary flex justify-center grow" (click)="signIn()">
+                    Sign In
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

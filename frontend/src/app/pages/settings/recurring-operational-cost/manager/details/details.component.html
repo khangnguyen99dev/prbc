@@ -1,0 +1,77 @@
+<app-alert [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
+
+<div class="grid gap-5 lg:gap-7.5 w-full mx-auto">
+    <div class="card pb-2.5">
+        <div class="card-header" id="basic_settings">
+            <h3 class="card-title">
+                Recurring Operational Cost Information
+            </h3>
+        </div>
+        <div class="card-body grid grid-cols-1 gap-4">
+            <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                <label class="form-label max-w-56">
+                    Entity <span class="text-danger">&nbsp;*</span>
+                </label>
+                <p class="pt-2 text-sm" id="fetching_entity" style="display: none">Fetching Entities...</p>
+                <select name="entity_selectize" id="entity_selectize" class="w-full" disabled>
+                    <option value="">Select Entity</option>
+                </select>
+            </div>
+            <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                <label class="form-label max-w-56">
+                    Cost Amount in Local Currency <span class="text-danger">&nbsp;*</span>
+                </label>
+                <input [(ngModel)]="form.cost_amount_in_local_currency" class="input" type="number"
+                    onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46"
+                    placeholder="Enter cost amount in local currency" />
+            </div>
+            <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                <label class="form-label max-w-56">
+                    Active <span class="text-danger">&nbsp;*</span>
+                </label>
+                <select name="active" id="active_selectize" class="w-full">
+                    <option value="">Select Active</option>
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
+            </div>
+            <div *ngIf="form.active == 1" class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                <label class="form-label max-w-56">
+                    Date Active <span class="text-danger">&nbsp;*</span>
+                </label>
+                <input [matDatepicker]="date_active" class="input" (click)="date_active.open()" name="date_active"
+                    [(ngModel)]="form.date_active" placeholder="Select Date Active">
+                <mat-datepicker #date_active></mat-datepicker>
+                <div class="text-gray-500 text-xs whitespace-nowrap">
+                    (Start date active)
+                </div>
+            </div>
+            <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                <label class="form-label max-w-56">
+                    Name <span class="text-danger">&nbsp;*</span>
+                </label>
+                <input [(ngModel)]="form.name" class="input" type="text" placeholder="Enter name" />
+            </div>
+            <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                <label class="form-label max-w-56">
+                    Code <span class="text-danger">&nbsp;*</span>
+                </label>
+                <input [(ngModel)]="form.code" class="input" type="text" placeholder="Enter code" />
+            </div>
+            <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                <label class="form-label max-w-56">
+                    Description
+                </label>
+                <textarea [(ngModel)]="form.description" class="textarea text-2sm text-gray-600 font-normal" rows="3"
+                    placeholder="Enter description"></textarea>
+            </div>
+
+            <div class="flex justify-end">
+                <button *ngIf="permissionService.hasPermission('Settings - Can Create Recurring Operational Cost')"
+                    (click)="editRecurringOperationalCost()" [disabled]="loading" class="btn btn-primary">
+                    {{ loading ? 'Saving...' : 'Update Changes' }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

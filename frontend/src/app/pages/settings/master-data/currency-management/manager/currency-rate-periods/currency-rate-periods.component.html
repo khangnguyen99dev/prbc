@@ -1,0 +1,151 @@
+<app-alert [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
+<div class="grid gap-5 lg:gap-7.5 w-full mx-auto" *ngIf="!settingUp && successSetup">
+    <div class="card pb-2.5">
+        <div class="card-header" id="basic_settings">
+            <h3 class="card-title">
+                {{ actionPage == 'create' ? 'Add Currency Rate Period' : 'Update Currency Rate Period' }}
+            </h3>
+        </div>
+        <div class="card-body grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
+            <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                <label class="form-label max-w-56">
+                    Period Start <span class="text-danger">&nbsp;*</span>
+                </label>
+                <input [matDatepicker]="periodStart" class="input" (click)="periodStart.open()" name="period_start"
+                    [(ngModel)]="period_start" placeholder="Select Period Start">
+                <mat-datepicker #periodStart></mat-datepicker>
+            </div>
+            <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                <label class="form-label max-w-56">
+                    Period End <span class="text-danger">&nbsp;*</span>
+                </label>
+                <input [matDatepicker]="periodEnd" class="input" (click)="periodEnd.open()" name="period_end"
+                    [(ngModel)]="period_end" placeholder="Select Period End">
+                <mat-datepicker #periodEnd></mat-datepicker>
+            </div>
+            <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                <label class="form-label max-w-56">
+                    Exchange Rate <span class="text-danger">&nbsp;*</span>
+                </label>
+                <input [(ngModel)]="exchange_rate" class="input" placeholder="Enter rate" type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode == 46"
+                    [(ngModel)]="exchange_rate" />
+            </div>
+
+        </div>
+        <div class="card-body flex justify-end" *ngIf="actionPage == 'create'">
+            <button (click)="save()" [disabled]="isLoading" *ngIf="permissionService.hasPermission('Settings - Master Data - Currency - Can Create Currency Rate Period')" class="btn btn-primary">
+                {{ isLoading ? 'isLoading...' : 'Add Changes' }}
+            </button>
+        </div>
+        <div class="card-body flex justify-end gap-2" *ngIf="actionPage == 'update'">
+            <button (click)="cancel()" class="btn btn-light">Cancel</button>
+            <button (click)="update()" [disabled]="isLoading" *ngIf="permissionService.hasPermission('Settings - Master Data - Currency - Can Update Currency Rate Period')" class="btn btn-primary">
+                {{ isLoading ? 'Updating...' : 'Update Changes' }}
+            </button>
+        </div>
+    </div>
+    <div class="grid gap-5 lg:gap-7.5">
+        <div class="card card-grid min-w-full">
+            <div class="card-header flex-wrap gap-2">
+                <h3 class="card-title font-medium text-sm">
+                    Showing {{ from }} to {{ to }} of {{ totalItems }} currency rate periods
+                </h3>
+            </div>
+            <div class="card-body">
+                <div data-datatable="true" data-datatable-page-size="20">
+                    <div class="scrollable-x-auto">
+                        <table class="table table-auto table-border" data-datatable-table="true">
+                            <thead>
+                                <tr>
+                                    <th class="min-w-[300px]">
+                                        Period Start
+                                    </th>
+                                    <th class="min-w-[180px]">
+                                        Period End
+                                    </th>
+                                    <th class="min-w-[180px]">
+                                        Exchange Rate
+                                    </th>
+                                    <th class="w-[60px]">
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let currencyRatePeriod of currencyRatePeriods">
+                                    <td class="text-gray-800 font-normal">
+                                        {{ currencyRatePeriod.period_start | date:'dd/MM/y' }}
+                                    </td>
+                                    <td class="text-gray-800 font-normal">
+                                        {{ currencyRatePeriod.period_end | date:'dd/MM/y' }}
+                                    </td>
+                                    <td class="text-gray-800 font-normal">
+                                        {{ currencyRatePeriod.exchange_rate }}
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="menu flex-inline" data-menu="true">
+                                            <div class="menu-item" data-menu-item-offset="0, 10px"
+                                                data-menu-item-placement="bottom-end"
+                                                data-menu-item-placement-rtl="bottom-start"
+                                                data-menu-item-toggle="dropdown"
+                                                data-menu-item-trigger="click|lg:click">
+                                                <button class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
+                                                    <i class="ki-filled ki-dots-vertical">
+                                                    </i>
+                                                </button>
+                                                <div class="menu-dropdown menu-default w-full max-w-[175px]"
+                                                    data-menu-dismiss="true">
+                                                    <div *ngIf="permissionService.hasPermission('Settings - Master Data - Currency - Can Show Currency Rate Period')"
+                                                        class="menu-item">
+                                                        <a class="menu-link"
+                                                            (click)="editCurrencyRatePeriod(currencyRatePeriod)">
+                                                            <span class="menu-icon">
+                                                                <i class="ki-filled ki-setting-2">
+                                                                </i>
+                                                            </span>
+                                                            <span class="menu-title">
+                                                                Edit
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                    <div *ngIf="permissionService.hasPermission('Settings - Master Data - Currency - Can Delete Currency Rate Period')"
+                                                        class="menu-item">
+                                                        <a class="menu-link" (click)="delete(currencyRatePeriod.id)">
+                                                            <span class="menu-icon">
+                                                                <i class="ki-filled ki-trash">
+                                                                </i>
+                                                            </span>
+                                                            <span class="menu-title">
+                                                                Remove
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr *ngIf="currencyRatePeriods.length == 0">
+                                    <td colspan="4" class="text-center text-gray-500 font-normal">
+                                        No currency rate periods found
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div
+                        class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
+                        <div class="flex items-center gap-2 order-2 md:order-1">
+
+                        </div>
+                        <div class="flex items-center gap-4 order-1 md:order-2">
+                            <app-pagination *ngIf="!isLoading" [perPage]="perPage" [totalItems]="totalItems"
+                                [currentPage]="page" (selectedPage)="selectedPage($event)">
+                            </app-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

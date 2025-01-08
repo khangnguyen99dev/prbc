@@ -30,7 +30,7 @@ export class WorkspaceLinkComponent {
 
     countAll() {
         let count = 0;
-        count += (this.purchaseRequestApprove.length || 0);
+        count += (this.purchaseRequestApprove?.length || 0);
         return count;
     }
 }

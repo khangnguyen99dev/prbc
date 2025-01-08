@@ -102,5 +102,12 @@ class SuperAdminPermissions extends PermissionsManager
         // Bonus Pool items
         'Settings - Bonus Pool - Can View Bonus Pool Items',
         'Settings - Bonus Pool - Can Approval Bonus Pool Items',
+
+        // Wedding Online
+        'WorkSpace - View Wedding Online in Sidebar',
+        'WorkSpace - Can View Wedding Online',
+        'WorkSpace - Can Create Wedding Online',
+        'WorkSpace - Can Update Wedding Online',
+        'WorkSpace - Can Delete Wedding Online',
     ];
 }

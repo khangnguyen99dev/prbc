@@ -1,0 +1,159 @@
+<div class="container-fixed">
+    <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+        <div class="flex flex-col justify-center gap-2">
+            <h1 class="text-xl font-medium leading-none text-gray-900">
+                Wedding Online
+            </h1>
+        </div>
+        <div class="flex items-center gap-2.5">
+            <a class="btn btn-sm btn-success" routerLink="/wedding-online/create" *ngIf="permissionService.hasPermission('WorkSpace - Can Create Wedding Online')">
+                New Wedding Online
+            </a>
+        </div>
+    </div>
+
+    <app-alert [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
+
+    <div class="mb-4">
+        <h2 class="text-lg font-medium leading-none text-gray-900">
+            Search
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div>
+                <label class="text-sm font-normal text-gray-700" for="bride_name">Bride Name:</label>
+                <br>
+                <input type="text" id="bride_name" class="input input-sm" placeholder="Bride Name" [(ngModel)]="filters.bride_name"
+                    name="bride_name">
+            </div>
+            <div>
+                <label class="text-sm font-normal text-gray-700" for="groom_name">Groom Name:</label>
+                <br>
+                <input type="text" id="groom_name" class="input input-sm" placeholder="Groom Name" [(ngModel)]="filters.groom_name"
+                    name="groom_name">
+            </div>
+            <div>
+                <label class="text-sm font-normal text-gray-700" for="wedding_date">Wedding Date:</label>
+                <br>
+                <input [matDatepicker]="wedding_date" class="input input-sm" (click)="wedding_date.open()" name="wedding_date" [(ngModel)]="filters.wedding_date"  placeholder="Select Wedding Date">
+                <mat-datepicker #wedding_date></mat-datepicker>
+            </div>
+            <div>
+                <label class="text-sm font-normal text-gray-700" for="status">Status:</label>
+                <br>
+                <select id="status" class="input input-sm" [(ngModel)]="filters.status" name="status">
+                    <option value="">All</option>
+                    <option value="Draft">Draft</option>
+                    <option value="Submitted">Submitted</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+            </div>
+        </div>
+        <div class="w-full mt-2 flex justify-end gap-2">
+            <button class="btn btn-sm btn-light" [disabled]="loading" (click)="resetFilters()">
+                Clear Filters
+            </button>
+            <button class="btn btn-sm btn-primary" [disabled]="loading" (click)="searchWeddingOnline()">
+                {{ loading ? 'Loading...' : 'Search' }}
+            </button>
+        </div>
+    </div>
+    <hr class="w-full my-4 border-t border-gray-300 mb-8">
+</div>
+
+<div class="container-fixed">
+    <div class="grid gap-5 lg:gap-7.5">
+        <div class="card card-grid min-w-full">
+            <div class="card-header flex-wrap gap-2">
+                <h3 class="card-title font-medium text-sm">
+                    Showing {{ from }} to {{ to }} of {{ totalItems }} wedding online
+                </h3>
+            </div>
+            <div class="card-body">
+                <div data-datatable="true" data-datatable-page-size="20">
+                    <div class="scrollable-x-auto">
+                        <table class="table table-auto table-border" data-datatable-table="true">
+                            <thead>
+                                <tr>
+                                    <th class="min-w-[250px]">
+                                        Bride Name
+                                    </th>
+                                    <th class="min-w-[100px]">
+                                        Groom Name
+                                    </th>
+                                    <th class="min-w-[180px]">
+                                        Wedding Date
+                                    </th>
+                                    <th class="min-w-[150px]">
+                                        Status
+                                    </th>
+                                    <th class="w-[60px]">
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let weddingOnline of weddingOnlines">
+                                    <td class="text-gray-800 font-normal">
+                                        {{ weddingOnline.bride_name }}
+                                    </td>
+                                    <td class="text-gray-800 font-normal">
+                                        {{ weddingOnline.groom_name }}
+                                    </td>
+                                    <td class="text-gray-800 font-normal">
+                                        {{ weddingOnline.wedding_date_formatted }}
+                                    </td>
+                                    <td class="text-gray-800 font-normal">
+                                        {{ weddingOnline.status }}
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="menu flex-inline" data-menu="true">
+                                            <div class="menu-item" data-menu-item-offset="0, 10px"
+                                                data-menu-item-placement="bottom-end"
+                                                data-menu-item-placement-rtl="bottom-start"
+                                                data-menu-item-toggle="dropdown"
+                                                data-menu-item-trigger="click|lg:click">
+                                                <button class="menu-toggle btn btn-sm btn-icon btn-light btn-clear">
+                                                    <i class="ki-filled ki-dots-vertical">
+                                                    </i>
+                                                </button>
+                                                <div class="menu-dropdown menu-default w-full max-w-[175px]"
+                                                    data-menu-dismiss="true">
+                                                    <div *ngIf="permissionService.hasPermission('WorkSpace - Can Show Wedding Online')" class="menu-item">
+                                                        <a class="menu-link" [routerLink]="['/wedding-online/', weddingOnline.id]">
+                                                            <span class="menu-icon">
+                                                                <i class="ki-filled ki-setting-2">
+                                                                </i>
+                                                            </span>
+                                                            <span class="menu-title">
+                                                                View
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr *ngIf="weddingOnlines?.length == 0">
+                                    <td colspan="7" class="text-center text-gray-500 font-normal">
+                                        No wedding online found
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
+                        <div class="flex items-center gap-2 order-2 md:order-1"></div>
+                        <div class="flex items-center gap-4 order-1 md:order-2">
+                            <app-pagination *ngIf="!loading" [perPage]="perPage" [totalItems]="totalItems"
+                                [currentPage]="page" (selectedPage)="selectedPage($event)">
+                            </app-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { routes as settingsRoutes } from './pages/settings/setting.routes';
 import { AuthGuard } from './guards/auth.guard';
 import { routes as workspaceRoutes } from './pages/workspace/workspace.routes';
+
 const routes: Routes = [
     {
         path: 'home',
@@ -26,6 +27,13 @@ const routes: Routes = [
         data: {
             layout: 'sign-in'
         },
+    },
+    {
+        path: 'wedding-online/view',
+        loadChildren: () => import('./pages/workspace/wedding-online/template1/template1.module').then(m => m.Template1Module),
+        data: {
+            layout: 'wedding-online',
+        }
     },
 
     //  Settings 

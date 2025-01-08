@@ -25,6 +25,14 @@ export const routes: Routes = [
         data: {
             layout: 'app',
         }
+    },
+    {
+        path: 'wedding-online',
+        loadChildren: () => import('./wedding-online/wedding-online.module').then(m => m.WeddingOnlineModule),
+        canActivate: [AuthGuard],
+        data: {
+            layout: 'app',
+        }
     }
 ];
 

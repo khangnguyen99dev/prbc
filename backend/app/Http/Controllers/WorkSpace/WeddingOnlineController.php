@@ -108,7 +108,7 @@ class WeddingOnlineController extends Controller
         }
 
         try {
-            $weddingOnline = DB::transaction(function () use ($request) {
+            $weddingOnline = DB::transaction(function () use ($request, $user) {
                 $weddingOnline = new WeddingOnline();
 
                 // Upload file to S3

@@ -138,7 +138,7 @@ export const EVENT_DATA = `
 		"COUNTDOWN1": {
 			"a": "countdown",
 			"bX": "countdown",
-			"bW": 54397
+			"bW": [COUNTDOWN]
 		},
 		"COUNTDOWN_ITEM1": {
 			"a": "countdown_item",
@@ -231,15 +231,6 @@ export const EVENT_DATA = `
 			"F": "fadeInUp",
 			"C": "0s"
 		},
-		"FORM7": {
-			"a": "form",
-			"bP": "66d360f3b4577100128b7bb4",
-			"bM": true,
-			"bK": "popup",
-			"bJ": "Thanks-LC",
-			"by": true,
-			"bx": true
-		},
 		"FORM_ITEM7": {
 			"a": "form_item",
 			"bS": "text",
@@ -265,7 +256,7 @@ export const EVENT_DATA = `
 			"cs": [{
 				"dr": "action",
 				"dv": "_blank",
-				"dw": "https://docs.google.com/spreadsheets/d/1t7X3ZTeMbc0tB__Unlurc9a__uCu0y3hVCw33SFgGhE/edit?gid=361606928#gid=361606928",
+				"dw": "https://docs.google.com/spreadsheets/d/1Mhudv7RGmShlE3RWUT4SqsYxO48YnWix/r/edit/edit?gid=251676678#gid=251676678",
 				"a": "link"
 			}]
 		},
@@ -305,7 +296,7 @@ export const EVENT_DATA = `
 			"cs": [{
 				"dr": "action",
 				"dv": "_self",
-				"dw": "https://w.ladicdn.com/5c728619c417ab07e5194baa/fd41a4d1-315f-4b19-9665-96911e364677-20240626153947-rede5.jpg",
+				"dw": [TRANSFER_OF_BRIDE_URL],
 				"a": "link"
 			}]
 		},
@@ -313,7 +304,7 @@ export const EVENT_DATA = `
 			"a": "button",
 			"cs": [{
 				"dr": "action",
-				"dL": "290819988888",
+				"dL": [BANK_ACCOUNT_NUMBER_BRIDE],
 				"a": "copy_clipboard"
 			}]
 		},
@@ -321,7 +312,7 @@ export const EVENT_DATA = `
 			"a": "image",
 			"cs": [{
 				"dr": "action",
-				"dC": "https://w.ladicdn.com/5c728619c417ab07e5194baa/fd41a4d1-315f-4b19-9665-96911e364677-20240626153947-rede5.jpg",
+				"dC": [TRANSFER_OF_BRIDE_URL],
 				"dF": "image",
 				"a": "lightbox"
 			}]
@@ -336,7 +327,7 @@ export const EVENT_DATA = `
 			"cs": [{
 				"dr": "action",
 				"dv": "_self",
-				"dw": "https://w.ladicdn.com/5c728619c417ab07e5194baa/3b5f245e-7e4b-490a-b707-48f07e069513-20240626153947-55y_s.jpg",
+				"dw": [TRANSFER_OF_GROOM_URL],
 				"a": "link"
 			}]
 		},
@@ -344,7 +335,7 @@ export const EVENT_DATA = `
 			"a": "button",
 			"cs": [{
 				"dr": "action",
-				"dL": "0848753999",
+				"dL": [BANK_ACCOUNT_NUMBER_GROOM],
 				"a": "copy_clipboard"
 			}]
 		},
@@ -352,7 +343,7 @@ export const EVENT_DATA = `
 			"a": "image",
 			"cs": [{
 				"dr": "action",
-				"dC": "https://w.ladicdn.com/5c728619c417ab07e5194baa/3b5f245e-7e4b-490a-b707-48f07e069513-20240626153947-55y_s.jpg",
+				"dC": [TRANSFER_OF_GROOM_URL],
 				"dF": "image",
 				"a": "lightbox"
 			}]
@@ -369,17 +360,6 @@ export const EVENT_DATA = `
 		},
 		"PARAGRAPH101": {
 			"a": "paragraph",
-			"F": "fadeInUp",
-			"C": "0s"
-		},
-		"FORM8": {
-			"a": "form",
-			"bP": "66d3611eb4577100128b7ccf",
-			"bM": true,
-			"bK": "popup",
-			"bJ": "Thanks-XNTD",
-			"by": true,
-			"bx": true,
 			"F": "fadeInUp",
 			"C": "0s"
 		},
@@ -783,6 +763,26 @@ export const EVENT_DATA = `
 			"F": "fadeInUp",
 			"C": "0s"
 		},
+		"SHAPE55": {
+			"a": "shape",
+			"cs": [{
+				"dr": "action",
+				"dw": "Thanks-LC",
+				"a": "popup"
+			}],
+			"F": "fadeInUp",
+			"C": "0s"
+		},
+		"SHAPE56": {
+			"a": "shape",
+			"cs": [{
+				"dr": "action",
+				"dw": "Thanks-LC",
+				"a": "popup"
+			}],
+			"F": "fadeInUp",
+			"C": "0s"
+		},
 		"HEADLINE87": {
 			"a": "headline",
 			"F": "fadeInDown",
@@ -800,7 +800,7 @@ export const EVENT_DATA = `
 		},
 		"VIDEO1": {
 			"a": "video",
-			"ci": "https://www.youtube.com/watch?v=vt-YPnXV8WM",
+			"ci": [URL_YOUTUBE],
 			"ch": "youtube",
 			"cg": true,
 			"D": "fadeInUp",

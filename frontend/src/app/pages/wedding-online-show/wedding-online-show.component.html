@@ -176,19 +176,11 @@
 				<div id="GALLERY2" class="ladi-element">
 					<div class="ladi-gallery ladi-gallery-bottom">
 						<div class="ladi-gallery-view">
-							<div class="ladi-gallery-view-arrow ladi-gallery-view-arrow-left opacity-0"></div>
-							<div class="ladi-gallery-view-arrow ladi-gallery-view-arrow-right opacity-0"></div>
-							<div class="ladi-gallery-view-item selected" data-index="0"></div>
-							<div class="ladi-gallery-view-item ladi-lazyload" data-index="1"></div>
-							<div class="ladi-gallery-view-item ladi-lazyload" data-index="2"></div>
-							<div class="ladi-gallery-view-item ladi-lazyload" data-index="3"></div>
 						</div>
+                        <div class="ladi-gallery-view-arrow ladi-gallery-view-arrow-left opacity-0"></div>
+                        <div class="ladi-gallery-view-arrow ladi-gallery-view-arrow-right opacity-0"></div>
 						<div class="ladi-gallery-control">
 							<div class="ladi-gallery-control-box">
-								<div class="ladi-gallery-control-item selected ladi-lazyload" data-index="0"></div>
-								<div class="ladi-gallery-control-item ladi-lazyload" data-index="1"></div>
-								<div class="ladi-gallery-control-item ladi-lazyload" data-index="2"></div>
-								<div class="ladi-gallery-control-item ladi-lazyload" data-index="3"></div>
 							</div>
 							<div class="ladi-gallery-control-arrow ladi-gallery-control-arrow-left opacity-0"></div>
 							<div class="ladi-gallery-control-arrow ladi-gallery-control-arrow-right opacity-0"></div>
@@ -442,39 +434,11 @@
 				<div id="GALLERY1" class="ladi-element">
 					<div class="ladi-gallery ladi-gallery-bottom">
 						<div class="ladi-gallery-view">
-							<div class="ladi-gallery-view-arrow ladi-gallery-view-arrow-left opacity-0"></div>
-							<div class="ladi-gallery-view-arrow ladi-gallery-view-arrow-right opacity-0"></div>
-							<div class="ladi-gallery-view-item selected ladi-lazyload" data-index="0"></div>
-							<div class="ladi-gallery-view-item ladi-lazyload" data-index="1"></div>
-							<div class="ladi-gallery-view-item ladi-lazyload" data-index="2"></div>
-							<div class="ladi-gallery-view-item ladi-lazyload" data-index="3"></div>
-							<div class="ladi-gallery-view-item ladi-lazyload" data-index="4"></div>
-							<div class="ladi-gallery-view-item ladi-lazyload" data-index="5"></div>
-							<div class="ladi-gallery-view-item ladi-lazyload" data-index="6"></div>
-							<div class="ladi-gallery-view-item ladi-lazyload" data-index="7"></div>
-							<div class="ladi-gallery-view-item ladi-lazyload" data-index="8"></div>
-							<div class="ladi-gallery-view-item ladi-lazyload" data-index="9"></div>
-							<div class="ladi-gallery-view-item ladi-lazyload" data-index="10"></div>
-							<div class="ladi-gallery-view-item ladi-lazyload" data-index="11"></div>
-							<div class="ladi-gallery-view-item ladi-lazyload" data-index="12"></div>
-							<div class="ladi-gallery-view-item ladi-lazyload" data-index="13"></div>
+                            <div class="ladi-gallery-view-arrow ladi-gallery-view-arrow-left opacity-0"></div>
+                            <div class="ladi-gallery-view-arrow ladi-gallery-view-arrow-right opacity-0"></div>
 						</div>
 						<div class="ladi-gallery-control">
 							<div class="ladi-gallery-control-box">
-								<div class="ladi-gallery-control-item selected ladi-lazyload" data-index="0"></div>
-								<div class="ladi-gallery-control-item ladi-lazyload" data-index="1"></div>
-								<div class="ladi-gallery-control-item ladi-lazyload" data-index="2"></div>
-								<div class="ladi-gallery-control-item ladi-lazyload" data-index="3"></div>
-								<div class="ladi-gallery-control-item ladi-lazyload" data-index="4"></div>
-								<div class="ladi-gallery-control-item ladi-lazyload" data-index="5"></div>
-								<div class="ladi-gallery-control-item ladi-lazyload" data-index="6"></div>
-								<div class="ladi-gallery-control-item ladi-lazyload" data-index="7"></div>
-								<div class="ladi-gallery-control-item ladi-lazyload" data-index="8"></div>
-								<div class="ladi-gallery-control-item ladi-lazyload" data-index="9"></div>
-								<div class="ladi-gallery-control-item ladi-lazyload" data-index="10"></div>
-								<div class="ladi-gallery-control-item ladi-lazyload" data-index="11"></div>
-								<div class="ladi-gallery-control-item ladi-lazyload" data-index="12"></div>
-								<div class="ladi-gallery-control-item ladi-lazyload" data-index="13"></div>
 							</div>
 							<div class="ladi-gallery-control-arrow ladi-gallery-control-arrow-left opacity-0"></div>
 							<div class="ladi-gallery-control-arrow ladi-gallery-control-arrow-right opacity-0"></div>
@@ -792,7 +756,7 @@
 									<div class="ladi-box ladi-transition ladi-lazyload"></div>
 								</div>
 								<div id="PARAGRAPH156" class="ladi-element">
-									<div class="ladi-paragraph ladi-transition">Be</div>
+									<div class="ladi-paragraph ladi-transition">{{formData.dress_codes && formData.dress_codes[0] ? formData.dress_codes[0].title : ''}}</div>
 								</div>
 							</div>
 						</div>
@@ -802,7 +766,7 @@
 									<div class="ladi-box ladi-transition ladi-lazyload"></div>
 								</div>
 								<div id="PARAGRAPH157" class="ladi-element">
-									<div class="ladi-paragraph ladi-transition">Đen</div>
+									<div class="ladi-paragraph ladi-transition">{{formData.dress_codes && formData.dress_codes[1] ? formData.dress_codes[1].title : ''}}</div>
 								</div>
 							</div>
 						</div>
@@ -1036,7 +1000,7 @@
 						</div>
 						<div id="FORM7" class="ladi-element">
 							<form autocomplete="off" method="post" class="ladi-form">
-								<div id="BUTTON19" class="ladi-element">
+								<div id="BUTTON19" class="ladi-element" (click)="sendMessage()">
 									<div class="ladi-button ladi-transition">
 										<div class="ladi-button-background ladi-lazyload"></div>
 										<div id="BUTTON_TEXT19" class="ladi-element ladi-button-headline">
@@ -1044,22 +1008,25 @@
 										</div>
 									</div>
 								</div>
+                                <div id="SHAPE55" class="ladi-element"></div>
 								<div id="FORM_ITEM7" class="ladi-element">
 									<div class="ladi-form-item-container">
 										<div class="ladi-form-item-background ladi-lazyload"></div>
-										<div class="ladi-form-item"><input autocomplete="off" tabindex="1" name="name" required="" class="ladi-form-control" type="text" placeholder="Họ và Tên" value=""></div>
+										<div class="ladi-form-item">
+                                            <input autocomplete="off" tabindex="1" name="name" required class="ladi-form-control" type="text" placeholder="Họ và Tên *" value="" [(ngModel)]="formMessage.name">
+                                        </div>
 									</div>
 								</div>
 								<div id="FORM_ITEM8" class="ladi-element">
 									<div class="ladi-form-item-container">
 										<div class="ladi-form-item-background ladi-lazyload"></div>
-										<div class="ladi-form-item"><textarea autocomplete="off" tabindex="2" name="message" required="" class="ladi-form-control" placeholder="Nhập lời chúc của bạn"></textarea></div>
+										<div class="ladi-form-item"><textarea autocomplete="off" tabindex="2" name="message" required class="ladi-form-control" placeholder="Nhập lời chúc của bạn *" [(ngModel)]="formMessage.message"></textarea></div>
 									</div>
 								</div>
 								<div id="FORM_ITEM9" class="ladi-element">
 									<div class="ladi-form-item-container">
 										<div class="ladi-form-item-background ladi-lazyload"></div>
-										<div class="ladi-form-item"><select tabindex="3" name="FORM_ITEM" required="" class="ladi-form-control ladi-form-control-select" data-selected="">
+										<div class="ladi-form-item"><select tabindex="3" name="FORM_ITEM" required class="ladi-form-control ladi-form-control-select" data-selected="" [(ngModel)]="formMessage.from_whom">
 												<option value="" class="ladi-hidden">Bạn Cô Dâu Chú Rể</option>
 												<option value="Bạn cô Dâu">Bạn cô Dâu</option>
 												<option value="Bạn chú Rể">Bạn chú Rể</option>
@@ -1070,7 +1037,8 @@
 								<div id="FORM_ITEM10" class="ladi-element">
 									<div class="ladi-form-item-container">
 										<div class="ladi-form-item-background ladi-lazyload"></div>
-										<div class="ladi-form-item"><select tabindex="4" name="form_item5" class="ladi-form-control ladi-form-control-select" data-selected="">
+										<div class="ladi-form-item">
+                                            <select tabindex="4" name="form_item5" class="ladi-form-control ladi-form-control-select" data-selected="" [(ngModel)]="formMessage.suggestion">
 												<option value="">Lời chúc gợi ý sẵn</option>
 												<option value="Chúc mừng hạnh phúc! Chúc hai bạn trăm năm hạnh phúc!">Chúc mừng hạnh phúc! Chúc hai bạn trăm năm hạnh phúc!</option>
 												<option value="Happy Wedding, chúc 2 vk ck trăm năm hạnh phúc, sớm sinh quý tử nhé.">Happy Wedding, chúc 2 vk ck trăm năm hạnh phúc, sớm sinh quý tử nhé.</option>
@@ -1080,13 +1048,15 @@
 												<option value="Chúc mừng hạnh phúc hai bạn. Chúc hai bạn bên nhau đầu bạc răng long, sớm có thiên thần nhỏ nhé!">Chúc mừng hạnh phúc hai bạn. Chúc hai bạn bên nhau đầu bạc răng long, sớm có thiên thần nhỏ nhé!</option>
 												<option value="Một chương mới đã mở ra với hai bạn rồi. Tôi mong cuộc sống mới của cả hai sẽ tràn ngập hy vọng, hạnh phúc và niềm vui!">Một chương mới đã mở ra với hai bạn rồi. Tôi mong cuộc sống mới của cả hai sẽ tràn ngập hy vọng, hạnh phúc và niềm vui!</option>
 												<option value="Gửi lời chúc mừng chân thành nhất tới bạn của tôi. Chúc hai bạn một cuộc sống thật tuyệt vời, hòa thuận, gắn bó son sắt, thủy chung, hạnh phúc lâu dài.">Gửi lời chúc mừng chân thành nhất tới bạn của tôi. Chúc hai bạn một cuộc sống thật tuyệt vời, hòa thuận, gắn bó son sắt, thủy chung, hạnh phúc lâu dài.</option>
-											</select></div>
+											</select>
+                                        </div>
 									</div>
-								</div><button type="submit" class="ladi-hidden"></button>
+								</div>
 							</form>
 						</div>
 					</div>
-				</div><a href="https://docs.google.com/spreadsheets/d/1Mhudv7RGmShlE3RWUT4SqsYxO48YnWix/r/edit/edit?gid=251676678#gid=251676678" target="_blank" id="GROUP76" class="ladi-element">
+				</div>
+                <!-- <a href="https://docs.google.com/spreadsheets/d/1Mhudv7RGmShlE3RWUT4SqsYxO48YnWix/r/edit/edit?gid=251676678#gid=251676678" target="_blank" id="GROUP76" class="ladi-element">
 					<div class="ladi-group">
 						<div id="PARAGRAPH90" class="ladi-element">
 							<div class="ladi-paragraph ladi-transition">Xem tất cả lời chúc của mọi người</div>
@@ -1097,7 +1067,7 @@
 								</svg></div>
 						</div>
 					</div>
-				</a>
+				</a> -->
 			</div>
 		</div>
 		<div id="SECTION22" class="ladi-section">
@@ -1281,7 +1251,7 @@
 					<div class="ladi-group">
 						<div id="FORM8" data-config-id="66d3611eb4577100128b7ccf" class="ladi-element">
 							<form autocomplete="off" method="post" class="ladi-form">
-								<div id="BUTTON30" class="ladi-element">
+								<div id="BUTTON30" class="ladi-element" (click)="sendFeedback()">
 									<div class="ladi-button ladi-transition">
 										<div class="ladi-button-background ladi-lazyload"></div>
 										<div id="BUTTON_TEXT30" class="ladi-element ladi-button-headline">
@@ -1289,16 +1259,17 @@
 										</div>
 									</div>
 								</div>
-								<div id="FORM_ITEM11" class="ladi-element">
+                                <div id="SHAPE56" class="ladi-element"></div>
+                                <div id="FORM_ITEM11" class="ladi-element">
 									<div class="ladi-form-item-container">
 										<div class="ladi-form-item-background ladi-lazyload"></div>
-										<div class="ladi-form-item"><input autocomplete="off" tabindex="1" name="name" required="" class="ladi-form-control" type="text" placeholder="" value=""></div>
+										<div class="ladi-form-item"><input autocomplete="off" tabindex="1" name="name" required="" class="ladi-form-control" type="text" placeholder="" [(ngModel)]="formFeedback.name" ></div>
 									</div>
 								</div>
 								<div id="FORM_ITEM12" class="ladi-element">
 									<div class="ladi-form-item-container">
 										<div class="ladi-form-item-background ladi-lazyload"></div>
-										<div class="ladi-form-item"><input autocomplete="off" tabindex="3" name="phone" required="" class="ladi-form-control" type="tel" placeholder="" pattern="(\+84|0)(9|8|7|5|3)[0-9]{8}" value=""></div>
+										<div class="ladi-form-item"><input autocomplete="off" tabindex="3" name="phone" required="" class="ladi-form-control" type="tel" placeholder="" pattern="(\+84|0)(9|8|7|5|3)[0-9]{8}" [(ngModel)]="formFeedback.phone" ></div>
 									</div>
 								</div>
 								<div id="FORM_ITEM13" class="ladi-element">
@@ -1306,8 +1277,8 @@
 										<div class="ladi-form-item-background ladi-lazyload"></div>
 										<div class="ladi-form-item ladi-form-checkbox ladi-form-checkbox-horizontal">
 											<div class="ladi-form-checkbox-box-item">
-												<div class="ladi-form-checkbox-item"><input tabindex="4" name="form_item7" required="" type="radio" value="Có, tôi sẽ tham gia"><span data-checked="false">Có, tôi sẽ tham gia</span></div>
-												<div class="ladi-form-checkbox-item"><input tabindex="4" name="form_item7" required="" type="radio" value="Xin lỗi, tôi bận mất rồi!"><span data-checked="false">Xin lỗi, tôi bận mất rồi!</span></div>
+												<div class="ladi-form-checkbox-item"><input tabindex="4" name="form_item7" required="" type="radio" value="1" [(ngModel)]="formFeedback.is_join_wedding"><span data-checked="false">Có, tôi sẽ tham gia</span></div>
+												<div class="ladi-form-checkbox-item"><input tabindex="4" name="form_item7" required="" type="radio" value="0" [(ngModel)]="formFeedback.is_join_wedding"><span data-checked="false">Xin lỗi, tôi bận mất rồi!</span></div>
 											</div>
 										</div>
 									</div>
@@ -1317,8 +1288,8 @@
 										<div class="ladi-form-item-background ladi-lazyload"></div>
 										<div class="ladi-form-item ladi-form-checkbox ladi-form-checkbox-horizontal" ladi-checkbox-required="true">
 											<div class="ladi-form-checkbox-box-item">
-												<div class="ladi-form-checkbox-item"><input tabindex="4" name="form_item8" type="checkbox" value="Cô Dâu"><span data-checked="false">Cô Dâu</span></div>
-												<div class="ladi-form-checkbox-item"><input tabindex="4" name="form_item8" type="checkbox" value="Chú Rể"><span data-checked="false">Chú Rể</span></div>
+												<div class="ladi-form-checkbox-item"><input tabindex="4" name="form_item8" type="checkbox" value="Cô Dâu" [(ngModel)]="formFeedback.is_guest_of_bride"><span data-checked="false">Cô Dâu</span></div>
+												<div class="ladi-form-checkbox-item"><input tabindex="4" name="form_item8" type="checkbox" value="Chú Rể" [(ngModel)]="formFeedback.is_guest_of_groom"><span data-checked="false">Chú Rể</span></div>
 											</div>
 										</div>
 									</div>
@@ -1326,7 +1297,7 @@
 								<div id="FORM_ITEM15" class="ladi-element">
 									<div class="ladi-form-item-container">
 										<div class="ladi-form-item-background ladi-lazyload"></div>
-										<div class="ladi-form-item"><select tabindex="5" name="form_item9" class="ladi-form-control ladi-form-control-select" data-selected="">
+										<div class="ladi-form-item"><select tabindex="5" name="form_item9" class="ladi-form-control ladi-form-control-select" data-selected="" [(ngModel)]="formFeedback.number_of_people">
 												<option value="">Bạn đi bao nhiêu người ?</option>
 												<option value="1 người">1 người</option>
 												<option value="2 người">2 người</option>
@@ -1869,7 +1840,8 @@
 						<div id="SHAPE73" class="ladi-element">
 							<div class="ladi-shape"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve" preserveAspectRatio="none" width="100%" height="100%" class="" fill="rgba(244, 64, 37, 1.0)">
 									<use xlink:href="#shape_kNtJdegeRS"></use>
-								</svg></div>
+								</svg>
+                            </div>
 						</div>
 						<div id="HEADLINE98" class="ladi-element">
 							<h3 class="ladi-headline ladi-lazyload">Vợ chồng xin cảm ơn tất cả tình cảm của mọi người ạ !!</h3>
@@ -1886,7 +1858,8 @@
 						<div id="SHAPE74" class="ladi-element">
 							<div class="ladi-shape"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve" preserveAspectRatio="none" width="100%" height="100%" class="" fill="rgba(244, 64, 37, 1.0)">
 									<use xlink:href="#shape_kNtJdegeRS"></use>
-								</svg></div>
+								</svg>
+                            </div>
 						</div>
 						<div id="HEADLINE101" class="ladi-element">
 							<h3 class="ladi-headline ladi-lazyload">Cảm ơn bạn đã phản hồi cho vợ chồng mình nhé. Chúc bạn và gia đình thật nhiều sức khỏe !!<br></h3>
@@ -1904,17 +1877,17 @@
 								<div class="ladi-gallery-view">
 									<div class="ladi-gallery-view-arrow ladi-gallery-view-arrow-left opacity-0"></div>
 									<div class="ladi-gallery-view-arrow ladi-gallery-view-arrow-right opacity-0"></div>
-									<div class="ladi-gallery-view-item selected ladi-lazyload" data-index="0"></div>
+									<!-- <div class="ladi-gallery-view-item selected ladi-lazyload" data-index="0"></div>
 									<div class="ladi-gallery-view-item ladi-lazyload" data-index="1"></div>
 									<div class="ladi-gallery-view-item ladi-lazyload" data-index="2"></div>
-									<div class="ladi-gallery-view-item ladi-lazyload" data-index="3"></div>
+									<div class="ladi-gallery-view-item ladi-lazyload" data-index="3"></div> -->
 								</div>
 								<div class="ladi-gallery-control">
 									<div class="ladi-gallery-control-box">
-										<div class="ladi-gallery-control-item selected ladi-lazyload" data-index="0"></div>
+										<!-- <div class="ladi-gallery-control-item selected ladi-lazyload" data-index="0"></div>
 										<div class="ladi-gallery-control-item ladi-lazyload" data-index="1"></div>
 										<div class="ladi-gallery-control-item ladi-lazyload" data-index="2"></div>
-										<div class="ladi-gallery-control-item ladi-lazyload" data-index="3"></div>
+										<div class="ladi-gallery-control-item ladi-lazyload" data-index="3"></div> -->
 									</div>
 									<div class="ladi-gallery-control-arrow ladi-gallery-control-arrow-left opacity-0"></div>
 									<div class="ladi-gallery-control-arrow ladi-gallery-control-arrow-right opacity-0"></div>
@@ -1931,15 +1904,15 @@
 								<div class="ladi-gallery-view">
 									<div class="ladi-gallery-view-arrow ladi-gallery-view-arrow-left opacity-0"></div>
 									<div class="ladi-gallery-view-arrow ladi-gallery-view-arrow-right opacity-0"></div>
-									<div class="ladi-gallery-view-item selected ladi-lazyload" data-index="0"></div>
+									<!-- <div class="ladi-gallery-view-item selected ladi-lazyload" data-index="0"></div>
 									<div class="ladi-gallery-view-item ladi-lazyload" data-index="1"></div>
-									<div class="ladi-gallery-view-item ladi-lazyload" data-index="2"></div>
+									<div class="ladi-gallery-view-item ladi-lazyload" data-index="2"></div> -->
 								</div>
 								<div class="ladi-gallery-control">
 									<div class="ladi-gallery-control-box">
-										<div class="ladi-gallery-control-item selected ladi-lazyload" data-index="0"></div>
+										<!-- <div class="ladi-gallery-control-item selected ladi-lazyload" data-index="0"></div>
 										<div class="ladi-gallery-control-item ladi-lazyload" data-index="1"></div>
-										<div class="ladi-gallery-control-item ladi-lazyload" data-index="2"></div>
+										<div class="ladi-gallery-control-item ladi-lazyload" data-index="2"></div> -->
 									</div>
 									<div class="ladi-gallery-control-arrow ladi-gallery-control-arrow-left opacity-0"></div>
 									<div class="ladi-gallery-control-arrow ladi-gallery-control-arrow-right opacity-0"></div>

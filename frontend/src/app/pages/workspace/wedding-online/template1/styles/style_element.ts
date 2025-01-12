@@ -322,7 +322,7 @@ export const STYLE_ELEMENT = `
 		height: 66.75px;
 		top: -8.5px;
 		left: -8.25px;
-		background-image: url("assets/template-1/images/ta-20240719042933-9cypn.png");
+		// background-image: url("assets/template-1/images/ta-20240719042933-9cypn.png");
 	}
 
 	#IMAGE4>.ladi-image,
@@ -409,42 +409,42 @@ export const STYLE_ELEMENT = `
 		margin-right: 0px;
 	}
 
-	#GALLERY2 .ladi-gallery .ladi-gallery-view-item[data-index="0"] {
-		background-image: url("assets/template-1/images/z5583219519965_1979ad524e89caf71ef1f41338abea26-20240628124104-3bfic_1.jpg");
-	}
+	// #GALLERY2 .ladi-gallery .ladi-gallery-view-item[data-index="0"] {
+	// 	background-image: url("assets/template-1/images/z5583219519965_1979ad524e89caf71ef1f41338abea26-20240628124104-3bfic_1.jpg");
+	// }
 
-	#GALLERY2 .ladi-gallery .ladi-gallery-control-item[data-index="0"],
-	#GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="0"] {
-		background-image: url("assets/template-1/images/z5583219519965_1979ad524e89caf71ef1f41338abea26-20240628124104-3bfic.jpg");
-	}
+	// #GALLERY2 .ladi-gallery .ladi-gallery-control-item[data-index="0"],
+	// #GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="0"] {
+	// 	background-image: url("assets/template-1/images/z5583219519965_1979ad524e89caf71ef1f41338abea26-20240628124104-3bfic.jpg");
+	// }
 
-	#GALLERY2 .ladi-gallery .ladi-gallery-view-item[data-index="1"] {
-		background-image: url("assets/template-1/images/z5583219519905_434e7fb2ef3834e2749815a49c2c0705-20240628124104-scio3.jpg");
-	}
+	// #GALLERY2 .ladi-gallery .ladi-gallery-view-item[data-index="1"] {
+	// 	background-image: url("assets/template-1/images/z5583219519905_434e7fb2ef3834e2749815a49c2c0705-20240628124104-scio3.jpg");
+	// }
 
-	#GALLERY2 .ladi-gallery .ladi-gallery-control-item[data-index="1"],
-	#GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="8"] {
-		background-image: url("assets/template-1/images/z5583219519905_434e7fb2ef3834e2749815a49c2c0705-20240628124104-scio3_1.jpg");
-	}
+	// #GALLERY2 .ladi-gallery .ladi-gallery-control-item[data-index="1"],
+	// #GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="8"] {
+	// 	background-image: url("assets/template-1/images/z5583219519905_434e7fb2ef3834e2749815a49c2c0705-20240628124104-scio3_1.jpg");
+	// }
 
-	#GALLERY2 .ladi-gallery .ladi-gallery-view-item[data-index="2"] {
-		background-image: url("assets/template-1/images/z5583219519901_5cc50ac8a4e76f0660d62ff4e1904c2d-20240628124104-v64oj.jpg");
-	}
+	// #GALLERY2 .ladi-gallery .ladi-gallery-view-item[data-index="2"] {
+	// 	background-image: url("assets/template-1/images/z5583219519901_5cc50ac8a4e76f0660d62ff4e1904c2d-20240628124104-v64oj.jpg");
+	// }
 
-	#GALLERY2 .ladi-gallery .ladi-gallery-control-item[data-index="2"],
-	#GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="1"],
-	#GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="2"] {
-		background-image: url("assets/template-1/images/z5583219519901_5cc50ac8a4e76f0660d62ff4e1904c2d-20240628124104-v64oj_1.jpg");
-	}
+	// #GALLERY2 .ladi-gallery .ladi-gallery-control-item[data-index="2"],
+	// #GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="1"],
+	// #GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="2"] {
+	// 	background-image: url("assets/template-1/images/z5583219519901_5cc50ac8a4e76f0660d62ff4e1904c2d-20240628124104-v64oj_1.jpg");
+	// }
 
-	#GALLERY2 .ladi-gallery .ladi-gallery-view-item[data-index="3"] {
-		background-image: url("assets/template-1/images/z5583219470385_e91cc9b34b077fa1d5cc2ac5e89ef7e6-20240628124050-mvvma_2.jpg");
-	}
+	// #GALLERY2 .ladi-gallery .ladi-gallery-view-item[data-index="3"] {
+	// 	background-image: url("assets/template-1/images/z5583219470385_e91cc9b34b077fa1d5cc2ac5e89ef7e6-20240628124050-mvvma_2.jpg");
+	// }
 
-	#GALLERY2 .ladi-gallery .ladi-gallery-control-item[data-index="3"],
-	#GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="3"] {
-		background-image: url("assets/template-1/images/z5583219470385_e91cc9b34b077fa1d5cc2ac5e89ef7e6-20240628124050-mvvma.jpg");
-	}
+	// #GALLERY2 .ladi-gallery .ladi-gallery-control-item[data-index="3"],
+	// #GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="3"] {
+	// 	background-image: url("assets/template-1/images/z5583219470385_e91cc9b34b077fa1d5cc2ac5e89ef7e6-20240628124050-mvvma.jpg");
+	// }
 
 	#SECTION2 {
 		height: 378.3px;
@@ -1075,7 +1075,7 @@ export const STYLE_ELEMENT = `
 		height: 249.567px;
 		top: -19px;
 		left: 1px;
-		background-image: url("assets/template-1/images/z5583219519953_3d5b2a614d9d83009837386f3a3f214f-20240628124104-a4qfb_1.jpg");
+		// background-image: url("assets/template-1/images/z5583219519953_3d5b2a614d9d83009837386f3a3f214f-20240628124104-a4qfb_1.jpg");
 	}
 
 	#IMAGE14>.ladi-image {
@@ -1311,7 +1311,7 @@ export const STYLE_ELEMENT = `
 	#IMAGE36>.ladi-image>.ladi-image-background {
 		top: -29px;
 		left: -3e-05px;
-		background-image: url("assets/template-1/images/z5583219519964_a38e7401bc2bbb7be0437b8a0a40c002-20240628124104-hum8q.jpg");
+		// background-image: url("assets/template-1/images/z5583219519964_a38e7401bc2bbb7be0437b8a0a40c002-20240628124104-hum8q.jpg");
 	}
 
 	#IMAGE36>.ladi-image,
@@ -1455,7 +1455,7 @@ export const STYLE_ELEMENT = `
 	#IMAGE37>.ladi-image>.ladi-image-background {
 		top: -14px;
 		left: 0px;
-		background-image: url("assets/template-1/images/z5583219569767_b3e44d78c3d50bbbae68064d0512799d-20240628124112-tdout.jpg");
+		// background-image: url("assets/template-1/images/z5583219569767_b3e44d78c3d50bbbae68064d0512799d-20240628124112-tdout.jpg");
 	}
 
 	#IMAGE37.ladi-animation>.ladi-image {
@@ -1588,82 +1588,82 @@ export const STYLE_ELEMENT = `
 		margin-right: 10px;
 	}
 
-	#GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="0"] {
-		background-image: url("assets/template-1/images/z5583219519965_1979ad524e89caf71ef1f41338abea26-20240628124104-3bfic_2.jpg");
-	}
+	// #GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="0"] {
+	// 	background-image: url("assets/template-1/images/z5583219519965_1979ad524e89caf71ef1f41338abea26-20240628124104-3bfic_2.jpg");
+	// }
 
-	#GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="1"],
-	#GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="2"] {
-		background-image: url("assets/template-1/images/z5583219519901_5cc50ac8a4e76f0660d62ff4e1904c2d-20240628124104-v64oj_3.jpg");
-	}
+	// #GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="1"],
+	// #GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="2"] {
+	// 	background-image: url("assets/template-1/images/z5583219519901_5cc50ac8a4e76f0660d62ff4e1904c2d-20240628124104-v64oj_3.jpg");
+	// }
 
-	#GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="3"] {
-		background-image: url("assets/template-1/images/z5583219470385_e91cc9b34b077fa1d5cc2ac5e89ef7e6-20240628124050-mvvma_1.jpg");
-	}
+	// #GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="3"] {
+	// 	background-image: url("assets/template-1/images/z5583219470385_e91cc9b34b077fa1d5cc2ac5e89ef7e6-20240628124050-mvvma_1.jpg");
+	// }
 
-	#GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="4"],
-	#GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="11"] {
-		background-image: url("assets/template-1/images/z5583219569766_68be02dfb4ecdba783b6f40c777811b3-20240628124112-6z5wp_1.jpg");
-	}
+	// #GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="4"],
+	// #GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="11"] {
+	// 	background-image: url("assets/template-1/images/z5583219569766_68be02dfb4ecdba783b6f40c777811b3-20240628124112-6z5wp_1.jpg");
+	// }
 
-	#GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="4"],
-	#GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="11"] {
-		background-image: url("assets/template-1/images/z5583219569766_68be02dfb4ecdba783b6f40c777811b3-20240628124112-6z5wp.jpg");
-	}
+	// #GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="4"],
+	// #GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="11"] {
+	// 	background-image: url("assets/template-1/images/z5583219569766_68be02dfb4ecdba783b6f40c777811b3-20240628124112-6z5wp.jpg");
+	// }
 
-	#GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="5"],
-	#GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="9"] {
-		background-image: url("assets/template-1/images/z5583219569680_31db69a10083dca6ee0f5eec5021912c-20240628124112-u47f3.jpg");
-	}
+	// #GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="5"],
+	// #GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="9"] {
+	// 	background-image: url("assets/template-1/images/z5583219569680_31db69a10083dca6ee0f5eec5021912c-20240628124112-u47f3.jpg");
+	// }
 
-	#GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="5"],
-	#GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="9"] {
-		background-image: url("assets/template-1/images/z5583219569680_31db69a10083dca6ee0f5eec5021912c-20240628124112-u47f3_1.jpg");
-	}
+	// #GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="5"],
+	// #GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="9"] {
+	// 	background-image: url("assets/template-1/images/z5583219569680_31db69a10083dca6ee0f5eec5021912c-20240628124112-u47f3_1.jpg");
+	// }
 
-	#GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="6"] {
-		background-image: url("assets/template-1/images/z5583219519953_3d5b2a614d9d83009837386f3a3f214f-20240628124104-a4qfb.jpg");
-	}
+	// #GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="6"] {
+	// 	background-image: url("assets/template-1/images/z5583219519953_3d5b2a614d9d83009837386f3a3f214f-20240628124104-a4qfb.jpg");
+	// }
 
-	#GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="6"] {
-		background-image: url("assets/template-1/images/z5583219519953_3d5b2a614d9d83009837386f3a3f214f-20240628124104-a4qfb_2.jpg");
-	}
+	// #GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="6"] {
+	// 	background-image: url("assets/template-1/images/z5583219519953_3d5b2a614d9d83009837386f3a3f214f-20240628124104-a4qfb_2.jpg");
+	// }
 
-	#GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="7"] {
-		background-image: url("assets/template-1/images/z5583219569700_517aad9318bc8affb874f060f632f90e-20240628124112-jsfpr.jpg");
-	}
+	// #GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="7"] {
+	// 	background-image: url("assets/template-1/images/z5583219569700_517aad9318bc8affb874f060f632f90e-20240628124112-jsfpr.jpg");
+	// }
 
-	#GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="7"] {
-		background-image: url("assets/template-1/images/z5583219569700_517aad9318bc8affb874f060f632f90e-20240628124112-jsfpr_1.jpg");
-	}
+	// #GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="7"] {
+	// 	background-image: url("assets/template-1/images/z5583219569700_517aad9318bc8affb874f060f632f90e-20240628124112-jsfpr_1.jpg");
+	// }
 
-	#GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="8"] {
-		background-image: url("assets/template-1/images/z5583219519905_434e7fb2ef3834e2749815a49c2c0705-20240628124104-scio3_3.jpg");
-	}
+	// #GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="8"] {
+	// 	background-image: url("assets/template-1/images/z5583219519905_434e7fb2ef3834e2749815a49c2c0705-20240628124104-scio3_3.jpg");
+	// }
 
-	#GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="10"] {
-		background-image: url("assets/template-1/images/z5583219569768_99d02927c47214e732e050063115720c-20240628124112-ljpf7.jpg");
-	}
+	// #GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="10"] {
+	// 	background-image: url("assets/template-1/images/z5583219569768_99d02927c47214e732e050063115720c-20240628124112-ljpf7.jpg");
+	// }
 
-	#GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="10"] {
-		background-image: url("assets/template-1/images/z5583219569768_99d02927c47214e732e050063115720c-20240628124112-ljpf7_1.jpg");
-	}
+	// #GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="10"] {
+	// 	background-image: url("assets/template-1/images/z5583219569768_99d02927c47214e732e050063115720c-20240628124112-ljpf7_1.jpg");
+	// }
 
-	#GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="12"] {
-		background-image: url("assets/template-1/images/z5583219367807_ab7c9d63011a1ee4577b056d5cfe9ba4-20240628124032-_9f4w.jpg");
-	}
+	// #GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="12"] {
+	// 	background-image: url("assets/template-1/images/z5583219367807_ab7c9d63011a1ee4577b056d5cfe9ba4-20240628124032-_9f4w.jpg");
+	// }
 
-	#GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="12"] {
-		background-image: url("assets/template-1/images/z5583219367807_ab7c9d63011a1ee4577b056d5cfe9ba4-20240628124032-_9f4w_1.jpg");
-	}
+	// #GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="12"] {
+	// 	background-image: url("assets/template-1/images/z5583219367807_ab7c9d63011a1ee4577b056d5cfe9ba4-20240628124032-_9f4w_1.jpg");
+	// }
 
-	#GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="13"] {
-		background-image: url("assets/template-1/images/z5583219367806_985927542d09f6d1509af5893d1a228c-20240628124032-nx07l_1.jpg");
-	}
+	// #GALLERY1 .ladi-gallery .ladi-gallery-view-item[data-index="13"] {
+	// 	background-image: url("assets/template-1/images/z5583219367806_985927542d09f6d1509af5893d1a228c-20240628124032-nx07l_1.jpg");
+	// }
 
-	#GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="13"] {
-		background-image: url("assets/template-1/images/z5583219367806_985927542d09f6d1509af5893d1a228c-20240628124032-nx07l.jpg");
-	}
+	// #GALLERY1 .ladi-gallery .ladi-gallery-control-item[data-index="13"] {
+	// 	background-image: url("assets/template-1/images/z5583219367806_985927542d09f6d1509af5893d1a228c-20240628124032-nx07l.jpg");
+	// }
 
 	#SECTION20 {
 		height: 338.3px;
@@ -1685,7 +1685,7 @@ export const STYLE_ELEMENT = `
 		height: 302px;
 		top: -2px;
 		left: -58px;
-		background-image: url("assets/template-1/images/z5583219164432_981e1b1759655c926afea9680f0cbef7-20240628123950-rmi1q.jpg");
+		// background-image: url("assets/template-1/images/z5583219164432_981e1b1759655c926afea9680f0cbef7-20240628123950-rmi1q.jpg");
 	}
 
 	#PARAGRAPH130 {
@@ -1945,8 +1945,8 @@ export const STYLE_ELEMENT = `
 	}
 
 	#SHAPE30 {
-		top: 220.034px;
-		left: 278px;
+		margin-top: -15px;
+		margin-left: -28px;
 	}
 
 	#SHAPE30.ladi-animation>.ladi-shape {
@@ -2274,7 +2274,7 @@ export const STYLE_ELEMENT = `
 	}
 
 	#BOX38>.ladi-box {
-		background-color: rgb(224, 195, 152);
+		// background-color: rgb(224, 195, 152);
 	}
 
 	#PARAGRAPH156,
@@ -2307,7 +2307,7 @@ export const STYLE_ELEMENT = `
 	}
 
 	#BOX39>.ladi-box {
-		background-color: rgb(65, 64, 64);
+		// background-color: rgb(65, 64, 64);
 	}
 
 	#GROUP151 {
@@ -2561,10 +2561,10 @@ export const STYLE_ELEMENT = `
 		height: 97.5px;
 	}
 
-	#IMAGE38>.ladi-image>.ladi-image-background,
-	#GALLERY4 .ladi-gallery .ladi-gallery-control-item[data-index="1"] {
-		background-image: url("assets/template-1/images/z5583219569699_ca7fb8c85308663a08f868301f084944-20240628124112-xzg8_.jpg");
-	}
+	// #IMAGE38>.ladi-image>.ladi-image-background,
+	// #GALLERY4 .ladi-gallery .ladi-gallery-control-item[data-index="1"] {
+	// 	background-image: url("assets/template-1/images/z5583219569699_ca7fb8c85308663a08f868301f084944-20240628124112-xzg8_.jpg");
+	// }
 
 	#IMAGE38>.ladi-image,
 	#IMAGE39>.ladi-image {
@@ -2619,10 +2619,10 @@ export const STYLE_ELEMENT = `
 		left: -1px;
 	}
 
-	#IMAGE39>.ladi-image>.ladi-image-background,
-	#GALLERY3 .ladi-gallery .ladi-gallery-control-item[data-index="3"] {
-		background-image: url("assets/template-1/images/z5583219112577_8a3bd4f6bb564b6dc5adb6456e87a633-20240628123932-averk_1.jpg");
-	}
+	// #IMAGE39>.ladi-image>.ladi-image-background,
+	// #GALLERY3 .ladi-gallery .ladi-gallery-control-item[data-index="3"] {
+	// 	background-image: url("assets/template-1/images/z5583219112577_8a3bd4f6bb564b6dc5adb6456e87a633-20240628123932-averk_1.jpg");
+	// }
 
 	#SECTION8 {
 		height: 450px;
@@ -2638,7 +2638,7 @@ export const STYLE_ELEMENT = `
 		height: 631px;
 		top: -99px;
 		left: 0px;
-		background-image: url("assets/template-1/images/z5583219519901_5cc50ac8a4e76f0660d62ff4e1904c2d-20240628124104-v64oj_2.jpg");
+		// background-image: url("assets/template-1/images/z5583219519901_5cc50ac8a4e76f0660d62ff4e1904c2d-20240628124104-v64oj_2.jpg");
 	}
 
 	#GROUP90,
@@ -2725,10 +2725,11 @@ export const STYLE_ELEMENT = `
 		left: -0.333378px;
 	}
 
-	#IMAGE20>.ladi-image>.ladi-image-background,
-	#IMAGE40>.ladi-image>.ladi-image-background {
-		background-image: url("assets/template-1/images/z5583219519905_434e7fb2ef3834e2749815a49c2c0705-20240628124104-scio3_2.jpg");
-	}
+	// #IMAGE20>.ladi-image>.ladi-image-background,
+	
+	// #IMAGE40>.ladi-image>.ladi-image-background {
+	// 	background-image: url("assets/template-1/images/z5583219519905_434e7fb2ef3834e2749815a49c2c0705-20240628124104-scio3_2.jpg");
+	// }
 
 	#HEADLINE55 {
 		width: 334px;
@@ -3001,7 +3002,7 @@ export const STYLE_ELEMENT = `
 	#IMAGE45>.ladi-image>.ladi-image-background {
 		width: 179.661px;
 		height: 159px;
-		background-image: url("assets/template-1/images/86a5de5ed02ca2-idy07358-20240427063946-69qxh.jpg");
+		// background-image: url("assets/template-1/images/86a5de5ed02ca2-idy07358-20240427063946-69qxh.jpg");
 	}
 
 	#IMAGE45>.ladi-image,
@@ -3137,7 +3138,7 @@ export const STYLE_ELEMENT = `
 		height: 238.491px;
 		top: -18px;
 		left: -2px;
-		background-image: url("assets/template-1/images/z5583219519965_1979ad524e89caf71ef1f41338abea26-20240628124104-3bfic_3.jpg");
+		// background-image: url("assets/template-1/images/z5583219519965_1979ad524e89caf71ef1f41338abea26-20240628124104-3bfic_3.jpg");
 	}
 
 	#GROUP172 {
@@ -3775,7 +3776,7 @@ export const STYLE_ELEMENT = `
 		height: 527.258px;
 		top: -52.6106px;
 		left: -2.6412px;
-		background-image: url("assets/template-1/images/fd41a4d1-315f-4b19-9665-96911e364677-20240626153947-rede5.jpg");
+		// background-image: url("assets/template-1/images/fd41a4d1-315f-4b19-9665-96911e364677-20240626153947-rede5.jpg");
 	}
 
 	#IMAGE24>.ladi-image,
@@ -3824,7 +3825,7 @@ export const STYLE_ELEMENT = `
 		height: 583.81px;
 		top: -58.6106px;
 		left: -1.6412px;
-		background-image: url("assets/template-1/images/3b5f245e-7e4b-490a-b707-48f07e069513-20240626153947-55y_s.jpg");
+		// background-image: url("assets/template-1/images/3b5f245e-7e4b-490a-b707-48f07e069513-20240626153947-55y_s.jpg");
 	}
 
 	#PARAGRAPH164 {
@@ -3919,7 +3920,7 @@ export const STYLE_ELEMENT = `
 	}
 
 	#VIDEO1>.ladi-video>.ladi-video-background {
-		background-image: url("assets/template-1/images/z5583219214826_545fe7b6be49b28c836d432daa6028a0-20240628124015-0a6m-.jpg");
+		// background-image: url("assets/template-1/images/z5583219214826_545fe7b6be49b28c836d432daa6028a0-20240628124015-0a6m-.jpg");
 		background-size: cover;
 		background-origin: content-box;
 		background-position: 50% 50%;
@@ -4064,51 +4065,51 @@ export const STYLE_ELEMENT = `
 		height: 538px;
 	}
 
-	#GALLERY3 .ladi-gallery .ladi-gallery-view-item[data-index="0"] {
-		background-image: url("assets/template-1/images/z5583219569767_b3e44d78c3d50bbbae68064d0512799d-20240628124112-tdout_2.jpg");
-	}
+	// #GALLERY3 .ladi-gallery .ladi-gallery-view-item[data-index="0"] {
+	// 	background-image: url("assets/template-1/images/z5583219569767_b3e44d78c3d50bbbae68064d0512799d-20240628124112-tdout_2.jpg");
+	// }
 
-	#GALLERY3 .ladi-gallery .ladi-gallery-control-item[data-index="0"] {
-		background-image: url("assets/template-1/images/z5583219569767_b3e44d78c3d50bbbae68064d0512799d-20240628124112-tdout_1.jpg");
-	}
+	// #GALLERY3 .ladi-gallery .ladi-gallery-control-item[data-index="0"] {
+	// 	background-image: url("assets/template-1/images/z5583219569767_b3e44d78c3d50bbbae68064d0512799d-20240628124112-tdout_1.jpg");
+	// }
 
-	#GALLERY3 .ladi-gallery .ladi-gallery-view-item[data-index="1"] {
-		background-image: url("assets/template-1/images/z5583219470379_9004bda282414831771403998f83b4ca-20240628124050-vilxa.jpg");
-	}
+	// #GALLERY3 .ladi-gallery .ladi-gallery-view-item[data-index="1"] {
+	// 	background-image: url("assets/template-1/images/z5583219470379_9004bda282414831771403998f83b4ca-20240628124050-vilxa.jpg");
+	// }
 
-	#GALLERY3 .ladi-gallery .ladi-gallery-control-item[data-index="1"] {
-		background-image: url("assets/template-1/images/z5583219470379_9004bda282414831771403998f83b4ca-20240628124050-vilxa_1.jpg");
-	}
+	// #GALLERY3 .ladi-gallery .ladi-gallery-control-item[data-index="1"] {
+	// 	background-image: url("assets/template-1/images/z5583219470379_9004bda282414831771403998f83b4ca-20240628124050-vilxa_1.jpg");
+	// }
 
-	#GALLERY3 .ladi-gallery .ladi-gallery-view-item[data-index="2"] {
-		background-image: url("assets/template-1/images/z5583219470336_d9607bc92be319c01855f5b1bea13c79-20240628124050-ip7ht_1.jpg");
-	}
+	// #GALLERY3 .ladi-gallery .ladi-gallery-view-item[data-index="2"] {
+	// 	background-image: url("assets/template-1/images/z5583219470336_d9607bc92be319c01855f5b1bea13c79-20240628124050-ip7ht_1.jpg");
+	// }
 
-	#GALLERY3 .ladi-gallery .ladi-gallery-control-item[data-index="2"] {
-		background-image: url("assets/template-1/images/z5583219470336_d9607bc92be319c01855f5b1bea13c79-20240628124050-ip7ht.jpg");
-	}
+	// #GALLERY3 .ladi-gallery .ladi-gallery-control-item[data-index="2"] {
+	// 	background-image: url("assets/template-1/images/z5583219470336_d9607bc92be319c01855f5b1bea13c79-20240628124050-ip7ht.jpg");
+	// }
 
-	#GALLERY3 .ladi-gallery .ladi-gallery-view-item[data-index="3"] {
-		background-image: url("assets/template-1/images/z5583219112577_8a3bd4f6bb564b6dc5adb6456e87a633-20240628123932-averk.jpg");
-	}
+	// #GALLERY3 .ladi-gallery .ladi-gallery-view-item[data-index="3"] {
+	// 	background-image: url("assets/template-1/images/z5583219112577_8a3bd4f6bb564b6dc5adb6456e87a633-20240628123932-averk.jpg");
+	// }
 
-	#GALLERY4 .ladi-gallery .ladi-gallery-view-item[data-index="0"] {
-		background-image: url("assets/template-1/images/z5583219519964_a38e7401bc2bbb7be0437b8a0a40c002-20240628124104-hum8q_2.jpg");
-	}
+	// #GALLERY4 .ladi-gallery .ladi-gallery-view-item[data-index="0"] {
+	// 	background-image: url("assets/template-1/images/z5583219519964_a38e7401bc2bbb7be0437b8a0a40c002-20240628124104-hum8q_2.jpg");
+	// }
 
-	#GALLERY4 .ladi-gallery .ladi-gallery-control-item[data-index="0"] {
-		background-image: url("assets/template-1/images/z5583219519964_a38e7401bc2bbb7be0437b8a0a40c002-20240628124104-hum8q_1.jpg");
-	}
+	// #GALLERY4 .ladi-gallery .ladi-gallery-control-item[data-index="0"] {
+	// 	background-image: url("assets/template-1/images/z5583219519964_a38e7401bc2bbb7be0437b8a0a40c002-20240628124104-hum8q_1.jpg");
+	// }
 
-	#GALLERY4 .ladi-gallery .ladi-gallery-view-item[data-index="1"] {
-		background-image: url("assets/template-1/images/z5583219569699_ca7fb8c85308663a08f868301f084944-20240628124112-xzg8__1.jpg");
-	}
+	// #GALLERY4 .ladi-gallery .ladi-gallery-view-item[data-index="1"] {
+	// 	background-image: url("assets/template-1/images/z5583219569699_ca7fb8c85308663a08f868301f084944-20240628124112-xzg8__1.jpg");
+	// }
 
-	#GALLERY4 .ladi-gallery .ladi-gallery-view-item[data-index="2"] {
-		background-image: url("assets/template-1/images/z5583219164431_bead446d547c49bec3c0cb7caa85e3db-20240628123933-hg4jf_1.jpg");
-	}
+	// #GALLERY4 .ladi-gallery .ladi-gallery-view-item[data-index="2"] {
+	// 	background-image: url("assets/template-1/images/z5583219164431_bead446d547c49bec3c0cb7caa85e3db-20240628123933-hg4jf_1.jpg");
+	// }
 
-	#GALLERY4 .ladi-gallery .ladi-gallery-control-item[data-index="2"] {
-		background-image: url("assets/template-1/images/z5583219164431_bead446d547c49bec3c0cb7caa85e3db-20240628123933-hg4jf.jpg");
-	}
+	// #GALLERY4 .ladi-gallery .ladi-gallery-control-item[data-index="2"] {
+	// 	background-image: url("assets/template-1/images/z5583219164431_bead446d547c49bec3c0cb7caa85e3db-20240628123933-hg4jf.jpg");
+	// }
 `;

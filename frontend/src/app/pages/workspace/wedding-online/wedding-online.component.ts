@@ -25,6 +25,7 @@ export class WeddingOnlineComponent {
 
   // Filters
   public filters: any = {
+    slug: "",
     bride_name: "",
     groom_name: "",
     wedding_date: "",
@@ -56,7 +57,7 @@ export class WeddingOnlineComponent {
         filters.wedding_date = moment(filters.wedding_date).format('YYYY-MM-DD');
     }
 
-    axios.get(`${environment.api_url}/work-space/wedding-online`, {
+    axios.get(`${environment.api_url}/work-space/wedding-onlines`, {
       headers: {
           Accept: 'application/json',
           "Content-Type": 'application/json',
@@ -65,7 +66,7 @@ export class WeddingOnlineComponent {
       params: {
           page: this.page,
           per_page: this.perPage,
-          module: 'purchase_request',
+          module: 'wedding_online',
           ...filters
       }
   })
@@ -80,10 +81,10 @@ export class WeddingOnlineComponent {
               return;
           }
 
-          this.weddingOnlines = response.data.wedding_online.data;
-          this.totalItems = response.data.wedding_online.total;
-          this.to = response.data.wedding_online.to;
-          this.from = response.data.wedding_online.from;
+          this.weddingOnlines = response.data.wedding_onlines.data;
+          this.totalItems = response.data.wedding_onlines.total;
+          this.to = response.data.wedding_onlines.to;
+          this.from = response.data.wedding_onlines.from;
           this.loading = false;
       })
       .catch((error) => {

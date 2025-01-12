@@ -20,8 +20,6 @@ class DigitalOceanSpacesService
             return null;
         }
 
-        $cdnUrl = 'https://cdn-primary.cityfamily.citycloudmm.com/'.$image;
-
-        return $cdnUrl;
+        return Storage::disk('public')->url($image);
     }
 }

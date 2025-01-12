@@ -20,6 +20,12 @@
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div>
+                <label class="text-sm font-normal text-gray-700" for="slug">Slug:</label>
+                <br>
+                <input type="text" id="slug" class="input input-sm" placeholder="Slug" [(ngModel)]="filters.slug"
+                    name="slug">
+            </div>
+            <div>
                 <label class="text-sm font-normal text-gray-700" for="bride_name">Bride Name:</label>
                 <br>
                 <input type="text" id="bride_name" class="input input-sm" placeholder="Bride Name" [(ngModel)]="filters.bride_name"
@@ -42,11 +48,8 @@
                 <br>
                 <select id="status" class="input input-sm" [(ngModel)]="filters.status" name="status">
                     <option value="">All</option>
-                    <option value="Draft">Draft</option>
-                    <option value="Submitted">Submitted</option>
-                    <option value="Approved">Approved</option>
-                    <option value="Rejected">Rejected</option>
-                    <option value="Cancelled">Cancelled</option>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
                 </select>
             </div>
         </div>
@@ -77,10 +80,13 @@
                             <thead>
                                 <tr>
                                     <th class="min-w-[250px]">
-                                        Bride Name
+                                        Slug
                                     </th>
                                     <th class="min-w-[100px]">
                                         Groom Name
+                                    </th>
+                                    <th class="min-w-[250px]">
+                                        Bride Name
                                     </th>
                                     <th class="min-w-[180px]">
                                         Wedding Date
@@ -95,16 +101,21 @@
                             <tbody>
                                 <tr *ngFor="let weddingOnline of weddingOnlines">
                                     <td class="text-gray-800 font-normal">
-                                        {{ weddingOnline.bride_name }}
+                                        <a [routerLink]="['/', weddingOnline.slug]" target="_blank" class="text-blue-600 hover:text-blue-800 hover:underline">{{ weddingOnline.slug }}</a>
                                     </td>
                                     <td class="text-gray-800 font-normal">
                                         {{ weddingOnline.groom_name }}
                                     </td>
                                     <td class="text-gray-800 font-normal">
-                                        {{ weddingOnline.wedding_date_formatted }}
+                                        {{ weddingOnline.bride_name }}
                                     </td>
                                     <td class="text-gray-800 font-normal">
-                                        {{ weddingOnline.status }}
+                                        {{ weddingOnline.wedding_full_date_formatted }}
+                                    </td>
+                                    <td class="text-gray-800 font-normal">
+                                        <span class="badge badge-sm badge-{{ weddingOnline.status == 'Active' ? 'success' : 'danger' }} badge-outline">
+                                            {{ weddingOnline.status }}
+                                        </span>          
                                     </td>
                                     <td class="text-center">
                                         <div class="menu flex-inline" data-menu="true">
@@ -119,7 +130,7 @@
                                                 </button>
                                                 <div class="menu-dropdown menu-default w-full max-w-[175px]"
                                                     data-menu-dismiss="true">
-                                                    <div *ngIf="permissionService.hasPermission('WorkSpace - Can Show Wedding Online')" class="menu-item">
+                                                    <div *ngIf="permissionService.hasPermission('WorkSpace - Can View Wedding Online')" class="menu-item">
                                                         <a class="menu-link" [routerLink]="['/wedding-online/', weddingOnline.id]">
                                                             <span class="menu-icon">
                                                                 <i class="ki-filled ki-setting-2">

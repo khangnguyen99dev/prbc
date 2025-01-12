@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { PermissionService } from './services/permission.service';
+import { environment } from '../environments/environment';
+
+(window as any).appEnvironment = environment;
 
 @Component({
     selector: 'app-root',

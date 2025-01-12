@@ -33,6 +33,23 @@ export const routes: Routes = [
         data: {
             layout: 'app',
         }
+    },
+    {
+        path: 'wedding-online/create',
+        loadChildren: () => import('./wedding-online/create/create.module').then(m => m.CreateModule),
+        canActivate: [AuthGuard],
+        data: {
+            layout: 'app',
+        }
+    },
+    {
+        path: 'wedding-online/:id',
+        loadChildren: () => import('./wedding-online/view/view.module').then(m => m.ViewModule),
+        canActivate: [AuthGuard],
+        data: {
+            layout: 'app',
+        }
     }
+
 ];
 

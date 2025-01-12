@@ -1,0 +1,668 @@
+<div class="container-fixed">
+    <div class="flex flex-wrap items-center lg:items-end justify-between gap-5 pb-7.5">
+        <div class="flex flex-col justify-center gap-2">
+            <h1 class="text-xl font-medium leading-none text-gray-900">
+                Wedding Online
+            </h1>
+        </div>
+        <div class="flex items-center gap-2.5">
+            <a class="btn btn-sm btn-light" routerLink="/wedding-online">
+                Back
+            </a>
+        </div>
+    </div>
+
+    <app-alert [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
+
+    <div class="grid gap-5 lg:gap-7.5 w-full mx-left">
+        <div>
+            <div class="pl-0" id="basic_settings">
+                <h3 class="card-title pl-0">
+                    Wedding Online Information
+                </h3>
+                <hr class="my-4">
+            </div>
+            <div class="grid gap-5">
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Slug <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="formData.slug" class="input" placeholder="Enter Slug" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Title <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="formData.title" class="input" placeholder="Enter Title" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Groom Name <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="formData.groom_name" class="input" placeholder="Enter Groom Name" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Bride Name <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="formData.bride_name" class="input" placeholder="Enter Bride Name" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Wedding Date <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <div class="flex flex-col gap-2 w-full">
+                        <div class="flex items-center gap-2 w-full">
+                            <input [matDatepicker]="wedding_full_date" class="input input-sm w-full" (dateChange)="onWeddingDateChange($event)" (click)="wedding_full_date.open()" name="wedding_full_date"
+                            [(ngModel)]="weddingFullDate" placeholder="Select Wedding Date">
+                            <mat-datepicker #wedding_full_date></mat-datepicker>
+                        </div>
+                        <div class="text-sm text-gray-600">
+                            Lunar Date: {{formData.wedding_lunar_full_date_formatted}}
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Wedding Time <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="time" [(ngModel)]="formData.wedding_time" class="input" placeholder="Enter Wedding Time" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Wedding Location <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="formData.wedding_location" class="input" placeholder="Enter Wedding Location" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5"> 
+                    <label class="form-label max-w-56">
+                        Wedding Location Address <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <textarea [(ngModel)]="formData.wedding_location_address" class="textarea text-2sm text-gray-600 font-normal" rows="3" style="height: 80px;"></textarea>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Map URL <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="formData.map_url" class="input" placeholder="Enter Map URL" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Invitation To <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="formData.invitation_to" class="input" placeholder="Enter Invitation To" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Father Groom Name <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="formData.father_groom_name" class="input" placeholder="Enter Father Groom Name" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Mother Groom Name <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="formData.mother_groom_name" class="input" placeholder="Enter Mother Groom Name" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Father Bride Name <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="formData.father_bride_name" class="input" placeholder="Enter Father Bride Name" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Mother Bride Name <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="formData.mother_bride_name" class="input" placeholder="Enter Mother Bride Name" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Pick Up Time <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="time" [(ngModel)]="formData.pick_up_time" class="input" placeholder="Enter Pick Up Time" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Service Time <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="time" [(ngModel)]="formData.service_time" class="input" placeholder="Enter Service Time" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Party Time <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="time" [(ngModel)]="formData.party_time" class="input" placeholder="Enter Party Time" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Photo Time <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="time" [(ngModel)]="formData.photo_time" class="input" placeholder="Enter Photo Time" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Wedding Video Description <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <textarea [(ngModel)]="formData.wedding_video_description" class="textarea text-2sm text-gray-600 font-normal" rows="3" style="height: 80px;"></textarea>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Popup Video Description <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <textarea [(ngModel)]="formData.popup_video_description" class="textarea text-2sm text-gray-600 font-normal" rows="3" style="height: 80px;"></textarea>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Youtube URL <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="formData.youtube_url" class="input" placeholder="Enter Youtube URL" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Facebook Bride URL <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="formData.facebook_bride_url" class="input" placeholder="Enter Facebook Bride URL" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Facebook Groom URL <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="formData.facebook_groom_url" class="input" placeholder="Enter Facebook Groom URL" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Wish Text <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <textarea [(ngModel)]="formData.wish_text" class="textarea text-2sm text-gray-600 font-normal" rows="3" style="height: 80px;"></textarea>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Invitation Text <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <textarea [(ngModel)]="formData.invitation_text" class="textarea text-2sm text-gray-600 font-normal" rows="3" style="height: 80px;"></textarea>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Bank Account Bride <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="formData.bank_account_bride" class="input" placeholder="Enter Bank Account Bride" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Bank Account Groom <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="formData.bank_account_groom" class="input" placeholder="Enter Bank Account Groom" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Logo URL <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                        <div class="image-input w-20 h-20" data-image-input="true">
+                            <input name="avatar" (change)="onImageChange($event, formData, 'logo_url')" id="logo_image_input" type="file" accept=".jpeg, .png, .jpg, .gif">
+                            <div (click)="removeImage(formData, 'logo_url')" class="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-5 -top-0.5 -end-0.5 rounded-full"
+                                data-image-input-remove="">
+                                <i class="ki-filled ki-cross"></i>
+                            </div>
+                            <label for="logo_image_input" class="image-input-placeholder border-2 border-success image-input-empty:border-gray-300"
+                                [style.backgroundImage]="'url(' + (formData.logo_url || '/assets/media/avatars/blank.png') + ')'">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Background Wish Image URL <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                        <div class="image-input w-20 h-20" data-image-input="true">
+                            <input name="avatar" (change)="onImageChange($event, formData, 'background_wish_image_url')" id="background_wish_image_input" type="file" accept=".jpeg, .png, .jpg, .gif">
+                            <div (click)="removeImage(formData, 'background_wish_image_url')" class="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-5 -top-0.5 -end-0.5 rounded-full"
+                                data-image-input-remove="">
+                                <i class="ki-filled ki-cross"></i>
+                            </div>
+                            <label for="background_wish_image_input" class="image-input-placeholder border-2 border-success image-input-empty:border-gray-300"
+                                [style.backgroundImage]="'url(' + (formData.background_wish_image_url || '/assets/media/avatars/blank.png') + ')'">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Background Wish Image URL 2 <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                        <div class="image-input w-20 h-20" data-image-input="true">
+                            <input name="avatar" (change)="onImageChange($event, formData, 'background_wish_image_url_2')" id="background_wish_image_2_input" type="file" accept=".jpeg, .png, .jpg, .gif">
+                            <div (click)="removeImage(formData, 'background_wish_image_url_2')" class="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-5 -top-0.5 -end-0.5 rounded-full"
+                                data-image-input-remove="">
+                                <i class="ki-filled ki-cross"></i>
+                            </div>
+                            <label for="background_wish_image_2_input" class="image-input-placeholder border-2 border-success image-input-empty:border-gray-300"
+                                [style.backgroundImage]="'url(' + (formData.background_wish_image_url_2 || '/assets/media/avatars/blank.png') + ')'">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Event Image URL <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                        <div class="image-input w-20 h-20" data-image-input="true">
+                            <input name="avatar" (change)="onImageChange($event, formData, 'event_image_url')" id="event_image_input" type="file" accept=".jpeg, .png, .jpg, .gif">
+                            <div (click)="removeImage(formData, 'event_image_url')" class="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-5 -top-0.5 -end-0.5 rounded-full"
+                                data-image-input-remove="">
+                                <i class="ki-filled ki-cross"></i>
+                            </div>
+                            <label for="event_image_input" class="image-input-placeholder border-2 border-success image-input-empty:border-gray-300"
+                                [style.backgroundImage]="'url(' + (formData.event_image_url || '/assets/media/avatars/blank.png') + ')'">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Wedding Ceremony Image URL <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                        <div class="image-input w-20 h-20" data-image-input="true">
+                            <input name="avatar" (change)="onImageChange($event, formData, 'wedding_ceremony_image_url')" id="wedding_ceremony_image_input" type="file" accept=".jpeg, .png, .jpg, .gif">
+                            <div (click)="removeImage(formData, 'wedding_ceremony_image_url')" class="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-5 -top-0.5 -end-0.5 rounded-full"
+                                data-image-input-remove="">
+                                <i class="ki-filled ki-cross"></i>
+                            </div>
+                            <label for="wedding_ceremony_image_input" class="image-input-placeholder border-2 border-success image-input-empty:border-gray-300"
+                                [style.backgroundImage]="'url(' + (formData.wedding_ceremony_image_url || '/assets/media/avatars/blank.png') + ')'">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Background Youtube URL <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                        <div class="image-input w-20 h-20" data-image-input="true">
+                            <input name="avatar" (change)="onImageChange($event, formData, 'background_youtube_url')" id="background_youtube_input" type="file" accept=".jpeg, .png, .jpg, .gif">
+                            <div (click)="removeImage(formData, 'background_youtube_url')" class="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-5 -top-0.5 -end-0.5 rounded-full"
+                                data-image-input-remove="">
+                                <i class="ki-filled ki-cross"></i>
+                            </div>
+                            <label for="background_youtube_input" class="image-input-placeholder border-2 border-success image-input-empty:border-gray-300"
+                                [style.backgroundImage]="'url(' + (formData.background_youtube_url || '/assets/media/avatars/blank.png') + ')'">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Transfer Of Bride URL <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                        <div class="image-input w-20 h-20" data-image-input="true">
+                            <input name="avatar" (change)="onImageChange($event, formData, 'transfer_of_bride_url')" id="transfer_of_bride_input" type="file" accept=".jpeg, .png, .jpg, .gif">
+                            <div (click)="removeImage(formData, 'transfer_of_bride_url')" class="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-5 -top-0.5 -end-0.5 rounded-full"
+                                data-image-input-remove="">
+                                <i class="ki-filled ki-cross"></i>
+                            </div>
+                            <label for="transfer_of_bride_input" class="image-input-placeholder border-2 border-success image-input-empty:border-gray-300"
+                                [style.backgroundImage]="'url(' + (formData.transfer_of_bride_url || '/assets/media/avatars/blank.png') + ')'">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Transfer Of Groom URL <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                        <div class="image-input w-20 h-20" data-image-input="true">
+                            <input name="avatar" (change)="onImageChange($event, formData, 'transfer_of_groom_url')" id="transfer_of_groom_input" type="file" accept=".jpeg, .png, .jpg, .gif">
+                            <div (click)="removeImage(formData, 'transfer_of_groom_url')" class="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-5 -top-0.5 -end-0.5 rounded-full"
+                                data-image-input-remove="">
+                                <i class="ki-filled ki-cross"></i>
+                            </div>
+                            <label for="transfer_of_groom_input" class="image-input-placeholder border-2 border-success image-input-empty:border-gray-300"
+                                [style.backgroundImage]="'url(' + (formData.transfer_of_groom_url || '/assets/media/avatars/blank.png') + ')'">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Card Cover Image URL <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                        <div class="image-input w-20 h-20" data-image-input="true">
+                            <input name="avatar" (change)="onImageChange($event, formData, 'card_cover_image_url')" id="card_cover_image_input" type="file" accept=".jpeg, .png, .jpg, .gif">
+                            <div (click)="removeImage(formData, 'card_cover_image_url')" class="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-5 -top-0.5 -end-0.5 rounded-full"
+                                data-image-input-remove="">
+                                <i class="ki-filled ki-cross"></i>
+                            </div>
+                            <label for="card_cover_image_input" class="image-input-placeholder border-2 border-success image-input-empty:border-gray-300"
+                                [style.backgroundImage]="'url(' + (formData.card_cover_image_url || '/assets/media/avatars/blank.png') + ')'">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Bride Image URL <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                        <div class="image-input w-20 h-20" data-image-input="true">
+                            <input name="avatar" (change)="onImageChange($event, formData, 'bride_image_url')" id="bride_image_input" type="file" accept=".jpeg, .png, .jpg, .gif">
+                            <div (click)="removeImage(formData, 'bride_image_url')" class="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-5 -top-0.5 -end-0.5 rounded-full"
+                                data-image-input-remove="">
+                                <i class="ki-filled ki-cross"></i>
+                            </div>
+                            <label for="bride_image_input" class="image-input-placeholder border-2 border-success image-input-empty:border-gray-300"
+                                [style.backgroundImage]="'url(' + (formData.bride_image_url || '/assets/media/avatars/blank.png') + ')'">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Groom Image URL <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                        <div class="image-input w-20 h-20" data-image-input="true">
+                            <input name="avatar" (change)="onImageChange($event, formData, 'groom_image_url')" id="groom_image_input" type="file" accept=".jpeg, .png, .jpg, .gif">
+                            <div (click)="removeImage(formData, 'groom_image_url')" class="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-5 -top-0.5 -end-0.5 rounded-full"
+                                data-image-input-remove="">
+                                <i class="ki-filled ki-cross"></i>
+                            </div>
+                            <label for="groom_image_input" class="image-input-placeholder border-2 border-success image-input-empty:border-gray-300"
+                                [style.backgroundImage]="'url(' + (formData.groom_image_url || '/assets/media/avatars/blank.png') + ')'">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Bride Image URL 2 <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                        <div class="image-input w-20 h-20" data-image-input="true">
+                            <input name="avatar" (change)="onImageChange($event, formData, 'bride_image_url_2')" id="bride_image_2_input" type="file" accept=".jpeg, .png, .jpg, .gif">
+                            <div (click)="removeImage(formData, 'bride_image_url_2')" class="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-5 -top-0.5 -end-0.5 rounded-full"
+                                data-image-input-remove="">
+                                <i class="ki-filled ki-cross"></i>
+                            </div>
+                            <label for="bride_image_2_input" class="image-input-placeholder border-2 border-success image-input-empty:border-gray-300"
+                                [style.backgroundImage]="'url(' + (formData.bride_image_url_2 || '/assets/media/avatars/blank.png') + ')'">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Groom Image URL 2 <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                        <div class="image-input w-20 h-20" data-image-input="true">
+                            <input name="avatar" (change)="onImageChange($event, formData, 'groom_image_url_2')" id="groom_image_2_input" type="file" accept=".jpeg, .png, .jpg, .gif">
+                            <div (click)="removeImage(formData, 'groom_image_url_2')" class="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-5 -top-0.5 -end-0.5 rounded-full"
+                                data-image-input-remove="">
+                                <i class="ki-filled ki-cross"></i>
+                            </div>
+                            <label for="groom_image_2_input" class="image-input-placeholder border-2 border-success image-input-empty:border-gray-300"
+                                [style.backgroundImage]="'url(' + (formData.groom_image_url_2 || '/assets/media/avatars/blank.png') + ')'">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Background Video Image URL <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                        <div class="image-input w-20 h-20" data-image-input="true">
+                            <input name="avatar" (change)="onImageChange($event, formData, 'background_video_image_url')" id="background_video_image_input" type="file" accept=".jpeg, .png, .jpg, .gif">
+                            <div (click)="removeImage(formData, 'background_video_image_url')" class="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-5 -top-0.5 -end-0.5 rounded-full"
+                                data-image-input-remove="">
+                                <i class="ki-filled ki-cross"></i>
+                            </div>
+                            <label for="background_video_image_input" class="image-input-placeholder border-2 border-success image-input-empty:border-gray-300"
+                                [style.backgroundImage]="'url(' + (formData.background_video_image_url || '/assets/media/avatars/blank.png') + ')'">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Background Footer Image URL <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                        <div class="image-input w-20 h-20" data-image-input="true">
+                            <input name="avatar" (change)="onImageChange($event, formData, 'background_footer_image_url')" id="background_footer_image_input" type="file" accept=".jpeg, .png, .jpg, .gif">
+                            <div (click)="removeImage(formData, 'background_footer_image_url')" class="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-5 -top-0.5 -end-0.5 rounded-full"
+                                data-image-input-remove="">
+                                <i class="ki-filled ki-cross"></i>
+                            </div>
+                            <label for="background_footer_image_input" class="image-input-placeholder border-2 border-success image-input-empty:border-gray-300"
+                                [style.backgroundImage]="'url(' + (formData.background_footer_image_url || '/assets/media/avatars/blank.png') + ')'">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Galleries section -->
+<div class="container-fixed mt-5">
+    <div class="pl-0" id="basic_settings">
+        <h3 class="card-title">
+            Galleries
+        </h3>
+        <div class="flex justify-end">
+            <button class="btn btn-light btn-sm" (click)="addGallery()">
+                <i class="ki-filled ki-plus"></i>
+                Add Gallery
+            </button>
+        </div>
+        <hr class="my-4">
+    </div>
+    <div class="grid gap-5 lg:gap-7.5">
+        <div class="card card-grid min-w-full">
+            <div class="card-body">
+                <div data-datatable="true" data-datatable-page-size="20">
+                    <div class="scrollable-x-auto">
+                        <table class="table table-auto table-border" data-datatable-table="true">
+                            <thead>
+                                <tr>
+                                    <th class="min-w-52">Gallery Name</th>
+                                    <th class="min-w-52">Gallery Image</th>
+                                    <th class="min-w-52">Order</th>
+                                    <th class="min-w-52">Active</th>
+                                    <th class="min-w-24">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let gallery of formData.galleries; let i = index">
+                                    <td class="text-sm text-gray-800 font-normal">
+                                        <input type="text" [(ngModel)]="gallery.title" class="input" placeholder="Enter gallery name" />
+                                    </td>
+                                    <td class="text-sm text-gray-800 font-normal">
+                                        <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                                            <div class="image-input w-20 h-20" data-image-input="true">
+                                                <input name="avatar" (change)="onImageChange($event, gallery, 'image_url')" id="image_input_gallery_{{i}}" type="file" accept=".jpeg, .png, .jpg, .gif">
+                                                <div (click)="removeImage(gallery, 'image_url')" class="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-5 -top-0.5 -end-0.5 rounded-full"
+                                                    data-image-input-remove="">
+                                                    <i class="ki-filled ki-cross"></i>
+                                                </div>
+                                                <label for="image_input_gallery_{{i}}" class="image-input-placeholder border-2 border-success image-input-empty:border-gray-300"
+                                                    [style.backgroundImage]="'url(' + (gallery.image_url || '/assets/media/avatars/blank.png') + ')'">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <input type="number" [(ngModel)]="gallery.order" class="input" placeholder="Enter order" disabled />
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <input type="checkbox" [(ngModel)]="gallery.is_active" />
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <button (click)="deleteGallery(i)" class="btn btn-sm btn-icon btn-danger">
+                                            <i class="ki-filled ki-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr *ngIf="formData.galleries?.length == 0">
+                                    <td colspan="6" class="text-center text-gray-500 font-normal">
+                                        No galleries found
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Memories section -->
+<div class="container-fixed mt-5">
+    <div class="pl-0" id="basic_settings">
+        <h3 class="card-title">
+            Memories
+        </h3>
+        <div class="flex justify-end">
+            <button class="btn btn-light btn-sm" (click)="addMemory()">
+                <i class="ki-filled ki-plus"></i>
+                Add Memory
+            </button>
+        </div>
+        <hr class="my-4">
+    </div>
+    <div class="grid gap-5 lg:gap-7.5">
+        <div class="card card-grid min-w-full">
+            <div class="card-body">
+                <div data-datatable="true" data-datatable-page-size="20">
+                    <div class="scrollable-x-auto">
+                        <table class="table table-auto table-border" data-datatable-table="true">
+                            <thead>
+                                <tr>
+                                    <th class="min-w-52">Memory Name</th>
+                                    <th class="min-w-52">Memory Image</th>
+                                    <th class="min-w-52">Order</th>
+                                    <th class="min-w-52">Active</th>
+                                    <th class="min-w-24">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let memory of formData.memories; let i = index">
+                                    <td class="text-sm text-gray-800 font-normal">
+                                        <input type="text" [(ngModel)]="memory.title" class="input" placeholder="Enter memory name" />
+                                    </td>
+                                    <td class="text-sm text-gray-800 font-normal">
+                                        <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                                            <div class="image-input w-20 h-20" data-image-input="true">
+                                                <input name="avatar" (change)="onImageChange($event, memory, 'image_url')" id="image_input_memory_{{i}}" type="file" accept=".jpeg, .png, .jpg, .gif">
+                                                <div (click)="removeImage(memory, 'image_url')" class="btn btn-icon btn-icon-xs btn-light shadow-default absolute z-1 size-5 -top-0.5 -end-0.5 rounded-full"
+                                                    data-image-input-remove="">
+                                                    <i class="ki-filled ki-cross"></i>
+                                                </div>
+                                                <label for="image_input_memory_{{i}}" class="image-input-placeholder border-2 border-success image-input-empty:border-gray-300"
+                                                    [style.backgroundImage]="'url(' + (memory.image_url || '/assets/media/avatars/blank.png') + ')'">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <input type="number" [(ngModel)]="memory.order" class="input" placeholder="Enter order" />
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <input type="checkbox" [(ngModel)]="memory.is_active" />
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <button (click)="deleteMemory(i)" class="btn btn-sm btn-icon btn-danger">
+                                            <i class="ki-filled ki-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr *ngIf="formData.memories?.length == 0">
+                                    <td colspan="6" class="text-center text-gray-500 font-normal">
+                                        No memories found
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Memories section -->
+<div class="container-fixed mt-5">
+    <div class="pl-0" id="basic_settings">
+        <h3 class="card-title">
+            Dress codes
+        </h3>
+        <div class="flex justify-end">
+            <button class="btn btn-light btn-sm" (click)="addDressCode()" [disabled]="formData.dress_codes?.length >= 2">
+                <i class="ki-filled ki-plus"></i>
+                Add Dress Code
+            </button>
+        </div>
+        <hr class="my-4">
+    </div>
+    <div class="grid gap-5 lg:gap-7.5">
+        <div class="card card-grid min-w-full">
+            <div class="card-body">
+                <div data-datatable="true" data-datatable-page-size="20">
+                    <div class="scrollable-x-auto">
+                        <table class="table table-auto table-border" data-datatable-table="true">
+                            <thead>
+                                <tr>
+                                    <th class="min-w-52">Title</th>
+                                    <th class="min-w-52">Color</th>
+                                    <th class="min-w-24">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let dressCode of formData.dress_codes; let i = index">
+                                    <td class="text-sm text-gray-800 font-normal">
+                                        <input type="text" [(ngModel)]="dressCode.title" class="input" placeholder="Enter dress code title" />
+                                    </td>
+                                    <td class="text-sm text-gray-800 font-normal">
+                                        <input type="color" [(ngModel)]="dressCode.color" class="input" placeholder="Enter dress code color" />
+                                    </td>
+                                    <td class="lg:text-start">
+                                        <button (click)="deleteDressCode(i)" class="btn btn-sm btn-icon btn-danger">
+                                            <i class="ki-filled ki-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr *ngIf="formData.dressCodes?.length == 0">
+                                    <td colspan="6" class="text-center text-gray-500 font-normal">
+                                        No dress codes found
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="flex justify-end mt-5 mb-10">
+    <button *ngIf="formData.galleries?.length > 0 && formData.memories?.length > 0" (click)="save()" [disabled]="loading" class="btn btn-primary">
+        {{ loading ? 'Saving...' : 'Save' }}
+    </button>
+</div>

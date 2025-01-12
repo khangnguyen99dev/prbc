@@ -15,10 +15,15 @@ use App\Http\Controllers\Settings\CountryBudgetController;
 use App\Http\Controllers\Settings\CountryBudgetMonthlyController;
 use App\Http\Controllers\Settings\BonusPoolController;
 use App\Http\Controllers\Settings\BonusPoolItemController;
+use App\Http\Controllers\WorkSpace\WeddingOnlineController;
 
 // Public routes
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
+Route::get('/wedding-onlines/{slug}/show', [WeddingOnlineController::class, 'showBySlug'])->name('wedding-online-show');
+Route::post('/wedding-onlines/send-message', [WeddingOnlineController::class, 'sendMessage']);
+Route::post('/wedding-onlines/send-feedback', [WeddingOnlineController::class, 'sendFeedback']);
+Route::get('/wedding-onlines/{slug}/notifications', [WeddingOnlineController::class, 'notifications']);
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -75,6 +80,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // WorkSpace
     Route::prefix('work-space')->group(function () {
+        // Wedding online
+        Route::apiResource('/wedding-onlines', WeddingOnlineController::class);
+
         // Purchase request
         Route::get('/purchase-requests/setup', [PurchaseRequestController::class, 'setup']);
         Route::get('/purchase-requests/get-available-budget', [PurchaseRequestController::class, 'getAvailableBudget']);
@@ -84,5 +92,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/purchase-requests/{id}/cancel', [PurchaseRequestController::class, 'cancel']);
         Route::post('/purchase-requests/{id}/approval', [PurchaseRequestController::class, 'approval']);
         Route::get('/purchase-requests/{id}/history', [PurchaseRequestController::class, 'history']);
+
+
     });
 });

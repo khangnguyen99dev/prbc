@@ -45,16 +45,18 @@ return [
             'throw' => false,
         ],
 
-        'oss' => [
-            'driver' => 'oss',
-            'key' => env('OSS_KEY'),
-            'secret' => env('OSS_SECRET'),
-            'region' => env('OSS_REGION'),
-            'bucket' => env('OSS_BUCKET'),
-            'endpoint' => env('OSS_ENDPOINT'),
+        'ftp' => [
+            'driver' => 'ftp',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
+            'port' => 21,
+            'root' => '/',
+            'passive' => true,
+            'ssl' => false,
+            'timeout' => 30,
             'throw' => true,
         ],
-
     ],
 
     /*

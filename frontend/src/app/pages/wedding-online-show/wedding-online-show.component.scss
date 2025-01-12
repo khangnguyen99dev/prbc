@@ -214,3 +214,18 @@
         background-color: rgba(0, 0, 0, 0.05);
     }
 }
+
+.show-popup {
+    display: block !important;
+    opacity: 1 !important;
+  }
+
+  .error-message {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  
+  .ladi-form-item input.ng-touched.ng-invalid {
+    border-color: #dc3545;
+  } 

@@ -46,6 +46,13 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: ':slug',
+        loadChildren: () => import('./pages/wedding-online-show/wedding-online-show.module').then(m => m.WeddingOnlineShowModule),
+        data: {
+            layout: 'wedding-online',
+        }
+    },
+    {
         path: '**',
         redirectTo: '/sign-in'
     },

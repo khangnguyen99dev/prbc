@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ActivateAccountEmail;
 
 class UserController extends Controller
 {
@@ -86,6 +88,7 @@ class UserController extends Controller
             'date_of_birth' => 'nullable|date',
             'password' => 'required|string|min:8',
             'confirm_password' => 'required|string|min:8|same:password',
+            'status' => 'required|string|in:Active,Inactive',
         ]);
 
         $user = User::create([
@@ -97,6 +100,7 @@ class UserController extends Controller
             'created_by' => auth()->user()->id,
             'created_from' => "UserController@store",
             'password' => Hash::make($request->password),
+            'status' => $request->status,
         ]);
 
         return response()->json([
@@ -173,6 +177,7 @@ class UserController extends Controller
             'date_of_birth' => 'nullable|date',
             'password' => 'nullable|string|min:8',
             'confirm_password' => 'required_with:password|same:password',
+            'status' => 'required|string|in:Active,Inactive',
         ]);
 
         $user = User::find($id);
@@ -192,7 +197,20 @@ class UserController extends Controller
         if (!empty($request->password)) {
             $user->password = Hash::make($request->password);
         }
+        $user->status = $request->status;
         $user->save();
+
+        if ($request->status == 'Active' && $user->is_send_email == false) {
+            try {
+                Mail::to($user->email)->send(new ActivateAccountEmail($user));
+                $user->is_send_email = true;
+                $user->save();
+                
+            } catch (\Exception $e) {
+                // Log the error
+                Log::error('Failed to send activate account email: ' . $e->getMessage());
+            }
+        }
 
         return response()->json([
             'error' => false,

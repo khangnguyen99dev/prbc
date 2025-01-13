@@ -58,6 +58,15 @@
                 </div>
                 <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
                     <label class="form-label max-w-56">
+                        Status <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <select [(ngModel)]="form.status" class="input">
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
                         Password <span class="text-danger">&nbsp;*</span>
                     </label>
                     <input [(ngModel)]="form.password" class="input" placeholder="Enter password" type="password"/>

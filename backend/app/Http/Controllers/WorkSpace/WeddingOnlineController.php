@@ -11,19 +11,55 @@ use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use App\Models\WeddingOnlineFeedbackWish;
+use App\Models\User;
+use App\Mail\SubmittedWeddingOnlineEmail;   
+use App\Mail\ActivateWeddingOnlineEmail;
+use App\Mail\SubmittedWeddingOnlineToUserEmail;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\RoundBlockSizeMode;
+use Illuminate\Support\Facades\Mail;
 
 class WeddingOnlineController extends Controller
 {
     public function index(Request $request)
     {
+        $user = auth()->user();
+        if (!$user->hasPermissionTo('WorkSpace - Can View Wedding Online')) {
+            return response()->json([
+                'error' => true,
+                'error_message' => "Sorry, you do not have permissions to this action."
+            ]);
+        }
+
         $weddingOnlines = WeddingOnline::with('galleries', 'memories', 'videos', 'infoFeedbacks', 'dressCodes', 'feedbackWishes');
+
         if (!empty($request->slug)){
             $weddingOnlines->where('slug', $request->slug);
+        }
+
+        if (!empty($request->code)){
+            $weddingOnlines->where('code', $request->code);
+        }
+
+        if (!empty($request->bride_name)){
+            $weddingOnlines->where('bride_name', $request->bride_name);
+        }
+
+        if (!empty($request->groom_name)){
+            $weddingOnlines->where('groom_name', $request->groom_name);
         }
 
         if (!empty($request->status)){
             $weddingOnlines->where('status', $request->status);
         }
+
+        if ($user->hasRole('Collaborator')) {
+            $weddingOnlines->where('user_id', $user->id);
+        }
+
         $weddingOnlines = $weddingOnlines->orderBy('id', 'desc')->paginate(20);
 
         return response()->json([
@@ -182,6 +218,7 @@ class WeddingOnlineController extends Controller
                     'bank_account_bride',
                     'bank_account_groom'
                 ]));
+                $weddingOnline->code = 'WO-' . Carbon::now()->format('YmdHis') . strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 5));
                 $weddingOnline->user_id = $user->id;
                 $weddingOnline->status = 'Inactive';
                 $weddingOnline->save();
@@ -269,7 +306,18 @@ class WeddingOnlineController extends Controller
                 'error_message' => "Sorry, you do not have permissions to this action."
             ]);
         }
-        $weddingOnline = WeddingOnline::with('galleries', 'memories', 'dressCodes')->find($id);
+
+        $weddingOnline = WeddingOnline::with('galleries', 'memories', 'dressCodes')->when($user->hasRole('Collaborator'), function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->find($id);
+
+        if (!$weddingOnline) {
+            return response()->json([
+                'error' => true,
+                'error_code' => '404',
+                'error_message' => "Sorry, the wedding online is not found."
+            ]);
+        }
 
         return response()->json([
             'error' => false,
@@ -277,9 +325,37 @@ class WeddingOnlineController extends Controller
         ]);
     }
 
-    public function showBySlug($slug)
+    public function showBySlug(Request $request, $slug)
     {
-        $weddingOnline = WeddingOnline::with('galleries', 'memories', 'dressCodes')->where('slug', $slug)->first();
+        $user = null;
+        if ($request->bearerToken()) {
+            try {
+                $user = auth('sanctum')->user();
+            } catch (\Exception $e) {
+                $user = null;
+            }
+        }
+
+        $weddingOnline = WeddingOnline::with('galleries', 'memories', 'dressCodes')->where('slug', $slug);
+
+        if($user && $user->hasRole('Collaborator')){
+            $weddingOnline->where('user_id', $user->id);
+        }
+
+        if (empty($user)) {
+            $weddingOnline->where('status', 'Activate');
+        }
+
+        $weddingOnline = $weddingOnline->first();
+
+        if (!$weddingOnline) {
+            return response()->json([
+                'error' => true,
+                'error_code' => '404',
+                'error_message' => "Sorry, the wedding online is not found."
+            ]);
+        }
+
         return response()->json([
             'error' => false,
             'wedding_online' => $weddingOnline
@@ -361,7 +437,7 @@ class WeddingOnlineController extends Controller
             ]);
         }
 
-        $weddingOnline = WeddingOnline::find($id);
+        $weddingOnline = WeddingOnline::where('status', 'Inactive')->find($id);
         if (!$weddingOnline) {
             return response()->json([
                 'error' => true,
@@ -652,6 +728,112 @@ class WeddingOnlineController extends Controller
             'error' => false,
             'notifications' => $notifications
         ]);
+    }
+
+    public function updateStatus($id, Request $request)
+    {
+        $user = auth()->user();
+        if ($request->action == 'Submitted') {
+            if (!$user->hasPermissionTo('WorkSpace - Can Submit Wedding Online')) {
+                return response()->json([
+                    'error' => true,
+                    'error_message' => "Sorry, you do not have permissions to this action."
+                ]);
+            }
+        } else if ($request->action == 'Approval') {
+            if (!$user->hasPermissionTo('WorkSpace - Can Approval Wedding Online')) {
+                return response()->json([
+                    'error' => true,
+                    'error_message' => "Sorry, you do not have permissions to this action."
+                ]);
+            }
+        }
+
+        $weddingOnline = WeddingOnline::find($id);
+        if (empty($weddingOnline)) {
+            return response()->json([
+                'error' => true,
+                'error_message' => "Sorry, the wedding online is not found."
+            ]);
+        }
+
+        if ($request->action == 'Rejected') {
+            if (empty($request->rejection_reason)) {
+                return response()->json([
+                    'error' => true,
+                    'error_message' => "Sorry, the rejection reason is required."
+                ]);
+            }
+
+            $weddingOnline->rejection_reason = $request->rejection_reason;
+        }
+
+        $weddingOnline->status = $request->action;
+        if ($request->action == 'Approval') {
+            $weddingOnline->approver_id = $user->id;
+        }
+        $weddingOnline->save();
+
+        if ($weddingOnline->status == 'Activate') {
+            // Send email to user
+            $userSubmit = $weddingOnline->user;
+            Mail::to($userSubmit->email)->send(new ActivateWeddingOnlineEmail($weddingOnline, $userSubmit));
+        }else if ($weddingOnline->status == 'Submitted') {
+            // Send email to admin
+            $admin = User::where('employee_number', 'admin')->first();
+            Mail::to($admin->email)->send(new SubmittedWeddingOnlineEmail($weddingOnline, $admin));
+            
+            // Send email to user - Format VietQR 
+            $bankName = 'Techcombank';  // Mã Techcombank
+            $accountNo = '3768888888';
+            $amount = '199000';  // Số tiền
+            $content = str_replace('-', '', $weddingOnline->code); // Nội dung
+
+            $bankQrCodeImage = 'https://img.vietqr.io/image/' . $bankName . '-' . $accountNo . '-compact.png?amount=' . $amount . '&addInfo=' . $content;
+
+            $userSubmit = $weddingOnline->user;
+            Mail::to($userSubmit->email)->send(new SubmittedWeddingOnlineToUserEmail($weddingOnline, $userSubmit, $bankQrCodeImage));
+        }
+
+        return response()->json([
+            'error' => false,
+            'wedding_online' => $weddingOnline
+        ]);
+    }
+
+    public function testEmail($slug)
+    {
+        $weddingOnline = WeddingOnline::where('slug', $slug)->first();
+        $userSubmit = $weddingOnline->user;
+
+        // Format VietQR 
+        $bankName = 'Techcombank';  // Mã Techcombank
+        $accountNo = '3768888888';
+        $amount = '199000';  // Số tiền
+        $content = str_replace('-', '', $weddingOnline->code); // Nội dung
+
+        
+        $bankQrCodeImage = 'https://img.vietqr.io/image/' . $bankName . '-' . $accountNo . '-compact.png?amount=' . $amount . '&addInfo=' . $content;
+        
+        return view('emails.submitted_wedding_online_to_user', [
+            'weddingOnline' => $weddingOnline,
+            'user' => $userSubmit,
+            'bankQrCodeImage' => $bankQrCodeImage
+        ]);
+    }
+
+    // Helper functions
+    private function formatQRString($str)
+    {
+        $length = strlen($str);
+        return str_pad($length, 2, '0', STR_PAD_LEFT) . $str;
+    }
+
+    private function formatAmount($amount)
+    {
+        // Remove any non-numeric characters
+        $amount = preg_replace('/[^0-9]/', '', $amount);
+        return str_pad(strlen($amount), 2, '0', STR_PAD_LEFT) . $amount;
     }
 }
 

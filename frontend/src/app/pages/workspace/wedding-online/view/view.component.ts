@@ -110,6 +110,11 @@ export class ViewComponent {
     bank_account_groom: '',
   };
 
+  public approvalForm: any = {
+    status: '',
+    rejection_reason: '',
+  };
+
   private getDayOfWeekText(date: moment.Moment): string {
     const day = date.day();
     switch (day) {
@@ -344,7 +349,11 @@ export class ViewComponent {
     })
         .then((response) => {
             if (response.data.error) {
-                this.errorMessages = response.data.error_message;
+                if (response.data.error_code == '404') {
+                    this.router.navigateByUrl('/not-found');
+                } else {
+                    this.errorMessages = response.data.error_message;
+                }
                 return;
             }
 
@@ -443,4 +452,59 @@ export class ViewComponent {
     this.getWeddingOnline();
   }
 
+  async updateStatus(action: string) {
+
+    var confirmMessage = '';
+    var actionForm = '';
+    if (action == 'submit') {
+      confirmMessage = 'Are you sure you want to submit?';
+      actionForm = 'Submitted';
+    } else if (action == 'approval') {
+      if (this.approvalForm.status == 'Inactive') {
+        confirmMessage = 'Are you sure you want to inactive?';
+        actionForm = 'Inactive';
+      } else {
+        confirmMessage = 'Are you sure you want to activate?';
+        actionForm = 'Activate';
+      }
+    } 
+
+    if (confirm(confirmMessage)) {
+      this.loading = true;
+      this.errorMessages = [];
+      this.successMessage = '';
+
+      await axios.post(`${environment.api_url}/work-space/wedding-onlines/${this.modelId}/update-status`, {
+        action: actionForm,
+        status: this.approvalForm.status,
+        rejection_reason: this.approvalForm.rejection_reason
+      }, {
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem(environment.api_token_identifier)}`
+        }
+      })
+      .then((response) => {
+        if (response.data.error) {
+          this.errorMessages = response.data.error_message;
+          this.loading = false;
+          return;
+        }
+
+        this.loading = false;
+        if (actionForm == 'Submitted') {
+          this.successMessage = 'Wedding online submitted successfully';
+        } else if (actionForm == 'Activate') {
+          this.successMessage = 'Wedding online activated successfully';
+        } else if (actionForm == 'Inactive') {
+          this.successMessage = 'Wedding online inactived successfully';
+        }
+
+        this.getWeddingOnline();
+      })
+      .catch((error) => {
+          this.errorMessages = error.response.data.error_message;
+          this.loading = false;
+        });
+    }
+  }
 }

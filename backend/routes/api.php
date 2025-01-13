@@ -24,6 +24,10 @@ Route::get('/wedding-onlines/{slug}/show', [WeddingOnlineController::class, 'sho
 Route::post('/wedding-onlines/send-message', [WeddingOnlineController::class, 'sendMessage']);
 Route::post('/wedding-onlines/send-feedback', [WeddingOnlineController::class, 'sendFeedback']);
 Route::get('/wedding-onlines/{slug}/notifications', [WeddingOnlineController::class, 'notifications']);
+
+// Sign up collaborator
+Route::post('/sign-up-collaborator', [AuthController::class, 'signUpCollaborator']);
+
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -82,7 +86,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('work-space')->group(function () {
         // Wedding online
         Route::apiResource('/wedding-onlines', WeddingOnlineController::class);
-
+        Route::post('/wedding-onlines/{id}/update-status', [WeddingOnlineController::class, 'updateStatus']);
         // Purchase request
         Route::get('/purchase-requests/setup', [PurchaseRequestController::class, 'setup']);
         Route::get('/purchase-requests/get-available-budget', [PurchaseRequestController::class, 'getAvailableBudget']);

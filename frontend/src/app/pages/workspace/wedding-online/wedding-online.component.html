@@ -26,6 +26,12 @@
                     name="slug">
             </div>
             <div>
+                <label class="text-sm font-normal text-gray-700" for="code">Code:</label>
+                <br>
+                <input type="text" id="code" class="input input-sm" placeholder="Code" [(ngModel)]="filters.code"
+                    name="code">
+            </div>
+            <div>
                 <label class="text-sm font-normal text-gray-700" for="bride_name">Bride Name:</label>
                 <br>
                 <input type="text" id="bride_name" class="input input-sm" placeholder="Bride Name" [(ngModel)]="filters.bride_name"
@@ -48,7 +54,8 @@
                 <br>
                 <select id="status" class="input input-sm" [(ngModel)]="filters.status" name="status">
                     <option value="">All</option>
-                    <option value="Active">Active</option>
+                    <option value="Activate">Activate</option>
+                    <option value="Submitted">Submitted</option>
                     <option value="Inactive">Inactive</option>
                 </select>
             </div>
@@ -82,6 +89,9 @@
                                     <th class="min-w-[250px]">
                                         Slug
                                     </th>
+                                    <th class="min-w-[250px]">
+                                        Code
+                                    </th>
                                     <th class="min-w-[100px]">
                                         Groom Name
                                     </th>
@@ -104,6 +114,9 @@
                                         <a [routerLink]="['/', weddingOnline.slug]" target="_blank" class="text-blue-600 hover:text-blue-800 hover:underline">{{ weddingOnline.slug }}</a>
                                     </td>
                                     <td class="text-gray-800 font-normal">
+                                        {{ weddingOnline.code }}
+                                    </td>
+                                    <td class="text-gray-800 font-normal">
                                         {{ weddingOnline.groom_name }}
                                     </td>
                                     <td class="text-gray-800 font-normal">
@@ -113,7 +126,7 @@
                                         {{ weddingOnline.wedding_full_date_formatted }}
                                     </td>
                                     <td class="text-gray-800 font-normal">
-                                        <span class="badge badge-sm badge-{{ weddingOnline.status == 'Active' ? 'success' : 'danger' }} badge-outline">
+                                        <span class="badge badge-sm badge-{{ weddingOnline.status_color }} badge-outline">
                                             {{ weddingOnline.status }}
                                         </span>          
                                     </td>

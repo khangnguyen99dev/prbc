@@ -3,9 +3,15 @@
         <div class="flex flex-col justify-center gap-2">
             <h1 class="text-xl font-medium leading-none text-gray-900">
                 Wedding Online
+                <div class="badge badge-sm badge-{{ weddingOnline.status_color }} badge-outline">
+                    {{ weddingOnline.status }}
+                </div>
             </h1>
         </div>
         <div class="flex items-center gap-2.5">
+            <button (click)="updateStatus('submit')" [disabled]="loading" class="btn btn-sm btn-primary me-2" *ngIf="permissionService.hasPermission('WorkSpace - Can Submit Wedding Online') && weddingOnline.status == 'Inactive'">
+                {{ loading ? 'Saving...' : 'Submit' }}
+            </button>
             <a class="btn btn-sm btn-light" routerLink="/wedding-online">
                 Back
             </a>
@@ -14,15 +20,15 @@
 
     <app-alert [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
 
-    <div class="grid gap-5 lg:gap-7.5 w-full mx-left">
+    <div class="grid gap-5 lg:gap-7.5 w-full mx-auto">
         <div>
             <div class="pl-0" id="basic_settings">
                 <h3 class="card-title pl-0">
-                    Wedding Online Information
+                    Wedding Online Information 
                 </h3>
                 <hr class="my-4">
             </div>
-            <div class="grid gap-5">
+            <div class=" grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
                     <label class="form-label max-w-56">
                         Slug <span class="text-danger">&nbsp;*</span>
@@ -154,12 +160,6 @@
                 </div>
                 <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
                     <label class="form-label max-w-56">
-                        Youtube URL <span class="text-danger">&nbsp;*</span>
-                    </label>
-                    <input type="text" [(ngModel)]="formData.youtube_url" class="input" placeholder="Enter Youtube URL" />
-                </div>
-                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-                    <label class="form-label max-w-56">
                         Facebook Bride URL <span class="text-danger">&nbsp;*</span>
                     </label>
                     <input type="text" [(ngModel)]="formData.facebook_bride_url" class="input" placeholder="Enter Facebook Bride URL" />
@@ -194,6 +194,15 @@
                     </label>
                     <input type="text" [(ngModel)]="formData.bank_account_groom" class="input" placeholder="Enter Bank Account Groom" />
                 </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Youtube URL <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="formData.youtube_url" class="input" placeholder="Enter Youtube URL" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5"></div>
+
+                <!-- Image -->
                 <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
                     <label class="form-label max-w-56">
                         Logo URL <span class="text-danger">&nbsp;*</span>
@@ -661,8 +670,47 @@
 </div>
 
 
-<div class="flex justify-end mt-5 mb-10">
-    <button *ngIf="formData.galleries?.length > 0 && formData.memories?.length > 0" (click)="save()" [disabled]="loading" class="btn btn-primary">
-        {{ loading ? 'Saving...' : 'Save' }}
-    </button>
+<div class="container-fixed mt-5">  
+    <div class="flex justify-end mt-5 mb-10">
+        <button *ngIf="formData.galleries?.length > 0 && formData.memories?.length > 0 && formData.dress_codes?.length > 0 && weddingOnline.status == 'Inactive'" (click)="save()" [disabled]="loading" class="btn btn-primary">
+            {{ loading ? 'Saving...' : 'Save' }}
+        </button>
+    </div>
 </div>
+
+
+<div class="container-fixed mt-5" *ngIf="weddingOnline.status == 'Submitted' && permissionService.hasPermission('WorkSpace - Can Update Status Wedding Online')">  
+    <div class="grid gap-5 lg:gap-7.5">
+        <div class="card card-grid min-w-full">
+            <div class="card-header">
+                <div class="card-header-content">
+                    <h3 class="card-title">Update Status</h3>
+                </div>
+            </div>
+            <div class="card-body p-40" style="padding: 40px !important;">
+                <div class="grid gap-5">
+                    <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                        <label class="form-label max-w-56">Status</label>
+                        <select [(ngModel)]="approvalForm.status" class="input" placeholder="Select status" [disabled]="loading">
+                            <option value="" disabled>Select status</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+
+                <div class="form-group" *ngIf="approvalForm.status === 'Rejected'">
+                    <label class="form-label required">Rejection Reason</label>
+                    <textarea [(ngModel)]="approvalForm.rejection_reason" class="input" rows="3" placeholder="Enter rejection reason" [disabled]="loading"></textarea>
+                </div>
+
+                <div class="flex justify-end mt-5">
+                    <button (click)="updateStatus('approval')" [disabled]="loading" class="btn btn-primary">
+                        {{ loading ? 'Updating...' : 'Update Status' }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

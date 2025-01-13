@@ -20,7 +20,8 @@ export class UserDetailsComponent implements OnInit {
         date_of_birth: '',
         password: '',
         confirm_password: '',
-        entityObject: null
+        entityObject: null,
+        status: ''
     };
     loading: boolean = false;
     public errorMessages: string[] = [];
@@ -68,6 +69,7 @@ export class UserDetailsComponent implements OnInit {
                 this.form.date_of_birth = user.date_of_birth;
                 this.form.entity_id = user.entity_id;
                 this.form.entityObject = user.entity;
+                this.form.status = user.status;
                 // this.form.password = user.password;
                 // this.form.confirm_password = user.confirm_password;
 

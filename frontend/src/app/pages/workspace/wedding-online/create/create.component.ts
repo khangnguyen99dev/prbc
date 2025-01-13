@@ -49,10 +49,10 @@ export class CreateComponent {
 
   public dressCodes: any[] = [];
   public formData: any = {
-    slug: 'anh-tu-va-phuong-anh',
+    slug: '',
     title: 'THÂN MỜI TỚI DỰ BỮA TIỆC',
-    bride_name: 'Phương Anh',
-    groom_name: 'Anh Tú',
+    bride_name: '',
+    groom_name: '',
     wedding_date: moment(this.weddingFullDate, 'YYYY-MM-DD').format('DD'),
     wedding_month: moment(this.weddingFullDate, 'YYYY-MM-DD').format('MM'),
     wedding_year: moment(this.weddingFullDate, 'YYYY-MM-DD').format('YYYY'),
@@ -71,10 +71,10 @@ export class CreateComponent {
     wedding_location_address: '119 Quang Trung, TX Sơn Tây, TP Hà Nội',
     map_url: 'https://maps.app.goo.gl/p9WAszMy5aaUJDgSA',
     invitation_to: 'Bạn + NT (GĐ Bạn)',
-    father_groom_name: 'Đỗ Văn Long',
-    mother_groom_name: 'Nguyễn Thị Hằng',
-    father_bride_name: 'Đỗ Văn Long',
-    mother_bride_name: 'Nguyễn Thị Hằng',
+    father_groom_name: '',
+    mother_groom_name: '',
+    father_bride_name: '',
+    mother_bride_name: '',
     pick_up_time: '',
     service_time: '',
     party_time: '',
@@ -82,8 +82,8 @@ export class CreateComponent {
     wedding_video_description: 'Gặp nhiều người ở thời điểm khác nhau cũng không huy hoàng bằng gặp đúng người đúng thời điểm.',
     popup_video_description: 'Chúng tôi luôn có những kỷ niệm tuyệt vời cùng nhau, dù ở bất cứ đâu, hay là bất cứ khi nào ♥️',
     youtube_url: 'https://www.youtube.com/watch?v=vt-YPnXV8WM',
-    facebook_bride_url: 'https://www.facebook.com/ankhang9916',
-    facebook_groom_url: 'https://www.facebook.com/ankhang9916',
+    facebook_bride_url: 'https://www.facebook.com',
+    facebook_groom_url: 'https://www.facebook.com',
     wish_text: 
     `Gặp gỡ, yêu và cưới. Điều bạn vừa nghe không nằm trong một câu chuyện cổ tích, mà chính là câu chuyện về cuộc đời hai chúng tôi
 Chúng tôi sẽ yêu thương, chăm sóc, trân trọng và nắm tay nhau cùng đi đến hết cuộc đời này.
@@ -108,7 +108,12 @@ Tú & Anh chuẩn bị đón tiếp bạn chu đáo nhất nha ♥️`,
         is_active: true
       }
     ],
-    dress_codes: [],
+    dress_codes: [
+      {
+        title: 'Black',
+        color: '#000000'
+      }
+    ],
     bank_account_bride: '',
     bank_account_groom: '',
     // url file
@@ -262,7 +267,9 @@ Tú & Anh chuẩn bị đón tiếp bạn chu đáo nhất nha ♥️`,
                   return;
               }else{
                 this.successMessage = 'Wedding online created successfully';
-                // this.router.navigateByUrl('/wedding-online');
+                setTimeout(() => {
+                  this.router.navigateByUrl('/wedding-online');
+                }, 2000);
               }
           })
           .catch(error => {

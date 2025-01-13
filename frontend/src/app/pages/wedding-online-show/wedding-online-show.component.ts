@@ -158,15 +158,19 @@ export class WeddingOnlineShowComponent {
   getWeddingOnline() {
     this.loading = true;
     axios.get(`${environment.api_url}/wedding-onlines/${this.slug}/show`, {
-        headers: {
-            Accept: 'application/json',
-            "Content-Type": 'application/json',
-            Authorization: `Bearer ${window.localStorage.getItem(environment.api_token_identifier)}`
-        },
-    })
+          headers: {
+              Accept: 'application/json',
+              "Content-Type": 'application/json',
+              Authorization: `Bearer ${window.localStorage.getItem(environment.api_token_identifier)}`
+          },
+      })
         .then((response) => {
             if (response.data.error) {
-                this.errorMessages = response.data.error_message;
+                if (response.data.error_code == '404') {
+                    this.router.navigate(['/not-found']);
+                } else {
+                    this.errorMessages = response.data.error_message;
+                }
                 return;
             }
 

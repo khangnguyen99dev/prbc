@@ -1,0 +1,52 @@
+<div class="grid grow">
+    <div class="flex justify-center items-center">
+        <app-alert class="sm:w-1/2 w-full" [errorMessages]="errorMessages" [successMessage]="successMessage"></app-alert>
+    </div>
+    <div class="flex justify-center items-center p-8 lg:p-10 order-2 lg:order-1">
+        <div class="card max-w-[370px] w-full">
+            <div class="card-body flex flex-col gap-5 p-10">
+                <div class="text-center mb-2.5">
+                    <h3 class="text-lg font-medium text-gray-900 leading-none">
+                        Sign Up Collaborator
+                    </h3>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="form-label font-normal text-gray-900">
+                        Name
+                    </label>
+                    <input [(ngModel)]="formData.name" class="input" placeholder="Enter name" type="text" value="" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="form-label font-normal text-gray-900">
+                        Email
+                    </label>
+                    <input [(ngModel)]="formData.email" class="input" placeholder="Enter email" type="email" value="" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="form-label font-normal text-gray-900">
+                        Phone
+                    </label>
+                    <input [(ngModel)]="formData.phone" class="input" placeholder="Enter phone" type="tel" value="" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label class="form-label font-normal text-gray-900">
+                        Message
+                    </label>
+                    <textarea [(ngModel)]="formData.message" class="input" placeholder="Enter message" rows="4" style="height: 100px;"></textarea>
+                </div>
+                <button type="button" class="btn btn-primary flex justify-center grow" (click)="onSubmit()">
+                    <ng-container *ngIf="!loading">Sign Up</ng-container>
+                    <div *ngIf="loading" class="animate-spin w-5 h-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </div>
+                </button>
+                <div class="text-center mt-4">
+                    <a routerLink="/sign-in" class="text-primary hover:underline">Back to Sign In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

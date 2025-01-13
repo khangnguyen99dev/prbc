@@ -17,19 +17,19 @@ class InitializeDatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        $user = User::where('email', 'admin@admin.com')->first();
-        if (!$user) {
-            $user = User::create([
-                'name' => 'Admin Admin',
-                'email' => 'admin@admin.com',
-                'password' => Hash::make('password'),
-                'created_by' => NULL,
-                'created_from' => "InitializeDatabaseSeeder@run",
-            ]);
+        // $user = User::where('email', 'admin@admin.com')->first();
+        // if (!$user) {
+        //     $user = User::create([
+        //         'name' => 'Admin Admin',
+        //         'email' => 'admin@admin.com',
+        //         'password' => Hash::make('password'),
+        //         'created_by' => NULL,
+        //         'created_from' => "InitializeDatabaseSeeder@run",
+        //     ]);
 
-            $user->assignRole('Super Admin');
-            echo 'User initialized admin user successfully';
-        }
+        //     $user->assignRole('Super Admin');
+        //     echo 'User initialized admin user successfully';
+        // }
         
         $currencyCode = config('currencies.default');
         $dataCurrency = config('currencies.init_list')[$currencyCode];

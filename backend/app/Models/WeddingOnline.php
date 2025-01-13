@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 use App\Services\DigitalOceanSpacesService;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class WeddingOnline extends Model
 {
@@ -96,7 +97,8 @@ class WeddingOnline extends Model
         'background_wish_image_url_2_signed', 
         'event_image_url_signed', 
         'wedding_ceremony_image_url_signed', 
-        'background_footer_image_url_signed'
+        'background_footer_image_url_signed',
+        'status_color',
     ];
 
     public function getActivitylogOptions(): LogOptions
@@ -104,6 +106,21 @@ class WeddingOnline extends Model
         return LogOptions::defaults()
             ->logOnly($this->fillable)
             ->logOnlyDirty();
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function approver(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'approver_id', 'id');
+    }
+
+    public function getStatusColorAttribute()
+    {
+        return $this->status == 'Inactive' ? 'danger' : ($this->status == 'Activate' ? 'success' : 'warning');
     }
 
     public function galleries(): HasMany

@@ -22,7 +22,7 @@
                 </h3>
                 <hr class="my-4">
             </div>
-            <div class="grid gap-5">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
                     <label class="form-label max-w-56">
                         Slug <span class="text-danger">&nbsp;*</span>
@@ -154,12 +154,6 @@
                 </div>
                 <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
                     <label class="form-label max-w-56">
-                        Youtube URL <span class="text-danger">&nbsp;*</span>
-                    </label>
-                    <input type="text" [(ngModel)]="formData.youtube_url" class="input" placeholder="Enter Youtube URL" />
-                </div>
-                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
-                    <label class="form-label max-w-56">
                         Facebook Bride URL <span class="text-danger">&nbsp;*</span>
                     </label>
                     <input type="text" [(ngModel)]="formData.facebook_bride_url" class="input" placeholder="Enter Facebook Bride URL" />
@@ -194,6 +188,15 @@
                     </label>
                     <input type="text" [(ngModel)]="formData.bank_account_groom" class="input" placeholder="Enter Bank Account Groom" />
                 </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Youtube URL <span class="text-danger">&nbsp;*</span>
+                    </label>
+                    <input type="text" [(ngModel)]="formData.youtube_url" class="input" placeholder="Enter Youtube URL" />
+                </div>
+                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5"></div>
+
+                <!-- Image -->
                 <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
                     <label class="form-label max-w-56">
                         Logo URL <span class="text-danger">&nbsp;*</span>

@@ -16,7 +16,7 @@
                 </h3>
             </div>
             <div class="card-body grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
+                <!-- <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
                     <label class="form-label max-w-56">
                         Entity <span class="text-danger">&nbsp;*</span>
                     </label>
@@ -24,7 +24,7 @@
                     <select name="entity_selectize" id="entity_selectize" class="w-full">
                         <option value="">Select Entity</option>
                     </select>
-                </div>
+                </div> -->
                 <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
                     <label class="form-label max-w-56">
                         Name <span class="text-danger">&nbsp;*</span>
@@ -35,7 +35,7 @@
                     <label class="form-label max-w-56">
                         Employee Number <span class="text-danger">&nbsp;*</span>
                     </label>
-                    <input [disabled]="form.email === 'admin@admin.com'" [(ngModel)]="form.employee_number" class="input" type="text" placeholder="Enter employee number" />
+                    <input [(ngModel)]="form.employee_number" class="input" type="text" placeholder="Enter employee number" disabled/>
                 </div>
                 <div class="flex items-center flex-wrap lg:flex-nowrap gap-2.5">
                     <label class="form-label max-w-56">

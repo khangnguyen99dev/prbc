@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use App\Notifications\CollaboratorRequestNotification;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CollaboratorRequestEmail;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -23,6 +27,13 @@ class AuthController extends Controller
     if (!$user || !Hash::check($request->password, $user->password)) {
         throw ValidationException::withMessages([
             'employee_number' => ['The provided credentials are incorrect.'],
+        ]);
+    }
+
+    if ($user->role == 'Collaborator' && $user->status == 'Inactive') {
+        return response()->json([
+            'error' => true,
+            'error_message' => 'Your account is not active. Please contact the administrator.'
         ]);
     }
 
@@ -126,6 +137,61 @@ class AuthController extends Controller
             'error' => false,
             'user' => $user,
             'success_message' => 'My profile updated successfully'
+        ]);
+    }
+
+    public function signUpCollaborator(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:100|unique:users,email',
+            'phone' => 'required|string|max:100|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'message' => 'required|string|max:1000',
+        ]);
+
+        // Get latest employee number
+        $latestEmployee = User::where('employee_number', 'like', 'CO-%')
+            ->orderBy('employee_number', 'desc')
+            ->first();
+
+        // Generate new employee number
+        if ($latestEmployee) {
+            $lastNumber = intval(substr($latestEmployee->employee_number, 3));
+            $newNumber = str_pad($lastNumber + 1, 8, '0', STR_PAD_LEFT);
+            $employeeNumber = 'CO-' . $newNumber;
+        } else {
+            $employeeNumber = 'CO-00000001';
+        }
+
+        $password = Str::random(8);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'message' => $request->message,
+            'password' => Hash::make($password),
+            'temp_password' => $password,
+            'employee_number' => $employeeNumber,
+            'status' => 'Inactive',
+            'entity_id' => 1,
+            'role' => 'Collaborator',
+            'created_from' => 'Collaborator Request',
+        ]);
+
+        $user->assignRole('Collaborator');
+
+        // Send email to admin
+        $admin = User::where('employee_number', 'admin')->first();
+        if ($admin) {
+            $url = 'https://kane-service.com/settings/master-data/user-management/' . $user->id;
+            Mail::to($admin->email)->send(new CollaboratorRequestEmail($user, $url));
+            $admin->notify(new CollaboratorRequestNotification($user));
+        }
+
+        return response()->json([
+            'error' => false,
+            'message' => 'Thank you for your interest in becoming a collaborator. We will get back to you soon.'
         ]);
     }
 }

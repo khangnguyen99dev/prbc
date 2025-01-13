@@ -13,7 +13,7 @@ import { HeaderService } from 'src/app/services/header.service';
 })
 export class MyProfileComponent {
     public form: any = {
-        entity_id: '',
+        // entity_id: '',
         name: '',
         employee_number: '',
         email: '',

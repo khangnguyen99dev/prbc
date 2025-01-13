@@ -32,6 +32,12 @@ class User extends Authenticatable
         'password',
         'created_by',
         'created_from',
+        'phone',
+        'message',
+        'role',
+        'status',
+        'is_send_email',
+        'temp_password',
     ];
 
     protected $appends = [

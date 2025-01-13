@@ -21,11 +21,27 @@ const routes: Routes = [
             layout: 'app',
         }
     },
+        // Sign up collaborator
+        {
+            path: 'sign-up-collaborator',
+            loadChildren: () => import('./pages/sign-up-collaborator/sign-up-collaborator.module').then(m => m.SignUpCollaboratorModule),
+            data: {
+                layout: 'sign-up',
+        }
+    },
+    
     {
         path: 'sign-in',
         loadChildren: () => import('./component/authentication/sign-in/sign-in.module').then(m => m.SignInModule),
         data: {
             layout: 'sign-in'
+        },
+    },
+    {
+        path: 'not-found',
+        loadChildren: () => import('./component/not-found/not-found.module').then(m => m.NotFoundModule),
+        data: {
+            layout: 'not-found'
         },
     },
     {

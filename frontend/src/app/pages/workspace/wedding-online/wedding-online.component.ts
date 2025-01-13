@@ -26,6 +26,7 @@ export class WeddingOnlineComponent {
   // Filters
   public filters: any = {
     slug: "",
+    code: "",
     bride_name: "",
     groom_name: "",
     wedding_date: "",

@@ -45,7 +45,8 @@ export class CreateComponent {
         email: '',
         date_of_birth: '',
         password: '',
-        confirm_password: ''
+        confirm_password: '',
+        status: ''
     };
 
     public loading: boolean = false;

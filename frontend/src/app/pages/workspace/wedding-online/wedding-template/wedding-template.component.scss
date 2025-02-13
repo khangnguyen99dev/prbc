@@ -1,0 +1,231 @@
+.tdk-music {
+    position: fixed;
+    z-index: 99999;
+    left: 0;
+    bottom: 0;
+    width: 90px;
+    height: 90px;
+}
+
+.tdk-music svg {
+    fill: white;
+    position: absolute;
+    top: calc(50% - 20px);
+    left: calc(50% - 20px);
+    width: 40px;
+    height: 40px;
+}
+
+.tdk-bg-player {
+    width: 65px;
+    height: 65px;
+    top: 12px;
+    left: 12px;
+    position: absolute;
+    box-shadow: 0 0 0 0 #c31d1d;
+    background-color: rgba(121, 113, 113, 1.0);
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transition: all .5s;
+    transform-origin: 50% 50%;
+}
+
+.tdk-player-text {
+    color: white;
+    white-space: nowrap;
+    position: absolute;
+    top: 25px;
+    left: 21px;
+    height: 40px;
+    line-height: 40px;
+    background-color: rgba(121, 113, 113, 1.0);
+    padding: 0 10px 0 60px;
+    border-radius: 30px;
+}
+
+.tdk-music .tdk-icon-pause {
+    display: none;
+}
+
+.tdk-music.playing .tdk-bg-player {
+    animation: zoom 1.3s infinite;
+}
+
+.tdk-music.playing .tdk-icon-play {
+    display: none;
+}
+
+.tdk-music.playing .tdk-icon-pause {
+    display: inline;
+}
+
+@keyframes zoom {
+    0% {
+        transform: scale(0.9);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 15px transparent;
+    }
+
+    100% {
+        transform: scale(0.9);
+        box-shadow: 0 0 0 0 transparent;
+    }
+}
+
+// Calendar
+.calendar-section {
+    max-width: 800px;
+    width: 361.922px;
+    height: 406.8px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .calendar-header {
+    text-align: center;
+    margin-bottom: 30px;
+    
+    h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+  }
+  
+  .month-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    
+    .month-title {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    
+    .nav-buttons {
+      display: flex;
+      gap: 5px;
+      
+      .nav-btn {
+        background: none;
+        border: 1px solid #ddd;  
+        border-radius: 4px;      
+        font-size: 1.2em;
+        cursor: pointer;
+        padding: 2px 8px;        
+        transition: all 0.3s;    
+        
+        &:hover {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+      }
+    }
+  }
+  
+  .calendar-grid {
+    .weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    
+    .days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+      
+      .day {
+        aspect-ratio: 1;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        &.selected {
+          background-color: rgba(255, 0, 0, 0.1);
+          border-color: red;
+        }
+        
+        .solar {
+          font-size: 1.2em;
+          font-weight: bold;
+        }
+        
+        .lunar {
+          font-size: 0.8em;
+          color: #666;
+        }
+      }
+    }
+  }
+  
+  .wedding-date {
+    text-align: center;
+    margin-top: 30px;
+    
+    h3 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+    
+    p {
+      color: #666;
+    }
+  }
+  
+  // Heart icons
+  .heart-icon {
+    color: red;
+    position: absolute;
+    font-size: 1.2em;
+  }
+
+  .day {
+    // ... existing styles ...
+  
+    &.current-month {
+      background-color: #fff;
+    }
+  
+    &:not(.current-month) {
+      opacity: 0.5;
+    }
+  
+    &.selected {
+      background-color: rgba(255, 0, 0, 0.1);
+      border: 2px solid red;
+    }
+  
+    &.today {
+      background-color: rgba(0, 0, 255, 0.1);
+    }
+  
+    &:hover {
+      cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+}
+
+.show-popup {
+    display: block !important;
+    opacity: 1 !important;
+  }
+
+  .error-message {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  
+  .ladi-form-item input.ng-touched.ng-invalid {
+    border-color: #dc3545;
+  } 

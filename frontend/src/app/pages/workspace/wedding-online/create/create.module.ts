@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { WeddingTemplateComponent } from '../wedding-template/wedding-template.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [CreateComponent],
+  declarations: [CreateComponent, WeddingTemplateComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

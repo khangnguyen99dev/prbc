@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
@@ -6,6 +6,7 @@ import { PermissionService } from 'src/app/services/permission.service';
 import * as moment from 'moment';
 import { HeaderService } from 'src/app/services/header.service';
 import 'moment-lunar';
+import { WeddingTemplateComponent } from '../wedding-template/wedding-template.component';
 
 @Component({
   selector: 'app-create',
@@ -13,6 +14,8 @@ import 'moment-lunar';
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent {
+  @ViewChild(WeddingTemplateComponent) weddingTemplate!: WeddingTemplateComponent;
+
   constructor(
       private router: Router,
       private headerService: HeaderService,
@@ -36,6 +39,26 @@ export class CreateComponent {
   public loading: boolean = false;
   public errorMessages: string[] = [];
   public successMessage: string = '';
+  public showPreview: boolean = false;
+  public showPreviewModal: boolean = false;
+
+  openPreviewModal() {
+    this.showPreviewModal = true;
+    // Prevent body scrolling when modal is open
+    // document.body.style.overflow = 'hidden';
+  }
+
+  closePreviewModal() {
+    this.showPreviewModal = false;
+    // Restore body scrolling when modal is closed
+    document.body.style.overflow = 'auto';
+  }
+
+  // Optional: Close modal when clicking outside
+  @HostListener('document:keydown.escape')
+  onEscapePress() {
+    this.closePreviewModal();
+  }
 
   currentMonth: moment.Moment = moment();
   calendar: any[][] = [];
@@ -372,5 +395,9 @@ Tú & Anh chuẩn bị đón tiếp bạn chu đáo nhất nha ♥️`,
 
   deleteDressCode(index: number) {
     this.formData.dress_codes.splice(index, 1);
+  }
+
+  togglePreview() {
+    this.showPreview = !this.showPreview;
   }
 }

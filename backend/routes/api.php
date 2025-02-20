@@ -16,6 +16,7 @@ use App\Http\Controllers\Settings\CountryBudgetMonthlyController;
 use App\Http\Controllers\Settings\BonusPoolController;
 use App\Http\Controllers\Settings\BonusPoolItemController;
 use App\Http\Controllers\WorkSpace\WeddingOnlineController;
+use App\Http\Controllers\WorkSpace\QrCodeController;
 
 // Public routes
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -97,6 +98,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/purchase-requests/{id}/approval', [PurchaseRequestController::class, 'approval']);
         Route::get('/purchase-requests/{id}/history', [PurchaseRequestController::class, 'history']);
 
-
+        // Generate QR code
+        Route::post('/generate-qr-code', [QrCodeController::class, 'generate']);
     });
 });

@@ -49,14 +49,6 @@ export const routes: Routes = [
         data: {
             layout: 'app',
         }
-    },
-    {
-        path: 'generate-qr-code',
-        loadChildren: () => import('./generate-qr-code/generate-qr-code.module').then(m => m.GenerateQrCodeModule),
-        canActivate: [AuthGuard],
-        data: {
-            layout: 'app',
-        }
     }
 
 ];

@@ -69,6 +69,13 @@ const routes: Routes = [
         }
     },
     {
+        path: 'service/generate-qr-code',
+        loadChildren: () => import('./pages/workspace/generate-qr-code/generate-qr-code.module').then(m => m.GenerateQrCodeModule),
+        data: {
+            layout: 'app',
+        }
+    },
+    {
         path: '**',
         redirectTo: '/sign-in'
     },
